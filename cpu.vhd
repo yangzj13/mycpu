@@ -212,6 +212,11 @@ architecture Behavioral of cpu is
 	signal pc_out : STD_LOGIC_VECTOR(15 downto 0);
 	-- pc_adder
 	signal pc_plus_1 : STD_LOGIC_VECTOR(15 downto 0);
+	-- inst_mem
+	signal inst_out : STD_LOGIC_VECTOR(15 downto 0);
+	-- if/id
+	signal id_pc : STD_LOGIC_VECTOR(15 downto 0);
+	signal id_inst : STD_LOGIC_VECTOR(15 downto 0);
 begin
 	
 	u1 : pc_reg
@@ -228,5 +233,25 @@ begin
 		pc_o => pc_4
 	);
 
+	u3 : inst_mem
+	port map(
+		inst_addr_i => pc_out,
+		inst_i => ram2_data,
+		inst_o => inst_out,
+		ram2_en => ram2_en,
+		ram2_we => ram2_we,
+		ram2_oe => ram2_oe,
+		ram2_addr => ram2_addr
+	);
+
+	u4 : if_id
+	port map(
+		rst => rst,
+		clk => clk,
+		if_pc => pc_out,
+		if_inst => inst_out,
+		id_pc => id_pc,
+		id_inst => id_inst
+		);
 end Behavioral;
 
