@@ -208,8 +208,25 @@ architecture Behavioral of cpu is
 		);
 	end component;
 	
+	-- pc_reg
+	signal pc_out : STD_LOGIC_VECTOR(15 downto 0);
+	-- pc_adder
+	signal pc_plus_1 : STD_LOGIC_VECTOR(15 downto 0);
 begin
+	
+	u1 : pc_reg
+	port map(	
+		rst => rst,
+		clk => clk,
+		pc_i => pc_4,
+		pc_o => pc_out
+	);
 
+	u2 : pc_adder
+	port map(
+		pc_i => pc_out,
+		pc_o => pc_4
+	);
 
 end Behavioral;
 
