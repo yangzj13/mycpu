@@ -167,7 +167,8 @@ architecture Behavioral of cpu is
 			rx_i : in STD_LOGIC_VECTOR(15 downto 0);
 			ry_i : in STD_LOGIC_VECTOR(15 downto 0);
 			alu_op_i : in STD_LOGIC_VECTOR(3 downto 0);
-			result_o : out STD_LOGIC_VECTOR(15 downto 0)
+			result_o : out STD_LOGIC_VECTOR(15 downto 0);
+			flag_o : out STD_LOGIC_VECTOR(3 downto 0)
 		);
 	end component;
 	
@@ -260,7 +261,7 @@ architecture Behavioral of cpu is
 
 	--alu
 	signal result_o : STD_LOGIC_VECTOR(15 downto 0); 
-
+	signal flag_o : STD_LOGIC_VECTOR(3 downto 0);
 	--ex/mem
 	signal mem_mem_to_reg : STD_LOGIC; --Ö±½ÓÐ´Èë¼Ä´æÆ÷(0)/¶ÁÈ¡RAM(1)
 	signal mem_reg_write : STD_LOGIC; --ÊÇ·ñÐ´Èë¼Ä´æÆ÷
@@ -366,7 +367,8 @@ begin
 		rx_i => ex_rx,
 		ry_i => ex_ry,
 		alu_op_i => ex_alu_op,
-		result_o => result_o
+		result_o => result_o,
+		flag_o => flag_o
 		);
 
 	u9 : ex_mem

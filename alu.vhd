@@ -31,13 +31,14 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --use UNISIM.VComponents.all;
 
 entity alu is
-    Port ( alu_op_i : in  STD_LOGIC_VECTOR (3 downto 0);
-			  rx_i : in  STD_LOGIC_VECTOR (15 downto 0);
-           ry_i : in  STD_LOGIC_VECTOR (15 downto 0);
-           result_o : out  STD_LOGIC_VECTOR (15 downto 0);
-			  flag_o : out STD_LOGIC_VECTOR(3 downto 0);
-			  rst : in STD_LOGIC
-			  );
+    Port ( 
+    	alu_op_i : in  STD_LOGIC_VECTOR (3 downto 0);
+		rx_i : in  STD_LOGIC_VECTOR (15 downto 0);
+        ry_i : in  STD_LOGIC_VECTOR (15 downto 0);
+        result_o : out  STD_LOGIC_VECTOR (15 downto 0);
+		flag_o : out STD_LOGIC_VECTOR(3 downto 0);
+		rst : in STD_LOGIC
+		);
 end alu;
 
 architecture Behavioral of alu is
