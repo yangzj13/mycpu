@@ -30,16 +30,24 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity cpu is
-    Port ( rst : in  STD_LOGIC;
-           clk : in  STD_LOGIC;
-			  
-			  -- ram2
-			  ram2_en : out STD_LOGIC;
-			  ram2_we : out STD_LOGIC;
-			  ram2_oe : out STD_LOGIC;
-			  ram2_addr : out STD_LOGIC_VECTOR(15 downto 0);
-			  ram2_data : inout STD_LOGIC_VECTOR(15 downto 0)
-			  );
+    Port ( 
+    	rst : in  STD_LOGIC;
+        clk : in  STD_LOGIC;
+		
+		--ram1
+		ram1_en : out STD_LOGIC;
+		ram1_we : out STD_LOGIC;
+		ram1_oe : out STD_LOGIC;
+		ram1_addr : out STD_LOGIC_VECTOR(15 downto 0);
+		ram1_data : inout STD_LOGIC_VECTOR(15 downto 0);
+		
+		-- ram2
+		ram2_en : out STD_LOGIC;
+		ram2_we : out STD_LOGIC;
+		ram2_oe : out STD_LOGIC;
+		ram2_addr : out STD_LOGIC_VECTOR(15 downto 0);
+		ram2_data : inout STD_LOGIC_VECTOR(15 downto 0)
+		);
 end cpu;
 
 architecture Behavioral of cpu is
@@ -65,6 +73,9 @@ architecture Behavioral of cpu is
 	--Ö¸ÁîMEM¿ØÖÆÆ÷
 	component inst_mem
 		port(
+			rst : in STD_LOGIC;
+			clk : in STD_LOGIC;
+
 			inst_addr_i : in STD_LOGIC_VECTOR(15 downto 0);
 			inst_i : in STD_LOGIC_VECTOR(15 downto 0);
 			inst_o : out STD_LOGIC_VECTOR(15 downto 0);
@@ -155,7 +166,7 @@ architecture Behavioral of cpu is
 			rst : in STD_LOGIC;
 			rx_i : in STD_LOGIC_VECTOR(15 downto 0);
 			ry_i : in STD_LOGIC_VECTOR(15 downto 0);
-			alu_op : in STD_LOGIC_VECTOR(3 downto 0);
+			alu_op_i : in STD_LOGIC_VECTOR(3 downto 0);
 			result_o : out STD_LOGIC_VECTOR(15 downto 0)
 		);
 	end component;
@@ -181,23 +192,31 @@ architecture Behavioral of cpu is
 		port(
 		
 			rst : in STD_LOGIC;
-			
+			clk : in STD_LOGIC;
+
 			mem_to_reg : in STD_LOGIC;
 			
 			addr_i : in STD_LOGIC_VECTOR(15 downto 0);
-			data_i : in STD_LOGIC_VECTOR(15 downto 0);
 			data_o : out STD_LOGIC_VECTOR(15 downto 0);
 			
 			ram1_en : out STD_LOGIC;
 			ram1_we : out STD_LOGIC;
 			ram1_oe : out STD_LOGIC;
-			ram1_addr : out STD_LOGIC_VECTOR(15 downto 0)
+			ram1_addr : out STD_LOGIC_VECTOR(15 downto 0);
+			ram1_data : inout STD_LOGIC_VECTOR(15 downto 0);
+
+			ram2_en : out STD_LOGIC;
+			ram2_we : out STD_LOGIC;
+			ram2_oe : out STD_LOGIC;
+			ram2_addr : out STD_LOGIC_VECTOR(15 downto 0);
+			ram2_data : inout STD_LOGIC_VECTOR(15 downto 0)
 		);
 	end component;
 	
 	component mem_wb
 		port(
 			rst : in STD_LOGIC;
+			clk : in STD_LOGIC;
 			mem_wdata : in STD_LOGIC_VECTOR(15 downto 0);
 			mem_reg_dst : in STD_LOGIC_VECTOR(3 downto 0);
 			mem_reg_write : in STD_LOGIC; --ÊÇ·ñÐ´Èë¼Ä´æÆ÷
@@ -217,6 +236,45 @@ architecture Behavioral of cpu is
 	-- if/id
 	signal id_pc : STD_LOGIC_VECTOR(15 downto 0);
 	signal id_inst : STD_LOGIC_VECTOR(15 downto 0);
+	-- controller
+	signal rx_o : STD_LOGIC_VECTOR(15 downto 0);
+	signal ry_o : STD_LOGIC_VECTOR(15 downto 0);
+	signal mem_to_reg_o : STD_LOGIC;
+	signal alu_op_o : STD_LOGIC(3 downto 0);
+	signal reg_dst_o : STD_LOGIC(3 downto 0);
+	signal reg_write_o : STD_LOGIC;
+	signal reg1_addr_o : STD_LOGIC_VECTOR(3 downto 0);
+	signal reg2_addr_o : STD_LOGIC_VECTOR(3 downto 0);
+
+	-- registers
+	signal r1_data : STD_LOGIC_VECTOR(15 downto 0);
+	signal r2_data : STD_LOGIC_VECTOR(15 downto 0);
+
+	--id/ex
+	signal ex_rx : STD_LOGIC_VECTOR(15 downto 0);
+	signal ex_ry : STD_LOGIC_VECTOR(15 downto 0);
+	signal ex_mem_to_reg : STD_LOGIC;
+	signal ex_alu_op : STD_LOGIC_VECTOR(3 downto 0);
+	signal ex_reg_dst : STD_LOGIC_VECTOR(3 downto 0);
+	signal ex_reg_write : STD_LOGIC;
+
+	--alu
+	signal result_o : STD_LOGIC_VECTOR(15 downto 0); 
+
+	--ex/mem
+	signal mem_mem_to_reg : STD_LOGIC; --Ö±½ÓÐ´Èë¼Ä´æÆ÷(0)/¶ÁÈ¡RAM(1)
+	signal mem_reg_write : STD_LOGIC; --ÊÇ·ñÐ´Èë¼Ä´æÆ÷
+	signal mem_reg_dst : STD_LOGIC_VECTOR(3 downto 0); -- Ä¿µÄ¼Ä´æÆ÷µØÖ·£¨À©Õ¹Îª4Î»£©
+	signal mem_result : STD_LOGIC_VECTOR(15 downto 0);
+
+	--data memory controller
+	signal data_o : STD_LOGIC_VECTOR(15 downto 0);
+	
+	--mem/wb
+	signal wb_wdata : STD_LOGIC_VECTOR(15 downto 0);
+	signal wb_reg_dst : STD_LOGIC_VECTOR(3 downto 0);
+	signal wb_reg_write : STD_LOGIC; --ÊÇ·ñÐ´Èë¼Ä´æÆ÷
+	-- 
 begin
 	
 	u1 : pc_reg
@@ -252,6 +310,114 @@ begin
 		if_inst => inst_out,
 		id_pc => id_pc,
 		id_inst => id_inst
+		);
+
+	u5 : registers
+	port map(
+		rst => rst,
+		clk => clk,
+		r1_addr => reg1_addr_o,
+		r2_addr => reg2_addr_o,
+		r1_data => r1_data,
+		r2_data => r2_data,
+		we => wb_reg_write,
+		wdata => wb_wdata,
+		waddr => wb_reg_dst
+		);
+
+	u6 : controller
+	port map(
+		rst => rst,
+		pc_i => id_pc,
+		inst_i => id_inst,
+		reg1_data_i => r1_data,
+		reg2_data_i => r2_data,
+		rx_o => rx_o,
+		ry_o => ry_o,
+		mem_to_reg_o => mem_to_reg_o,
+		reg_write_o => reg_write_o,
+		reg_dst_o => reg_dst_o,
+		alu_op_o => alu_op_o,
+		reg1_addr_o => reg1_addr_o,
+		reg2_addr_o => reg2_addr_o
+		);
+
+	u7 : id_ex
+	port map(
+		rst => rst,
+		clk => clk,
+		id_rx => rx_o,
+		id_ry => ry_o,
+		id_mem_to_reg => mem_to_reg_o,
+		id_reg_write => reg_write_o,
+		id_reg_dst => reg_dst_o,
+		id_alu_op => alu_op_o,
+		ex_rx => ex_rx,
+		ex_ry => ex_ry,
+		ex_mem_to_reg => ex_mem_to_reg,
+		ex_reg_write => ex_reg_write,
+		ex_reg_dst => ex_reg_dst,
+		ex_alu_op => ex_alu_op
+		);
+
+	u8 : alu
+	port map(
+		rst => rst,
+		rx_i => ex_rx,
+		ry_i => ex_ry,
+		alu_op_i => ex_alu_op,
+		result_o => result_o
+		);
+
+	u9 : ex_mem
+	port map(
+		rst => rst,
+		clk => clk,
+		ex_mem_to_reg => ex_mem_to_reg,
+		ex_reg_write => ex_reg_write,
+		ex_reg_dst => ex_reg_dst,
+		ex_result => result_o,
+		mem_mem_to_reg => mem_mem_to_reg,
+		mem_reg_write => mem_reg_write,
+		mem_reg_dst => mem_reg_dst,
+		mem_result => mem_result
+		);
+
+	u10 : data_mem
+	port map(
+		rst => rst,
+		clk => clk,
+
+		mem_to_reg => mem_mem_to_reg,
+			
+		addr_i => mem_result,
+		data_i => mem_result,
+		data_o => data_o,
+		
+		ram1_en => ram1_en,
+		ram1_we => mem1_we,
+		ram1_oe => ram1_oe,
+		ram1_addr => ram1_addr,
+		ram1_data => ram1_data,
+
+		ram2_en => ram2_en,
+		ram2_we => mem2_we,
+		ram2_oe => ram2_oe,
+		ram2_addr => ram2_addr,
+		ram2_data => ram2_data
+		);
+
+	u11 : mem_wb
+	port map(
+		rst => rst,
+		clk => clk,
+		mem_wdata => data_o,
+		mem_reg_dst => mem_reg_dst,
+		mem_reg_write => mem_reg_write, 
+
+		wb_wdata => wb_wdata,
+		wb_reg_dst => wb_reg_dst,
+		wb_reg_write => wb_write
 		);
 end Behavioral;
 
