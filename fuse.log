@@ -1,0 +1,47 @@
+Running: fuse.exe -relaunch -intstyle "ise" -incremental -o "C:/Users/Bob/Documents/xilinx/cpu208/test_sopc_isim_beh.exe" -prj "C:/Users/Bob/Documents/xilinx/cpu208/test_sopc_beh.prj" "work.test_sopc" 
+ISim P.20131013 (signature 0x7708f090)
+Number of CPUs detected in this system: 4
+Turning on mult-threading, number of parallel sub-compilation jobs: 8 
+Determining compilation order of HDL files
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/registers.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/pc_reg.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/pc_adder.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/mem_wb.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/inst_mem.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/if_id.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/id_ex.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/ex_mem.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/data_mem.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/controller.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/alu.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/ram2.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/cpu.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/sopc.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/test_sopc.vhd" into library work
+Starting static elaboration
+Completed static elaboration
+Compiling package standard
+Compiling package std_logic_1164
+Compiling package std_logic_arith
+Compiling package std_logic_unsigned
+Compiling architecture behavioral of entity pc_reg [pc_reg_default]
+Compiling architecture behavioral of entity pc_adder [pc_adder_default]
+Compiling architecture behavioral of entity inst_mem [inst_mem_default]
+Compiling architecture behavioral of entity if_id [if_id_default]
+Compiling architecture behavioral of entity registers [registers_default]
+Compiling architecture behavioral of entity controller [controller_default]
+Compiling architecture behavioral of entity id_ex [id_ex_default]
+Compiling architecture behavioral of entity alu [alu_default]
+Compiling architecture behavioral of entity ex_mem [ex_mem_default]
+Compiling architecture behavioral of entity data_mem [data_mem_default]
+Compiling architecture behavioral of entity mem_wb [mem_wb_default]
+Compiling architecture behavioral of entity cpu [cpu_default]
+Compiling architecture behavioral of entity ram2 [ram2_default]
+Compiling architecture behavioral of entity sopc [sopc_default]
+Compiling architecture behavior of entity test_sopc
+Time Resolution for simulation is 1ps.
+Waiting for 8 sub-compilation(s) to finish...
+Compiled 33 VHDL Units
+Built simulation executable C:/Users/Bob/Documents/xilinx/cpu208/test_sopc_isim_beh.exe
+Fuse Memory Usage: 34964 KB
+Fuse CPU Usage: 687 ms

@@ -39,14 +39,16 @@ entity cpu is
 		ram1_we : out STD_LOGIC;
 		ram1_oe : out STD_LOGIC;
 		ram1_addr : out STD_LOGIC_VECTOR(15 downto 0);
-		ram1_data : inout STD_LOGIC_VECTOR(15 downto 0);
+		ram1_data : in STD_LOGIC_VECTOR(15 downto 0);
+		-- ram1_data : inout STD_LOGIC_VECTOR(15 downto 0);
 		
 		-- ram2
 		ram2_en : out STD_LOGIC;
 		ram2_we : out STD_LOGIC;
 		ram2_oe : out STD_LOGIC;
 		ram2_addr : out STD_LOGIC_VECTOR(15 downto 0);
-		ram2_data : inout STD_LOGIC_VECTOR(15 downto 0)
+		ram2_data : in STD_LOGIC_VECTOR(15 downto 0)
+		-- ram2_data : inout STD_LOGIC_VECTOR(15 downto 0)
 		);
 end cpu;
 
@@ -102,17 +104,18 @@ architecture Behavioral of cpu is
 	component registers
 		port(
 			-- µØÖ·À©Õ¹Îª4Î»£¬ÓÃÀ´±íÊ¾ÌØÊâ¼Ä´æÆ÷
-			-- ¶Á¼Ä´æÆ÷
-			r1_addr : in STD_LOGIC_VECTOR(3 downto 0);
-			r2_addr : in STD_LOGIC_VECTOR(3 downto 0);
-			r1_data : out STD_LOGIC_VECTOR(15 downto 0);
-			r2_data : out STD_LOGIC_VECTOR(15 downto 0);
-			-- Ð´¼Ä´æÆ÷
+			
 			rst : in STD_LOGIC;
 			clk : in STD_LOGIC;
-			we : in STD_LOGIC;
-			waddr : in STD_LOGIC_VECTOR(3 downto 0);
-			wdata : in STD_LOGIC_VECTOR(15 downto 0)
+			-- ¶Á¼Ä´æÆ÷
+			readAddr1 : in std_logic_vector(3 downto 0);
+			readAddr2 : in std_logic_vector(3 downto 0);
+			readData1 : out std_logic_vector(15 downto 0);
+			readData2 : out std_logic_vector(15 downto 0);
+			-- Ð´¼Ä´æÆ÷	  
+			WbReg : in std_logic_vector(3 downto 0);
+			WbData : in std_logic_vector(15 downto 0);
+			WriteBack : in std_logic
 		);
 	end component;
 	
@@ -128,8 +131,8 @@ architecture Behavioral of cpu is
 			rx_o : out STD_LOGIC_VECTOR(15 downto 0);
 			ry_o : out STD_LOGIC_VECTOR(15 downto 0);
 			-- registers addr
-			reg1_addr_o : out STD_LOGIC_VECTOR(15 downto 0);
-			reg2_addr_o : out STD_LOGIC_VECTOR(15 downto 0);
+			reg1_addr_o : out STD_LOGIC_VECTOR(3 downto 0);
+			reg2_addr_o : out STD_LOGIC_VECTOR(3 downto 0);
 			-- controll signals
 			mem_to_reg : out STD_LOGIC; --Ö±½ÓÐ´Èë¼Ä´æÆ÷(0)/¶ÁÈ¡RAM(1)
 			reg_write : out STD_LOGIC; --ÊÇ·ñÐ´Èë¼Ä´æÆ÷
@@ -198,19 +201,23 @@ architecture Behavioral of cpu is
 			mem_to_reg : in STD_LOGIC;
 			
 			addr_i : in STD_LOGIC_VECTOR(15 downto 0);
+			data_i : in STD_LOGIC_VECTOR(15 downto 0);
 			data_o : out STD_LOGIC_VECTOR(15 downto 0);
 			
 			ram1_en : out STD_LOGIC;
 			ram1_we : out STD_LOGIC;
 			ram1_oe : out STD_LOGIC;
 			ram1_addr : out STD_LOGIC_VECTOR(15 downto 0);
-			ram1_data : inout STD_LOGIC_VECTOR(15 downto 0);
+			ram1_data : in STD_LOGIC_VECTOR(15 downto 0)
 
-			ram2_en : out STD_LOGIC;
-			ram2_we : out STD_LOGIC;
-			ram2_oe : out STD_LOGIC;
-			ram2_addr : out STD_LOGIC_VECTOR(15 downto 0);
-			ram2_data : inout STD_LOGIC_VECTOR(15 downto 0)
+			-- ram1_data : inout STD_LOGIC_VECTOR(15 downto 0);
+
+			--ram2_en : out STD_LOGIC;
+			--ram2_we : out STD_LOGIC;
+			--ram2_oe : out STD_LOGIC;
+			--ram2_addr : out STD_LOGIC_VECTOR(15 downto 0);
+			--ram2_data : in STD_LOGIC_VECTOR(15 downto 0)
+			-- ram2_data : inout STD_LOGIC_VECTOR(15 downto 0)
 		);
 	end component;
 	
@@ -241,8 +248,8 @@ architecture Behavioral of cpu is
 	signal rx_o : STD_LOGIC_VECTOR(15 downto 0);
 	signal ry_o : STD_LOGIC_VECTOR(15 downto 0);
 	signal mem_to_reg_o : STD_LOGIC;
-	signal alu_op_o : STD_LOGIC(3 downto 0);
-	signal reg_dst_o : STD_LOGIC(3 downto 0);
+	signal alu_op_o : STD_LOGIC_VECTOR(3 downto 0);
+	signal reg_dst_o : STD_LOGIC_VECTOR(3 downto 0);
 	signal reg_write_o : STD_LOGIC;
 	signal reg1_addr_o : STD_LOGIC_VECTOR(3 downto 0);
 	signal reg2_addr_o : STD_LOGIC_VECTOR(3 downto 0);
@@ -282,18 +289,20 @@ begin
 	port map(	
 		rst => rst,
 		clk => clk,
-		pc_i => pc_4,
+		pc_i => pc_plus_1,
 		pc_o => pc_out
 	);
 
 	u2 : pc_adder
 	port map(
 		pc_i => pc_out,
-		pc_o => pc_4
+		pc_o => pc_plus_1
 	);
 
 	u3 : inst_mem
 	port map(
+		rst => rst,
+		clk => clk,
 		inst_addr_i => pc_out,
 		inst_i => ram2_data,
 		inst_o => inst_out,
@@ -317,13 +326,13 @@ begin
 	port map(
 		rst => rst,
 		clk => clk,
-		r1_addr => reg1_addr_o,
-		r2_addr => reg2_addr_o,
-		r1_data => r1_data,
-		r2_data => r2_data,
-		we => wb_reg_write,
-		wdata => wb_wdata,
-		waddr => wb_reg_dst
+		readAddr1 => reg1_addr_o,
+		readAddr2 => reg2_addr_o,
+		readData1 => r1_data,
+		readData2 => r2_data,
+		WriteBack => wb_reg_write,
+		WbData => wb_wdata,
+		WbReg => wb_reg_dst
 		);
 
 	u6 : controller
@@ -335,10 +344,10 @@ begin
 		reg2_data_i => r2_data,
 		rx_o => rx_o,
 		ry_o => ry_o,
-		mem_to_reg_o => mem_to_reg_o,
-		reg_write_o => reg_write_o,
-		reg_dst_o => reg_dst_o,
-		alu_op_o => alu_op_o,
+		mem_to_reg => mem_to_reg_o,
+		reg_write => reg_write_o,
+		reg_dst => reg_dst_o,
+		alu_op => alu_op_o,
 		reg1_addr_o => reg1_addr_o,
 		reg2_addr_o => reg2_addr_o
 		);
@@ -397,16 +406,16 @@ begin
 		data_o => data_o,
 		
 		ram1_en => ram1_en,
-		ram1_we => mem1_we,
+		ram1_we => ram1_we,
 		ram1_oe => ram1_oe,
 		ram1_addr => ram1_addr,
-		ram1_data => ram1_data,
+		ram1_data => ram1_data
 
-		ram2_en => ram2_en,
-		ram2_we => mem2_we,
-		ram2_oe => ram2_oe,
-		ram2_addr => ram2_addr,
-		ram2_data => ram2_data
+		--ram2_en => ram2_en,
+		--ram2_we => ram2_we,
+		--ram2_oe => ram2_oe,
+		--ram2_addr => ram2_addr,
+		--ram2_data => ram2_data
 		);
 
 	u11 : mem_wb
@@ -419,7 +428,7 @@ begin
 
 		wb_wdata => wb_wdata,
 		wb_reg_dst => wb_reg_dst,
-		wb_reg_write => wb_write
+		wb_reg_write => wb_reg_write
 		);
 end Behavioral;
 

@@ -40,10 +40,7 @@ end pc_adder;
 architecture Behavioral of pc_adder is
 begin
 
-process
-begin
 	pc_o <= pc_i + x"0001";
-end process;
 
 end Behavioral;
 

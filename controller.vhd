@@ -40,13 +40,13 @@ entity controller is
 			rx_o : out STD_LOGIC_VECTOR(15 downto 0);
 			ry_o : out STD_LOGIC_VECTOR(15 downto 0);
 			-- registers addr
-			reg1_addr_o : out STD_LOGIC_VECTOR(15 downto 0);
-			reg2_addr_o : out STD_LOGIC_VECTOR(15 downto 0);
+			reg1_addr_o : out STD_LOGIC_VECTOR(3 downto 0);
+			reg2_addr_o : out STD_LOGIC_VECTOR(3 downto 0);
 			-- controll signals
 			mem_to_reg : out STD_LOGIC; --直接写入寄存器(0)/读取RAM(1)
 			reg_write : out STD_LOGIC; --是否写入寄存器
 			reg_dst : out STD_LOGIC_VECTOR(3 downto 0); -- 目的寄存器地址（扩展为4位）
-			alu_op_o : out STD_LOGIC_VECTOR(3 downto 0)
+			alu_op : out STD_LOGIC_VECTOR(3 downto 0)
 			-- TODO: other controll signals
 		);
 end controller;
@@ -61,7 +61,7 @@ begin
 		mem_to_reg <= '0';
 		reg_write <= '0';
 		reg_dst <= "0000";
-		alu_op_o <= "0000";
+		alu_op <= "0000";
 	else
 		case inst_i(15 downto 11) is
 			-- AND/OR/CMP/JR/MFPC/SLLV/SLTU
@@ -69,21 +69,39 @@ begin
 				mem_to_reg <= '0';
 				reg_write <= '1';
 				reg_dst(3) <= '1';
-				reg1_addr_o <= inst_i(10 downto 8);
-				reg2_addr_o <= inst_i(7 downto 5);
+				reg1_addr_o(3) <= '1';
+				reg2_addr_o(3) <= '1';
+				reg1_addr_o(2 downto 0) <= inst_i(10 downto 8);
+				reg2_addr_o(2 downto 0) <= inst_i(7 downto 5);
 				case inst_i(4 downto 0) is
 					--AND
 					when "01100" =>
 						reg_dst(2 downto 0) <= inst_i(10 downto 8);
-						alu_op_o <= "0010";
+						alu_op <= "0010";
 					--OR
 					when "01101" =>
 						reg_dst(2 downto 0) <= inst_i(10 downto 8);
-						alu_op_o <= "0011";
+						alu_op <= "0011";
+					--CMP
+					when "01010" =>
+					--SLLV
+					when "00100" => 
+					--SLLA
+					when "00011" =>
+					--MFPC/JR
+					when "00000" =>
+						case inst_i(7 downto 5) is
+							--JR
+							when "000" =>
+							--MFPC
+							when "010" =>
+							when others =>
+							
+						end case;
 					--ERROR
 					when others =>
 						reg_dst(2 downto 0) <= "111";
-						alu_op_o <= "0000";
+						alu_op <= "0000";
 				end case;
 			-- ADDU/SUBU
 			when "11100" =>
@@ -91,17 +109,21 @@ begin
 				reg_write <= '1';
 				reg_dst(3) <= '1';
 				reg_dst(2 downto 0) <= inst_i(4 downto 2);
-				reg1_addr_o <= inst_i(10 downto 8);
-				reg2_addr_o <= inst_i(7 downto 5);
+				reg1_addr_o(3) <= '1';
+				reg2_addr_o(3) <= '1';
+				reg1_addr_o(2 downto 0) <= inst_i(10 downto 8);
+				reg2_addr_o(2 downto 0) <= inst_i(7 downto 5);
 				case inst_i(1 downto 0) is
 					--ADDU
 					when "01" =>
-						alu_op_o <= 
+						alu_op <= "0000";
 					--SUBU
 					when "11" =>
+						alu_op <= "0001";
 					--ERROR
 					when others =>
 				end case;
+			--when ""
 			--when "" =>
 			--when "" =>
 			--when "" =>
@@ -118,7 +140,7 @@ begin
 				mem_to_reg <= '0';
 				reg_write <= '0';
 				reg_dst <= "0000";
-				alu_op_o <= "0000";
+				alu_op <= "0000";
 		end case;
 	end if;
 end process;

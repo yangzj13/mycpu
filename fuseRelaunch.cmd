@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -o "C:/Users/Bob/Documents/xilinx/cpu208/test_sopc_isim_beh.exe" -prj "C:/Users/Bob/Documents/xilinx/cpu208/test_sopc_beh.prj" "work.test_sopc" 

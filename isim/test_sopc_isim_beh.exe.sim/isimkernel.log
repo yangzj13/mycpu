@@ -1,0 +1,10 @@
+Command line:
+   test_sopc_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  53883
+
+Tue Nov 22 18:42:47 2016
+
+
+ Elaboration Time: 0.09375 sec
