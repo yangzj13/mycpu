@@ -54,7 +54,62 @@ end controller;
 architecture Behavioral of controller is
 
 begin
+	
+process(rst, inst_i)
+begin
+	if (rst = '0') then
+		mem_to_reg <= '0';
+		reg_write <= '0';
+		reg_dst <= "0000";
+		alu_op <= "0000";
+	else
+		case inst_i(15 downto 11) is
+			-- AND/OR/CMP/JR/MFPC/SLLV/SLTU
+			when "11101" =>
+				mem_to_reg <= '0';
+				reg_write <= '1';
+				reg_dst(3) <= '1';
+				reg1_addr_o <= inst_i(10 downto 8);
+				reg2_addr_o <= inst_i(7 downto 5);
+				case inst_i(4 downto 0) is
+					--AND
+					when "01100" =>
+						reg_dst(2 downto 0) <= inst_i(10 downto 8);
+						alu_op <= "0010";
+					--OR
+					when "01101" =>
+						reg_dst(2 downto 0) <= inst_i(10 downto 8);
+						alu_op <= "0011";
+					when others =>
+						reg_dst(2 downto 0) <= "111";
+						alu_op <= "0000";
+				end case;
+			--when "" =>
+			--when "" =>
+			--when "" =>
+			--when "" =>
+			--when "" =>
+			--when "" =>
+			--when "" =>
+			--when "" =>
+			--when "" =>
+			--when "" =>
+			--when "" =>
+			--when "" =>
+			when others =>
+				mem_to_reg <= '0';
+				reg_write <= '0';
+				reg_dst <= "0000";
+				alu_op <= "0000";
+		end case;
+	end if;
+end process;
 
+process (reg1_data_i, reg2_data_i)
+begin
+	rx_o <= reg1_data_i;
+	ry_o <= reg2_data_i;
+end process;
 
 end Behavioral;
 
