@@ -46,7 +46,7 @@ begin
 	begin
 		if (rst = '0') then  --复位，pc从0开始
 			pc_o <= x"0000";  --x代表十六进制
-		elsif (risingedge(clk)) then 
+		elsif (rising_edge(clk)) then 
 			pc_o <= pc_i;
 		end if;
 	end process;

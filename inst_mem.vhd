@@ -30,12 +30,42 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity inst_mem is
+	port(
+	rst : in STD_LOGIC;
+	clk : in STD_LOGIC;
+
+	inst_addr_i : in STD_LOGIC_VECTOR(15 downto 0);
+	inst_i : in STD_LOGIC_VECTOR(15 downto 0);
+	inst_o : out STD_LOGIC_VECTOR(15 downto 0);
+	ram2_en : out STD_LOGIC;
+	ram2_we : out STD_LOGIC;
+	ram2_oe : out STD_LOGIC;
+	ram2_addr : out STD_LOGIC_VECTOR(15 downto 0)
+);
 end inst_mem;
 
 architecture Behavioral of inst_mem is
 
 begin
 
+	process(rst ,clk)
+	begin
+		if (rst = '0') then
+			ram2_en <= '1';
+			ram2_we <= '1';
+			ram2_oe <= '1';
+			ram2_addr <= x"0000";
+			--inst_i <= x"0000";
+			inst_o <= x"0000";
+		elsif (rising_edge(clk)) then
+			ram2_addr <= inst_addr_i;
+			ram2_we <= '1';
+			ram2_oe <= '0';
+			ram2_en <= '0';
+			--inst_i <= "ZZZZZZZZZZZZZZZZ";
+			inst_o <= inst_i;
+		end if;
+	end process;
 
 end Behavioral;
 
