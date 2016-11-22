@@ -63,7 +63,7 @@ begin
 	begin
 		if (rst = '0') then
 			data_o <= x"0000";
-		elsif (rising_edge(clk)) then
+		elsif (falling_edge(clk)) then
 			data_o <= data_i;
 		end if;
 	end process;

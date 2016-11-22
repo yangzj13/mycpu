@@ -19,7 +19,7 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
+--use constants.ALL;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 --use IEEE.NUMERIC_STD.ALL;
@@ -34,19 +34,17 @@ entity controller is
 			rst : in STD_LOGIC;
 			pc_i : in STD_LOGIC_VECTOR(15 downto 0);
 			inst_i : in STD_LOGIC_VECTOR(15 downto 0);
-			-- registers data
-			reg1_data_i : in STD_LOGIC_VECTOR(15 downto 0);
-			reg2_data_i : in STD_LOGIC_VECTOR(15 downto 0);
-			rx_o : out STD_LOGIC_VECTOR(15 downto 0);
-			ry_o : out STD_LOGIC_VECTOR(15 downto 0);
 			-- registers addr
 			reg1_addr_o : out STD_LOGIC_VECTOR(3 downto 0);
 			reg2_addr_o : out STD_LOGIC_VECTOR(3 downto 0);
 			-- controll signals
-			mem_to_reg : out STD_LOGIC; --ֱ��д��Ĵ���(0)/��ȡRAM(1)
-			reg_write : out STD_LOGIC; --�Ƿ�д��Ĵ���
-			reg_dst : out STD_LOGIC_VECTOR(3 downto 0); -- Ŀ�ļĴ�����ַ����չΪ4λ��
-			alu_op : out STD_LOGIC_VECTOR(3 downto 0)
+			mem_to_reg : out STD_LOGIC; --Ö±½ÓÐ´Èë¼Ä´æÆ÷(0)/¶ÁÈ¡RAM(1)
+			reg_write : out STD_LOGIC; --ÊÇ·ñÐ´Èë¼Ä´æÆ÷
+			reg_dst : out STD_LOGIC_VECTOR(3 downto 0); -- Ä¿µÄ¼Ä´æÆ÷µØÖ·£¨À©Õ¹Îª4Î»£©
+			alu_op : out STD_LOGIC_VECTOR(3 downto 0);
+			extend_o : out STD_LOGIC_VECTOR(3 downto 0);
+			a_src_o : out STD_LOGIC_VECTOR(1 downto 0);
+			b_src_o : out STD_LOGIC_VECTOR(1 downto 0)
 			-- TODO: other controll signals
 		);
 end controller;
@@ -62,6 +60,9 @@ begin
 		reg_write <= '0';
 		reg_dst <= "0000";
 		alu_op <= "0000";
+		extend_o <= "0000";
+		a_src_o <= "00";
+		b_src_o <= "00";
 	else
 		case inst_i(15 downto 11) is
 			-- AND/OR/CMP/JR/MFPC/SLLV/SLTU
@@ -73,15 +74,20 @@ begin
 				reg2_addr_o(3) <= '1';
 				reg1_addr_o(2 downto 0) <= inst_i(10 downto 8);
 				reg2_addr_o(2 downto 0) <= inst_i(7 downto 5);
+				extend_o <= "0000";
 				case inst_i(4 downto 0) is
 					--AND
 					when "01100" =>
 						reg_dst(2 downto 0) <= inst_i(10 downto 8);
 						alu_op <= "0010";
+						a_src_o <= "00";
+						b_src_o <= "00";
 					--OR
 					when "01101" =>
 						reg_dst(2 downto 0) <= inst_i(10 downto 8);
 						alu_op <= "0011";
+						a_src_o <= "00";
+						b_src_o <= "00";
 					--CMP
 					when "01010" =>
 					--SLLV
@@ -113,6 +119,9 @@ begin
 				reg2_addr_o(3) <= '1';
 				reg1_addr_o(2 downto 0) <= inst_i(10 downto 8);
 				reg2_addr_o(2 downto 0) <= inst_i(7 downto 5);
+				a_src_o <= "00";
+				b_src_o <= "00";
+				extend_o <= "0000";
 				case inst_i(1 downto 0) is
 					--ADDU
 					when "01" =>
@@ -123,6 +132,18 @@ begin
 					--ERROR
 					when others =>
 				end case;
+			-- ADDIU
+			when "01001" =>
+				mem_to_reg <= '0';
+				reg_write <= '1';
+				reg_dst(3) <= '1';
+				reg_dst(2 downto 0) <= inst_i(10 downto 8);
+				reg1_addr_o(3) <= '1';
+				reg1_addr_o(2 downto 0) <= inst_i(10 downto 8);
+				reg2_addr_o <= "0000";
+				extend_o <= "1001";
+				a_src_o <= "00";
+				b_src_o <= "11";
 			--when ""
 			--when "" =>
 			--when "" =>
@@ -145,11 +166,4 @@ begin
 	end if;
 end process;
 
-process (reg1_data_i, reg2_data_i)
-begin
-	rx_o <= reg1_data_i;
-	ry_o <= reg2_data_i;
-end process;
-
 end Behavioral;
-

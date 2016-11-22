@@ -24,7 +24,7 @@
 static const char *ng0 = "C:/Users/Bob/Documents/xilinx/cpu208/inst_mem.vhd";
 extern char *IEEE_P_2592010699;
 
-unsigned char ieee_p_2592010699_sub_1744673427_503743352(char *, char *, unsigned int , unsigned int );
+unsigned char ieee_p_2592010699_sub_1258338084_503743352(char *, char *, unsigned int , unsigned int );
 
 
 static void work_a_4234865043_3212880686_p_0(char *t0)
@@ -48,7 +48,7 @@ LAB0:    xsi_set_current_line(53, ng0);
         goto LAB2;
 
 LAB4:    t1 = (t0 + 1152U);
-    t3 = ieee_p_2592010699_sub_1744673427_503743352(IEEE_P_2592010699, t1, 0U, 0U);
+    t3 = ieee_p_2592010699_sub_1258338084_503743352(IEEE_P_2592010699, t1, 0U, 0U);
     if (t3 != 0)
         goto LAB5;
 

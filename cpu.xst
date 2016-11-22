@@ -1,0 +1,5 @@
+set -tmpdir "C:/Users/Bob/Documents/xilinx/cpu208/xst/projnav.tmp"
+set -xsthdpdir "C:/Users/Bob/Documents/xilinx/cpu208/xst"
+elaborate
+-ifn cpu.prj
+-ifmt mixed

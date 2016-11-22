@@ -49,9 +49,10 @@ begin
 		elsif ((ram2_oe = '0') and (ram2_we = '1')) then
 			case ram2_addr is
 				when x"0000" =>
-					ram2_data <= "1110100101001101"; --OR R1 R2
-				when x"0001" =>
-					ram2_data <= "1110101110001100"; --AND R3 R3
+					ram2_data <= "0100100100001000"; --ADDIU R1 8
+					--ram2_data <= "1110100101001101"; --OR R1 R2
+				when x"0010" =>
+					ram2_data <= "1110101110001100"; --AND R3 R1
 				when others =>
 					ram2_data <= x"0000";
 			end case;

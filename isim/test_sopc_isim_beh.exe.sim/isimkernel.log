@@ -2,9 +2,27 @@ Command line:
    test_sopc_isim_beh.exe
      -simmode  gui
      -simrunnum  0
-     -socket  53883
+     -socket  55992
 
-Tue Nov 22 18:42:47 2016
+Tue Nov 22 22:07:43 2016
 
 
  Elaboration Time: 0.09375 sec
+
+ Current Memory Usage: 853.062 Meg
+
+ Total Signals          : 184
+ Total Nets             : 575
+ Total Signal Drivers   : 62
+ Total Blocks           : 20
+ Total Primitive Blocks : 17
+ Total Processes        : 19
+ Total Traceable Variables  : 15
+ Total Scalar Nets and Variables : 962
+
+ Total Simulation Time: 0.109375 sec
+
+ Current Memory Usage: 538.489 Meg
+
+Tue Nov 22 22:27:50 2016
+

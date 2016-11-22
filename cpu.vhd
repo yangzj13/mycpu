@@ -125,11 +125,6 @@ architecture Behavioral of cpu is
 			rst : in STD_LOGIC;
 			pc_i : in STD_LOGIC_VECTOR(15 downto 0);
 			inst_i : in STD_LOGIC_VECTOR(15 downto 0);
-			-- registers data
-			reg1_data_i : in STD_LOGIC_VECTOR(15 downto 0);
-			reg2_data_i : in STD_LOGIC_VECTOR(15 downto 0);
-			rx_o : out STD_LOGIC_VECTOR(15 downto 0);
-			ry_o : out STD_LOGIC_VECTOR(15 downto 0);
 			-- registers addr
 			reg1_addr_o : out STD_LOGIC_VECTOR(3 downto 0);
 			reg2_addr_o : out STD_LOGIC_VECTOR(3 downto 0);
@@ -137,11 +132,35 @@ architecture Behavioral of cpu is
 			mem_to_reg : out STD_LOGIC; --直接写入寄存器(0)/读取RAM(1)
 			reg_write : out STD_LOGIC; --是否写入寄存器
 			reg_dst : out STD_LOGIC_VECTOR(3 downto 0); -- 目的寄存器地址（扩展为4位）
-			alu_op : out STD_LOGIC_VECTOR(3 downto 0)
+			alu_op : out STD_LOGIC_VECTOR(3 downto 0);
+			extend_o : out STD_LOGIC_VECTOR(3 downto 0);
+			a_src_o : out STD_LOGIC_VECTOR(1 downto 0);
+			b_src_o : out STD_LOGIC_VECTOR(1 downto 0)
 			-- TODO: other controll signals
 		);
 	end component;
 	
+	component extend
+		port(
+			extend_i : in STD_LOGIC_VECTOR(3 downto 0);
+			inst_i : in STD_LOGIC_VECTOR(15 downto 0);
+			imm_o : out STD_LOGIC_VECTOR(15 downto 0)
+			);
+	end component;
+
+	component src_mux
+		port(
+			a_src_i : in STD_LOGIC_VECTOR(1 downto 0);
+			b_src_i : in STD_LOGIC_VECTOR(1 downto 0);
+			pc_i : in STD_LOGIC_VECTOR(15 downto 0);
+			rx_i : in STD_LOGIC_VECTOR(15 downto 0);
+			ry_i : in STD_LOGIC_VECTOR(15 downto 0);
+			imm_i : in STD_LOGIC_VECTOR(15 downto 0);
+			a_o : out STD_LOGIC_VECTOR(15 downto 0);
+			b_o : out STD_LOGIC_VECTOR(15 downto 0)
+			);
+	end component;
+
 	-- ID/EX段寄存器元件例化
 	component id_ex
 		port(
@@ -245,18 +264,26 @@ architecture Behavioral of cpu is
 	signal id_pc : STD_LOGIC_VECTOR(15 downto 0);
 	signal id_inst : STD_LOGIC_VECTOR(15 downto 0);
 	-- controller
-	signal rx_o : STD_LOGIC_VECTOR(15 downto 0);
-	signal ry_o : STD_LOGIC_VECTOR(15 downto 0);
 	signal mem_to_reg_o : STD_LOGIC;
 	signal alu_op_o : STD_LOGIC_VECTOR(3 downto 0);
 	signal reg_dst_o : STD_LOGIC_VECTOR(3 downto 0);
 	signal reg_write_o : STD_LOGIC;
 	signal reg1_addr_o : STD_LOGIC_VECTOR(3 downto 0);
 	signal reg2_addr_o : STD_LOGIC_VECTOR(3 downto 0);
-
+	signal a_src_o : STD_LOGIC_VECTOR(1 downto 0);
+	signal b_src_o : STD_LOGIC_VECTOR(1 downto 0);
+	signal extend_o : STD_LOGIC_VECTOR(3 downto 0);
+	
 	-- registers
 	signal r1_data : STD_LOGIC_VECTOR(15 downto 0);
 	signal r2_data : STD_LOGIC_VECTOR(15 downto 0);
+
+	-- extend
+	signal imm_o : STD_LOGIC_VECTOR(15 downto 0);
+
+	-- src_mux
+	signal a_o : STD_LOGIC_VECTOR(15 downto 0);
+	signal b_o : STD_LOGIC_VECTOR(15 downto 0);
 
 	--id/ex
 	signal ex_rx : STD_LOGIC_VECTOR(15 downto 0);
@@ -285,7 +312,7 @@ architecture Behavioral of cpu is
 	-- 
 begin
 	
-	u1 : pc_reg
+	u_pc_reg : pc_reg
 	port map(	
 		rst => rst,
 		clk => clk,
@@ -293,13 +320,13 @@ begin
 		pc_o => pc_out
 	);
 
-	u2 : pc_adder
+	u_pc_adder : pc_adder
 	port map(
 		pc_i => pc_out,
 		pc_o => pc_plus_1
 	);
 
-	u3 : inst_mem
+	u_inst_mem : inst_mem
 	port map(
 		rst => rst,
 		clk => clk,
@@ -312,7 +339,7 @@ begin
 		ram2_addr => ram2_addr
 	);
 
-	u4 : if_id
+	u_if_id : if_id
 	port map(
 		rst => rst,
 		clk => clk,
@@ -322,7 +349,7 @@ begin
 		id_inst => id_inst
 		);
 
-	u5 : registers
+	u_registers : registers
 	port map(
 		rst => rst,
 		clk => clk,
@@ -335,29 +362,47 @@ begin
 		WbReg => wb_reg_dst
 		);
 
-	u6 : controller
+	u_controller : controller
 	port map(
 		rst => rst,
 		pc_i => id_pc,
 		inst_i => id_inst,
-		reg1_data_i => r1_data,
-		reg2_data_i => r2_data,
-		rx_o => rx_o,
-		ry_o => ry_o,
 		mem_to_reg => mem_to_reg_o,
 		reg_write => reg_write_o,
 		reg_dst => reg_dst_o,
 		alu_op => alu_op_o,
+		extend_o => extend_o,
+		a_src_o => a_src_o,
+		b_src_o => b_src_o,
 		reg1_addr_o => reg1_addr_o,
 		reg2_addr_o => reg2_addr_o
 		);
 
-	u7 : id_ex
+	u_extend : extend
+	port map(
+		extend_i => extend_o,
+		inst_i => id_inst,
+		imm_o => imm_o
+		);
+
+	u_src_mux : src_mux
+	port map(
+		a_src_i => a_src_o,
+		b_src_i => b_src_o, 
+		pc_i => id_pc,
+		rx_i => r1_data,
+		ry_i => r2_data,
+		imm_i => imm_o,
+		a_o => a_o,
+		b_o => b_o
+	);
+
+	u_id_ex : id_ex
 	port map(
 		rst => rst,
 		clk => clk,
-		id_rx => rx_o,
-		id_ry => ry_o,
+		id_rx => a_o,
+		id_ry => b_o,
 		id_mem_to_reg => mem_to_reg_o,
 		id_reg_write => reg_write_o,
 		id_reg_dst => reg_dst_o,
@@ -370,7 +415,7 @@ begin
 		ex_alu_op => ex_alu_op
 		);
 
-	u8 : alu
+	u_alu : alu
 	port map(
 		rst => rst,
 		rx_i => ex_rx,
@@ -380,7 +425,7 @@ begin
 		flag_o => flag_o
 		);
 
-	u9 : ex_mem
+	u_ex_mem : ex_mem
 	port map(
 		rst => rst,
 		clk => clk,
@@ -394,7 +439,7 @@ begin
 		mem_result => mem_result
 		);
 
-	u10 : data_mem
+	u_data_mem : data_mem
 	port map(
 		rst => rst,
 		clk => clk,
@@ -418,7 +463,7 @@ begin
 		--ram2_data => ram2_data
 		);
 
-	u11 : mem_wb
+	u_mem_wb : mem_wb
 	port map(
 		rst => rst,
 		clk => clk,

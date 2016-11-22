@@ -98,7 +98,7 @@ LAB14:    t8 = (t0 + 5007);
         goto LAB12;
 
 LAB15:
-LAB13:    xsi_set_current_line(56, ng0);
+LAB13:    xsi_set_current_line(57, ng0);
     t1 = (t0 + 5055);
     t5 = (t0 + 3232);
     t6 = (t5 + 56U);
@@ -128,7 +128,7 @@ LAB11:    xsi_set_current_line(52, ng0);
     xsi_driver_first_trans_fast_port(t17);
     goto LAB10;
 
-LAB12:    xsi_set_current_line(54, ng0);
+LAB12:    xsi_set_current_line(55, ng0);
     t1 = (t0 + 5039);
     t5 = (t0 + 3232);
     t6 = (t5 + 56U);
