@@ -36,6 +36,8 @@ entity id_ex is
 		-- ID
 		id_rx : in STD_LOGIC_VECTOR(15 downto 0);
 		id_ry : in STD_LOGIC_VECTOR(15 downto 0);
+		id_rx_addr : in STD_LOGIC_VECTOR(3 downto 0);
+		id_ry_addr : in STD_LOGIC_VECTOR(3 downto 0);
 		id_mem_to_reg : in STD_LOGIC; --ֱ?????Ĵ??(0)/??ȡRAM(1)
 		id_reg_write : in STD_LOGIC; --??????Ĵ??
 		id_reg_dst : in STD_LOGIC_VECTOR(3 downto 0); -- Ŀ?ļĴ?????????չΪ4λ??
@@ -43,6 +45,8 @@ entity id_ex is
 		-- EX
 		ex_rx : out STD_LOGIC_VECTOR(15 downto 0);
 		ex_ry : out STD_LOGIC_VECTOR(15 downto 0);
+		ex_rx_addr : out STD_LOGIC_VECTOR(3 downto 0);
+		ex_ry_addr : out STD_LOGIC_VECTOR(3 downto 0);
 		ex_mem_to_reg : out STD_LOGIC; --ֱ?????Ĵ??(0)/??ȡRAM(1)
 		ex_reg_write : out STD_LOGIC; --??????Ĵ??
 		ex_reg_dst : out STD_LOGIC_VECTOR(3 downto 0); -- Ŀ?ļĴ?????????չΪ4λ??
@@ -61,9 +65,13 @@ begin
 			ex_reg_write <= '0';
 			ex_reg_dst <= "0000";
 			ex_alu_op <= "0000";
+			ex_rx_addr <= "0000";
+			ex_ry_addr <= "0000";
 		elsif clk'event and clk = '1' then --ʱ????
 			ex_rx <= id_rx;
 			ex_ry <= id_ry;
+			ex_rx_addr <= id_rx_addr;
+			ex_ry_addr <= id_ry_addr;
 			ex_mem_to_reg <= id_mem_to_reg;
 			ex_reg_write <= id_reg_write;
 			ex_reg_dst <= id_reg_dst;

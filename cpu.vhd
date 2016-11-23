@@ -169,6 +169,8 @@ architecture Behavioral of cpu is
 			-- ID
 			id_rx : in STD_LOGIC_VECTOR(15 downto 0);
 			id_ry : in STD_LOGIC_VECTOR(15 downto 0);
+			id_rx_addr : in STD_LOGIC_VECTOR(3 downto 0);
+			id_ry_addr : in STD_LOGIC_VECTOR(3 downto 0);
 			id_mem_to_reg : in STD_LOGIC; --直接写入寄存器(0)/读取RAM(1)
 			id_reg_write : in STD_LOGIC; --是否写入寄存器
 			id_reg_dst : in STD_LOGIC_VECTOR(3 downto 0); -- 目的寄存器地址（扩展为4位）
@@ -176,6 +178,8 @@ architecture Behavioral of cpu is
 			-- EX
 			ex_rx : out STD_LOGIC_VECTOR(15 downto 0);
 			ex_ry : out STD_LOGIC_VECTOR(15 downto 0);
+			ex_rx_addr : out STD_LOGIC_VECTOR(3 downto 0);
+			ex_ry_addr : out STD_LOGIC_VECTOR(3 downto 0);
 			ex_mem_to_reg : out STD_LOGIC; --直接写入寄存器(0)/读取RAM(1)
 			ex_reg_write : out STD_LOGIC; --是否写入寄存器
 			ex_reg_dst : out STD_LOGIC_VECTOR(3 downto 0); -- 目的寄存器地址（扩展为4位）
@@ -183,6 +187,15 @@ architecture Behavioral of cpu is
 		);
 	end component;
 	
+	component forward_mux
+		port(
+			origin_data_in : in STD_LOGIC_VECTOR(15 downto 0);
+			forward_data_in : in STD_LOGIC_VECTOR(15 downto 0);
+			select_forward_data : in STD_LOGIC;
+			data_out : out STD_LOGIC_VECTOR(15 downto 0)
+			);
+	end component;
+
 	component alu
 		port(
 			rst : in STD_LOGIC;
@@ -254,6 +267,24 @@ architecture Behavioral of cpu is
 		);
 	end component;
 	
+	component forwarding_unit
+		Port ( 
+			rst : in STD_LOGIC;
+			mem_data : in  STD_LOGIC_VECTOR (15 downto 0);
+           	mem_reg : in  STD_LOGIC_VECTOR (3 downto 0);
+			  
+           	wb_data : in  STD_LOGIC_VECTOR (15 downto 0);
+           	wb_reg : in  STD_LOGIC_VECTOR (3 downto 0);
+           
+			rx_cur : in  STD_LOGIC_VECTOR (3 downto 0);
+           	ry_cur : in  STD_LOGIC_VECTOR (3 downto 0);
+           
+			data_A : out  STD_LOGIC_VECTOR (15 downto 0);
+           	data_B : out  STD_LOGIC_VECTOR (15 downto 0);
+           	select_data_A : out  STD_LOGIC;
+           	select_data_B : out  STD_LOGIC);
+	end component;
+
 	-- pc_reg
 	signal pc_out : STD_LOGIC_VECTOR(15 downto 0);
 	-- pc_adder
@@ -288,10 +319,16 @@ architecture Behavioral of cpu is
 	--id/ex
 	signal ex_rx : STD_LOGIC_VECTOR(15 downto 0);
 	signal ex_ry : STD_LOGIC_VECTOR(15 downto 0);
+	signal ex_rx_addr : STD_LOGIC_VECTOR(3 downto 0);
+	signal ex_ry_addr : STD_LOGIC_VECTOR(3 downto 0);
 	signal ex_mem_to_reg : STD_LOGIC;
 	signal ex_alu_op : STD_LOGIC_VECTOR(3 downto 0);
 	signal ex_reg_dst : STD_LOGIC_VECTOR(3 downto 0);
 	signal ex_reg_write : STD_LOGIC;
+
+	--forward_mux
+	signal mux_a : STD_LOGIC_VECTOR(15 downto 0);
+	signal mux_b : STD_LOGIC_VECTOR(15 downto 0);
 
 	--alu
 	signal result_o : STD_LOGIC_VECTOR(15 downto 0); 
@@ -309,7 +346,13 @@ architecture Behavioral of cpu is
 	signal wb_wdata : STD_LOGIC_VECTOR(15 downto 0);
 	signal wb_reg_dst : STD_LOGIC_VECTOR(3 downto 0);
 	signal wb_reg_write : STD_LOGIC; --是否写入寄存器
-	-- 
+	
+	--forwarding_unit
+	signal forward_data_a : STD_LOGIC_VECTOR(15 downto 0);
+	signal forward_data_b : STD_LOGIC_VECTOR(15 downto 0);
+	signal forward_sel_a : STD_LOGIC;
+	signal forward_sel_b : STD_LOGIC;
+	
 begin
 	
 	u_pc_reg : pc_reg
@@ -403,23 +446,43 @@ begin
 		clk => clk,
 		id_rx => a_o,
 		id_ry => b_o,
+		id_rx_addr => reg1_addr_o,
+		id_ry_addr => reg2_addr_o,
 		id_mem_to_reg => mem_to_reg_o,
 		id_reg_write => reg_write_o,
 		id_reg_dst => reg_dst_o,
 		id_alu_op => alu_op_o,
 		ex_rx => ex_rx,
 		ex_ry => ex_ry,
+		ex_rx_addr => ex_rx_addr,
+		ex_ry_addr => ex_ry_addr,
 		ex_mem_to_reg => ex_mem_to_reg,
 		ex_reg_write => ex_reg_write,
 		ex_reg_dst => ex_reg_dst,
 		ex_alu_op => ex_alu_op
 		);
 
+	u_forward_mux_a : forward_mux
+	port map(
+			origin_data_in => ex_rx,
+			forward_data_in => forward_data_a,
+			select_forward_data => forward_sel_a,
+			data_out => mux_a
+		);
+
+	u_forward_mux_b : forward_mux
+	port map(
+			origin_data_in => ex_ry,
+			forward_data_in => forward_data_b,
+			select_forward_data => forward_sel_b,
+			data_out => mux_b
+		);
+
 	u_alu : alu
 	port map(
 		rst => rst,
-		rx_i => ex_rx,
-		ry_i => ex_ry,
+		rx_i => mux_a,
+		ry_i => mux_b,
 		alu_op_i => ex_alu_op,
 		result_o => result_o,
 		flag_o => flag_o
@@ -474,6 +537,21 @@ begin
 		wb_wdata => wb_wdata,
 		wb_reg_dst => wb_reg_dst,
 		wb_reg_write => wb_reg_write
+		);
+
+	u_forwarding_unit : forwarding_unit
+	port map(
+		rst => rst,
+		mem_data => mem_result,
+		mem_reg => mem_reg_dst,
+		wb_data => wb_wdata,
+		wb_reg => wb_reg_dst,
+		rx_cur => ex_rx_addr,
+		ry_cur => ex_ry_addr,
+		data_A => forward_data_a,
+		data_B => forward_data_b,
+		select_data_A => forward_sel_a,
+		select_data_B => forward_sel_b
 		);
 end Behavioral;
 

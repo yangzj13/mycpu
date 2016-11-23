@@ -62,11 +62,11 @@
   </files>
 
   <transforms xmlns="http://www.xilinx.com/XMLSchema">
-    <transform xil_pn:end_ts="1479821797" xil_pn:name="TRAN_copyInitialToAbstractSimulation" xil_pn:start_ts="1479821797">
+    <transform xil_pn:end_ts="1479836589" xil_pn:name="TRAN_copyInitialToAbstractSimulation" xil_pn:start_ts="1479836589">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1479823630" xil_pn:in_ck="7452271290197156883" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1479823630">
+    <transform xil_pn:end_ts="1479836929" xil_pn:in_ck="1432324544820387315" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1479836929">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="alu.vhd"/>
@@ -76,6 +76,8 @@
       <outfile xil_pn:name="data_mem.vhd"/>
       <outfile xil_pn:name="ex_mem.vhd"/>
       <outfile xil_pn:name="extend.vhd"/>
+      <outfile xil_pn:name="forward_mux.vhd"/>
+      <outfile xil_pn:name="forwarding_unit.vhd"/>
       <outfile xil_pn:name="id_ex.vhd"/>
       <outfile xil_pn:name="if_id.vhd"/>
       <outfile xil_pn:name="inst_mem.vhd"/>
@@ -88,19 +90,19 @@
       <outfile xil_pn:name="src_mux.vhd"/>
       <outfile xil_pn:name="test_sopc.vhd"/>
     </transform>
-    <transform xil_pn:end_ts="1479823188" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="2809331785636231498" xil_pn:start_ts="1479823188">
+    <transform xil_pn:end_ts="1479836589" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="2809331785636231498" xil_pn:start_ts="1479836589">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1479823188" xil_pn:name="TRAN_schematicsToHdlSim" xil_pn:prop_ck="870443998863472076" xil_pn:start_ts="1479823188">
+    <transform xil_pn:end_ts="1479836589" xil_pn:name="TRAN_schematicsToHdlSim" xil_pn:prop_ck="870443998863472076" xil_pn:start_ts="1479836589">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1479808588" xil_pn:name="TRAN_regenerateCoresSim" xil_pn:prop_ck="-5339042534122801522" xil_pn:start_ts="1479808588">
+    <transform xil_pn:end_ts="1479836589" xil_pn:name="TRAN_regenerateCoresSim" xil_pn:prop_ck="-5339042534122801522" xil_pn:start_ts="1479836589">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1479823633" xil_pn:in_ck="7452271290197156883" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1479823633">
+    <transform xil_pn:end_ts="1479836932" xil_pn:in_ck="1432324544820387315" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1479836932">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="alu.vhd"/>
@@ -110,6 +112,8 @@
       <outfile xil_pn:name="data_mem.vhd"/>
       <outfile xil_pn:name="ex_mem.vhd"/>
       <outfile xil_pn:name="extend.vhd"/>
+      <outfile xil_pn:name="forward_mux.vhd"/>
+      <outfile xil_pn:name="forwarding_unit.vhd"/>
       <outfile xil_pn:name="id_ex.vhd"/>
       <outfile xil_pn:name="if_id.vhd"/>
       <outfile xil_pn:name="inst_mem.vhd"/>
@@ -122,12 +126,9 @@
       <outfile xil_pn:name="src_mux.vhd"/>
       <outfile xil_pn:name="test_sopc.vhd"/>
     </transform>
-    <transform xil_pn:end_ts="1479823638" xil_pn:in_ck="7452271290197156883" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-2947441576048354058" xil_pn:start_ts="1479823633">
+    <transform xil_pn:end_ts="1479836938" xil_pn:in_ck="1432324544820387315" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-2947441576048354058" xil_pn:start_ts="1479836932">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForProperties"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="fuse.log"/>
       <outfile xil_pn:name="isim"/>
       <outfile xil_pn:name="isim.log"/>
@@ -135,13 +136,9 @@
       <outfile xil_pn:name="test_sopc_isim_beh.exe"/>
       <outfile xil_pn:name="xilinxsim.ini"/>
     </transform>
-    <transform xil_pn:end_ts="1479823638" xil_pn:in_ck="1997220701521884041" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="8207986936248468643" xil_pn:start_ts="1479823638">
+    <transform xil_pn:end_ts="1479836938" xil_pn:in_ck="1997220701521884041" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="8207986936248468643" xil_pn:start_ts="1479836938">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForProperties"/>
-      <status xil_pn:value="OutOfDateForPredecessor"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="isim.cmd"/>
       <outfile xil_pn:name="isim.log"/>
       <outfile xil_pn:name="test_sopc_isim_beh.wdb"/>
@@ -174,15 +171,12 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1479821762" xil_pn:in_ck="-3868489088646400721" xil_pn:name="TRANEXT_xstsynthesize_spartan3e" xil_pn:prop_ck="-8347832099114562581" xil_pn:start_ts="1479821749">
+    <transform xil_pn:end_ts="1479833455" xil_pn:in_ck="5716075684489765647" xil_pn:name="TRANEXT_xstsynthesize_spartan3e" xil_pn:prop_ck="-8347832099114562581" xil_pn:start_ts="1479833437">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputChanged"/>
-      <status xil_pn:value="OutputChanged"/>
-      <status xil_pn:value="OutputRemoved"/>
       <outfile xil_pn:name=".lso"/>
       <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
       <outfile xil_pn:name="sopc.lso"/>

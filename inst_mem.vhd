@@ -57,7 +57,7 @@ begin
 			ram2_addr <= x"0000";
 			--inst_i <= x"0000";
 			inst_o <= x"0000";
-		elsif (falling_edge(clk)) then
+		else
 			ram2_addr <= inst_addr_i;
 			ram2_we <= '1';
 			ram2_oe <= '0';

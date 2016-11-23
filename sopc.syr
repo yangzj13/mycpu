@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.14 secs
+Total CPU time to Xst completion: 0.31 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.14 secs
+Total CPU time to Xst completion: 0.31 secs
  
 --> Reading design: sopc.prj
 
@@ -104,8 +104,6 @@ Slice Utilization Ratio Delta      : 5
 =========================================================================
 *                          HDL Compilation                              *
 =========================================================================
-Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/constants.vhd" in Library work.
-Architecture constants of Entity constants is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/pc_reg.vhd" in Library work.
 Architecture behavioral of Entity pc_reg is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/pc_adder.vhd" in Library work.
@@ -124,6 +122,8 @@ Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/src_mux.vhd" in Librar
 Architecture behavioral of Entity src_mux is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/id_ex.vhd" in Library work.
 Architecture behavioral of Entity id_ex is up to date.
+Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/forward_mux.vhd" in Library work.
+Architecture behavioral of Entity forward_mux is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/alu.vhd" in Library work.
 Architecture behavioral of Entity alu is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/ex_mem.vhd" in Library work.
@@ -132,12 +132,19 @@ Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/data_mem.vhd" in Libra
 Architecture behavioral of Entity data_mem is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/mem_wb.vhd" in Library work.
 Architecture behavioral of Entity mem_wb is up to date.
+Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/forwarding_unit.vhd" in Library work.
+Architecture behavioral of Entity forwarding_unit is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/cpu.vhd" in Library work.
-Architecture behavioral of Entity cpu is up to date.
+Entity <cpu> compiled.
+Entity <cpu> (Architecture <behavioral>) compiled.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/ram2.vhd" in Library work.
-Architecture behavioral of Entity ram2 is up to date.
+Entity <ram2> compiled.
+Entity <ram2> (Architecture <behavioral>) compiled.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/sopc.vhd" in Library work.
 Architecture behavioral of Entity sopc is up to date.
+Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/constants.vhd" in Library work.
+Package <constants> compiled.
+Package body <constants> compiled.
 
 =========================================================================
 *                     Design Hierarchy Analysis                         *
@@ -166,6 +173,8 @@ Analyzing hierarchy for entity <src_mux> in library <work> (architecture <behavi
 
 Analyzing hierarchy for entity <id_ex> in library <work> (architecture <behavioral>).
 
+Analyzing hierarchy for entity <forward_mux> in library <work> (architecture <behavioral>).
+
 Analyzing hierarchy for entity <alu> in library <work> (architecture <behavioral>).
 
 Analyzing hierarchy for entity <ex_mem> in library <work> (architecture <behavioral>).
@@ -173,6 +182,8 @@ Analyzing hierarchy for entity <ex_mem> in library <work> (architecture <behavio
 Analyzing hierarchy for entity <data_mem> in library <work> (architecture <behavioral>).
 
 Analyzing hierarchy for entity <mem_wb> in library <work> (architecture <behavioral>).
+
+Analyzing hierarchy for entity <forwarding_unit> in library <work> (architecture <behavioral>).
 
 
 =========================================================================
@@ -215,12 +226,15 @@ INFO:Xst:1561 - "C:/Users/Bob/Documents/xilinx/cpu208/extend.vhd" line 82: Mux i
 Entity <extend> analyzed. Unit <extend> generated.
 
 Analyzing Entity <src_mux> in library <work> (Architecture <behavioral>).
-INFO:Xst:1561 - "C:/Users/Bob/Documents/xilinx/cpu208/src_mux.vhd" line 55: Mux is complete : default of case is discarded
-INFO:Xst:1561 - "C:/Users/Bob/Documents/xilinx/cpu208/src_mux.vhd" line 66: Mux is complete : default of case is discarded
+INFO:Xst:1561 - "C:/Users/Bob/Documents/xilinx/cpu208/src_mux.vhd" line 61: Mux is complete : default of case is discarded
+INFO:Xst:1561 - "C:/Users/Bob/Documents/xilinx/cpu208/src_mux.vhd" line 72: Mux is complete : default of case is discarded
 Entity <src_mux> analyzed. Unit <src_mux> generated.
 
 Analyzing Entity <id_ex> in library <work> (Architecture <behavioral>).
 Entity <id_ex> analyzed. Unit <id_ex> generated.
+
+Analyzing Entity <forward_mux> in library <work> (Architecture <behavioral>).
+Entity <forward_mux> analyzed. Unit <forward_mux> generated.
 
 Analyzing Entity <alu> in library <work> (Architecture <behavioral>).
 Entity <alu> analyzed. Unit <alu> generated.
@@ -233,6 +247,13 @@ Entity <data_mem> analyzed. Unit <data_mem> generated.
 
 Analyzing Entity <mem_wb> in library <work> (Architecture <behavioral>).
 Entity <mem_wb> analyzed. Unit <mem_wb> generated.
+
+Analyzing Entity <forwarding_unit> in library <work> (Architecture <behavioral>).
+WARNING:Xst:819 - "C:/Users/Bob/Documents/xilinx/cpu208/forwarding_unit.vhd" line 51: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+   <rx_cur>
+WARNING:Xst:819 - "C:/Users/Bob/Documents/xilinx/cpu208/forwarding_unit.vhd" line 66: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+   <ry_cur>
+Entity <forwarding_unit> analyzed. Unit <forwarding_unit> generated.
 
 Analyzing Entity <ram2> in library <work> (Architecture <behavioral>).
 Entity <ram2> analyzed. Unit <ram2> generated.
@@ -350,15 +371,22 @@ Unit <src_mux> synthesized.
 
 Synthesizing Unit <id_ex>.
     Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/id_ex.vhd".
+    Found 4-bit register for signal <ex_ry_addr>.
     Found 4-bit register for signal <ex_reg_dst>.
     Found 16-bit register for signal <ex_rx>.
     Found 16-bit register for signal <ex_ry>.
     Found 1-bit register for signal <ex_reg_write>.
     Found 4-bit register for signal <ex_alu_op>.
+    Found 4-bit register for signal <ex_rx_addr>.
     Found 1-bit register for signal <ex_mem_to_reg>.
     Summary:
-	inferred  42 D-type flip-flop(s).
+	inferred  50 D-type flip-flop(s).
 Unit <id_ex> synthesized.
+
+
+Synthesizing Unit <forward_mux>.
+    Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/forward_mux.vhd".
+Unit <forward_mux> synthesized.
 
 
 Synthesizing Unit <alu>.
@@ -420,6 +448,19 @@ Synthesizing Unit <mem_wb>.
 Unit <mem_wb> synthesized.
 
 
+Synthesizing Unit <forwarding_unit>.
+    Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/forwarding_unit.vhd".
+WARNING:Xst:737 - Found 16-bit latch for signal <data_A>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 16-bit latch for signal <data_B>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Found 4-bit comparator equal for signal <select_data_A$cmp_eq0000> created at line 53.
+    Found 4-bit comparator equal for signal <select_data_A$cmp_eq0001> created at line 53.
+    Found 4-bit comparator equal for signal <select_data_B$cmp_eq0000> created at line 68.
+    Found 4-bit comparator equal for signal <select_data_B$cmp_eq0001> created at line 68.
+    Summary:
+	inferred   4 Comparator(s).
+Unit <forwarding_unit> synthesized.
+
+
 Synthesizing Unit <cpu>.
     Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/cpu.vhd".
 WARNING:Xst:646 - Signal <flag_o> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
@@ -445,17 +486,17 @@ Macro Statistics
  16-bit subtractor                                     : 1
  17-bit adder                                          : 1
  17-bit subtractor                                     : 1
-# Registers                                            : 32
+# Registers                                            : 34
  1-bit register                                        : 6
  16-bit register                                       : 22
- 4-bit register                                        : 4
-# Latches                                              : 18
+ 4-bit register                                        : 6
+# Latches                                              : 20
  1-bit latch                                           : 14
- 16-bit latch                                          : 1
+ 16-bit latch                                          : 3
  2-bit latch                                           : 1
  4-bit latch                                           : 2
-# Comparators                                          : 2
- 4-bit comparator equal                                : 2
+# Comparators                                          : 6
+ 4-bit comparator equal                                : 6
 # Multiplexers                                         : 2
  16-bit 4-to-1 multiplexer                             : 2
 # Logic shifters                                       : 4
@@ -486,15 +527,15 @@ Macro Statistics
  16-bit subtractor                                     : 1
  17-bit adder                                          : 1
  17-bit subtractor                                     : 1
-# Registers                                            : 374
- Flip-Flops                                            : 374
-# Latches                                              : 18
+# Registers                                            : 382
+ Flip-Flops                                            : 382
+# Latches                                              : 20
  1-bit latch                                           : 14
- 16-bit latch                                          : 1
+ 16-bit latch                                          : 3
  2-bit latch                                           : 1
  4-bit latch                                           : 2
-# Comparators                                          : 2
- 4-bit comparator equal                                : 2
+# Comparators                                          : 6
+ 4-bit comparator equal                                : 6
 # Multiplexers                                         : 2
  16-bit 4-to-1 multiplexer                             : 2
 # Logic shifters                                       : 4
@@ -510,9 +551,9 @@ Macro Statistics
 =========================================================================
 *                         Low Level Synthesis                           *
 =========================================================================
-INFO:Xst:2261 - The FF/Latch <12> in Unit <LPM_LATCH_1> is equivalent to the following 6 FFs/Latches, which will be removed : <10> <6> <5> <4> <1> <0> 
-INFO:Xst:2261 - The FF/Latch <15> in Unit <LPM_LATCH_1> is equivalent to the following 4 FFs/Latches, which will be removed : <13> <9> <7> <2> 
-INFO:Xst:2261 - The FF/Latch <14> in Unit <LPM_LATCH_1> is equivalent to the following 3 FFs/Latches, which will be removed : <11> <8> <3> 
+INFO:Xst:2261 - The FF/Latch <9> in Unit <LPM_LATCH_1> is equivalent to the following 2 FFs/Latches, which will be removed : <7> <2> 
+INFO:Xst:2261 - The FF/Latch <12> in Unit <LPM_LATCH_1> is equivalent to the following 3 FFs/Latches, which will be removed : <10> <4> <1> 
+INFO:Xst:2261 - The FF/Latch <6> in Unit <LPM_LATCH_1> is equivalent to the following FF/Latch, which will be removed : <5> 
 INFO:Xst:2261 - The FF/Latch <extend_o_0> in Unit <controller> is equivalent to the following FF/Latch, which will be removed : <extend_o_3> 
 INFO:Xst:2261 - The FF/Latch <alu_op_2> in Unit <controller> is equivalent to the following FF/Latch, which will be removed : <alu_op_3> 
 INFO:Xst:2261 - The FF/Latch <b_src_o_0> in Unit <controller> is equivalent to the following FF/Latch, which will be removed : <b_src_o_1> 
@@ -542,11 +583,52 @@ Optimizing unit <data_mem> ...
 
 Optimizing unit <mem_wb> ...
 
+Optimizing unit <ram2> ...
+INFO:Xst:2261 - The FF/Latch <ram2_data_3> in Unit <ram2> is equivalent to the following 2 FFs/Latches, which will be removed : <ram2_data_8> <ram2_data_14> 
+INFO:Xst:2261 - The FF/Latch <ram2_data_0> in Unit <ram2> is equivalent to the following 2 FFs/Latches, which will be removed : <ram2_data_13> <ram2_data_15> 
+
 Optimizing unit <controller> ...
 
+Optimizing unit <forwarding_unit> ...
+
 Optimizing unit <cpu> ...
-WARNING:Xst:2677 - Node <u2/ram2_data_14> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u2/ram2_data_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u2/ram2_data_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u2/ram2_data_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u2/ram2_data_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u2/ram2_data_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u2/ram2_data_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_B_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_B_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_B_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_B_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_B_4> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_B_5> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_B_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_B_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_B_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_B_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_B_10> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_B_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_B_12> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_B_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_B_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_B_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_A_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_A_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_A_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_A_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_A_4> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_A_5> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_A_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_A_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_A_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_A_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_A_10> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_A_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_A_12> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_A_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_A_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_forwarding_unit/data_A_15> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/reg_dst_2> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/reg_dst_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/reg_dst_0> of sequential type is unconnected in block <sopc>.
@@ -624,6 +706,15 @@ WARNING:Xst:2677 - Node <u1/u_alu/Z> of sequential type is unconnected in block 
 WARNING:Xst:2677 - Node <u1/u_alu/S> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_alu/O> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_alu/C> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_alu_op_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_alu_op_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_alu_op_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_alu_op_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_rx_addr_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_rx_addr_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_rx_addr_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_rx_addr_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_mem_to_reg> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_rx_0> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_rx_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_rx_2> of sequential type is unconnected in block <sopc>.
@@ -640,15 +731,6 @@ WARNING:Xst:2677 - Node <u1/u_id_ex/ex_rx_12> of sequential type is unconnected 
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_rx_13> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_rx_14> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_rx_15> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_id_ex/ex_alu_op_0> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_id_ex/ex_alu_op_1> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_id_ex/ex_alu_op_2> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_id_ex/ex_alu_op_3> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_id_ex/ex_mem_to_reg> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_id_ex/ex_reg_dst_0> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_id_ex/ex_reg_dst_1> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_id_ex/ex_reg_dst_2> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_id_ex/ex_reg_dst_3> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_ry_0> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_ry_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_ry_2> of sequential type is unconnected in block <sopc>.
@@ -666,6 +748,14 @@ WARNING:Xst:2677 - Node <u1/u_id_ex/ex_ry_13> of sequential type is unconnected 
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_ry_14> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_ry_15> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_reg_write> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_ry_addr_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_ry_addr_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_ry_addr_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_ry_addr_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_reg_dst_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_reg_dst_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_reg_dst_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_reg_dst_3> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_registers/r0_0> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_registers/r0_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_registers/r0_2> of sequential type is unconnected in block <sopc>.
@@ -1028,14 +1118,14 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 
 
-Total REAL time to Xst completion: 10.00 secs
-Total CPU time to Xst completion: 9.88 secs
+Total REAL time to Xst completion: 16.00 secs
+Total CPU time to Xst completion: 16.02 secs
  
 --> 
 
-Total memory usage is 326908 kilobytes
+Total memory usage is 326936 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :  437 (   0 filtered)
-Number of infos    :   20 (   0 filtered)
+Number of warnings :  484 (   0 filtered)
+Number of infos    :   22 (   0 filtered)
 
