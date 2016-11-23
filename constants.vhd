@@ -26,7 +26,9 @@ constant src_pc : std_logic_vector := "01";
 constant src_0 : std_logic_vector := "10";
 constant src_imm : std_logic_vector := "11";
 
-
+constant res_alu : std_logic_vector := "000";
+constant res_eq : std_logic_vector := "101";  
+constant res_sl : std_logic_vector := "110";  
 -- constant <constant_name>		: time := <time_unit> ns;
 -- constant <constant_name>		: integer := <value;
 --

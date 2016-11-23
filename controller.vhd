@@ -38,18 +38,26 @@ entity controller is
 			reg1_addr_o : out STD_LOGIC_VECTOR(3 downto 0);
 			reg2_addr_o : out STD_LOGIC_VECTOR(3 downto 0);
 			-- controll signals
-			mem_to_reg : out STD_LOGIC; --Ö±½ÓÐ´Èë¼Ä´æÆ÷(0)/¶ÁÈ¡RAM(1)
-			reg_write : out STD_LOGIC; --ÊÇ·ñÐ´Èë¼Ä´æÆ÷
-			reg_dst : out STD_LOGIC_VECTOR(3 downto 0); -- Ä¿µÄ¼Ä´æÆ÷µØÖ·£¨À©Õ¹Îª4Î»£©
+			mem_to_reg : out STD_LOGIC; 
+			reg_write : out STD_LOGIC;
+			reg_dst : out STD_LOGIC_VECTOR(3 downto 0);
 			alu_op : out STD_LOGIC_VECTOR(3 downto 0);
 			extend_o : out STD_LOGIC_VECTOR(3 downto 0);
 			a_src_o : out STD_LOGIC_VECTOR(1 downto 0);
-			b_src_o : out STD_LOGIC_VECTOR(1 downto 0)
+			b_src_o : out STD_LOGIC_VECTOR(1 downto 0);
+			
 			-- TODO: other controll signals
+			
+			--Add   To change T reg
+			res_flag_o : out STD_LOGIC_VECTOR(2 downto 0)
 		);
 end controller;
 
 architecture Behavioral of controller is
+
+constant res_alu : std_logic_vector := "000";
+constant res_eq : std_logic_vector := "101";  
+constant res_sl : std_logic_vector := "110";  
 
 begin
 	
@@ -63,7 +71,9 @@ begin
 		extend_o <= "0000";
 		a_src_o <= "00";
 		b_src_o <= "00";
+		res_flag_o <= res_alu;
 	else
+		res_flag_o <= res_alu;  --���̨�����????��??��?????0
 		case inst_i(15 downto 11) is
 			-- AND/OR/CMP/JR/MFPC/SLLV/SLTU
 			when "11101" =>
@@ -90,10 +100,27 @@ begin
 						b_src_o <= "00";
 					--CMP
 					when "01010" =>
+						reg_dst <= "0001";
+						alu_op <= "0100";
+						a_src_o <= "00";
+						b_src_o <= "00";
+						res_flag_o <= res_eq;
 					--SLLV
 					when "00100" => 
-					--SLLA
+						reg_dst(2 downto 0) <= inst_i(7 downto 5);
+						alu_op <= "0110";
+						a_src_o <= "00";
+						b_src_o <= "00";
+						-- rx ��? ry ��??3D����?????��??������
+						reg1_addr_o(2 downto 0) <= inst_i(7 downto 5);
+						reg2_addr_o(2 downto 0) <= inst_i(10 downto 8);
+					--SLTU
 					when "00011" =>
+						reg_dst <= "0001";
+						alu_op <= "0001";
+						a_src_o <= "00";
+						b_src_o <= "00";
+						res_flag_o <= res_sl;
 					--MFPC/JR
 					when "00000" =>
 						case inst_i(7 downto 5) is
@@ -101,6 +128,16 @@ begin
 							when "000" =>
 							--MFPC
 							when "010" =>
+								mem_to_reg <= '0';
+								reg_write <= '1';
+								reg_dst(3) <= '1';
+								reg_dst(2 downto 0) <= inst_i(10 downto 8);
+								reg1_addr_o <= "0000";
+								reg2_addr_o <= "0000";
+								extend_o <= "0000";
+								a_src_o <= "01";
+								b_src_o <= "00";
+								alu_op <= "0000";
 							when others =>
 							
 						end case;
@@ -144,12 +181,151 @@ begin
 				extend_o <= "1001";
 				a_src_o <= "00";
 				b_src_o <= "11";
-			--when ""
-			--when "" =>
-			--when "" =>
-			--when "" =>
-			--when "" =>
-			--when "" =>
+				alu_op <= "0000";
+			-- ADDIU3
+			when "01000" =>
+				mem_to_reg <= '0';
+				reg_write <= '1';
+				reg_dst(3) <= '1';
+				reg_dst(2 downto 0) <= inst_i(7 downto 5);
+				reg1_addr_o(3) <= '1';
+				reg1_addr_o(2 downto 0) <= inst_i(10 downto 8);
+				reg2_addr_o <= "0000";
+				-- imm 0+[3-0]
+				extend_o <= "1011";
+				a_src_o <= "00";
+				b_src_o <= "11";
+				alu_op <= "0000";
+			-- ADDSP / BTEQZ / MTSP
+			when "01100" =>
+				case inst_i(10 downto 8) is
+					--ADDSP
+					when "011" =>
+						mem_to_reg <= '0';
+						reg_write <= '1';
+						--Reg SP
+						reg_dst <= "0100";
+						reg1_addr_o <= "0100";
+						reg2_addr_o <= "0000";
+						extend_o <= "1001";
+						a_src_o <= "00";
+						b_src_o <= "11";
+						alu_op <= "0000";
+					--BTEQZ
+					when "000" =>
+						
+					--MTSP
+					when "100" =>
+						mem_to_reg <= '0';
+						reg_write <= '1';
+						reg_dst <= "0100";
+						reg1_addr_o(3) <= '1';
+						reg1_addr_o(2 downto 0) <= inst_i(7 downto 5);
+						reg2_addr_o <= "0000";
+						extend_o <= "0000";
+						a_src_o <= "00";
+						b_src_o <= "10";
+						alu_op <= "0001";
+					--ERROR
+					when others =>
+				end case;
+			--LI
+			when "01101" =>
+				mem_to_reg <= '0';
+				reg_write <= '1';
+				reg_dst(3) <= '1';
+				reg_dst(2 downto 0) <= inst_i(10 downto 8);
+				reg1_addr_o <= "0000";
+				reg2_addr_o <= "0000";
+				extend_o <= "0001";
+				a_src_o <= "00";
+				b_src_o <= "11";
+				alu_op <= "0000";
+			-- MFIH / MTIH
+			when "11110" =>
+				case inst_i(7 downto 0) is
+					--MFIH
+					when "00000000" =>
+						mem_to_reg <= '0';
+						reg_write <= '1';
+						reg_dst(3) <= '1';
+						reg_dst(2 downto 0) <= inst_i(10 downto 8);
+						reg1_addr_o <= "0010";
+						reg2_addr_o <= "0000";
+						extend_o <= "0000";
+						a_src_o <= "00";
+						b_src_o <= "00";
+						alu_op <= "0000";
+					--MTIH
+					when "00000001" =>
+						mem_to_reg <= '0';
+						reg_write <= '1';
+						reg_dst <= "0010";
+						reg1_addr_o(3) <= '1';
+						reg1_addr_o(2 downto 0) <= inst_i(10 downto 8);
+						reg2_addr_o <= "0000";
+						extend_o <= "0000";
+						a_src_o <= "00";
+						b_src_o <= "00";
+						alu_op <= "0000";
+					--ERROR
+					when others =>
+				end case;
+			-- SLL / SRA / SRL
+			when "00110" =>
+				mem_to_reg <= '0';
+				reg_write <= '1';
+				reg_dst(3) <= '1';
+				reg_dst(2 downto 0) <= inst_i(10 downto 8);
+				reg1_addr_o(3) <= '1';
+				reg1_addr_o(2 downto 0) <= inst_i(7 downto 5);
+				reg2_addr_o <= "0000";
+				a_src_o <= "00";
+				b_src_o <= "11";
+				if(inst_i(4 downto 2) = "000") then 
+					extend_o <= "0111";
+				else
+					extend_o <= "1110";
+				end if;
+				case inst_i(1 downto 0) is
+					--SLL
+					when "00" =>
+						alu_op <= "0110";
+					--SRA
+					when "11" =>
+						alu_op <= "1000";
+					--SRL	
+					when "10" =>
+						alu_op <= "0111";
+					--ERROR
+					when others =>
+				end case;
+			--CMPI
+			when "01110" =>
+				mem_to_reg <= '0';
+				reg_write <= '1';
+				reg1_addr_o(3) <= '1';
+				reg1_addr_o(2 downto 0) <= inst_i(10 downto 8);
+				reg2_addr_o <= "0000";
+				extend_o <= "1001";
+				reg_dst <= "0001";
+				alu_op <= "0001";
+				a_src_o <= "00";
+				b_src_o <= "11";
+				res_flag_o <= res_eq;
+			--MOVE
+			when "01111" =>
+				mem_to_reg <= '0';
+				reg_write <= '1';
+				reg1_addr_o(3) <= '1';
+				reg1_addr_o(2 downto 0) <= inst_i(7 downto 5);
+				reg2_addr_o <= "0000";
+				extend_o <= "0000";
+				reg_dst(3) <= '1';
+				reg_dst(2 downto 0) <= inst_i(10 downto 8);
+				alu_op <= "0000";
+				a_src_o <= "00";
+				b_src_o <= "10";				
 			--when "" =>
 			--when "" =>
 			--when "" =>

@@ -135,7 +135,8 @@ architecture Behavioral of cpu is
 			alu_op : out STD_LOGIC_VECTOR(3 downto 0);
 			extend_o : out STD_LOGIC_VECTOR(3 downto 0);
 			a_src_o : out STD_LOGIC_VECTOR(1 downto 0);
-			b_src_o : out STD_LOGIC_VECTOR(1 downto 0)
+			b_src_o : out STD_LOGIC_VECTOR(1 downto 0);
+			res_flag_o : out STD_LOGIC_VECTOR(2 downto 0)
 			-- TODO: other controll signals
 		);
 	end component;
@@ -175,6 +176,7 @@ architecture Behavioral of cpu is
 			id_reg_write : in STD_LOGIC; --是否写入寄存器
 			id_reg_dst : in STD_LOGIC_VECTOR(3 downto 0); -- 目的寄存器地址（扩展为4位）
 			id_alu_op : in STD_LOGIC_VECTOR(3 downto 0);
+			id_res_flag : in STD_LOGIC_VECTOR(2 downto 0);
 			-- EX
 			ex_rx : out STD_LOGIC_VECTOR(15 downto 0);
 			ex_ry : out STD_LOGIC_VECTOR(15 downto 0);
@@ -183,7 +185,8 @@ architecture Behavioral of cpu is
 			ex_mem_to_reg : out STD_LOGIC; --直接写入寄存器(0)/读取RAM(1)
 			ex_reg_write : out STD_LOGIC; --是否写入寄存器
 			ex_reg_dst : out STD_LOGIC_VECTOR(3 downto 0); -- 目的寄存器地址（扩展为4位）
-			ex_alu_op : out STD_LOGIC_VECTOR(3 downto 0)	
+			ex_alu_op : out STD_LOGIC_VECTOR(3 downto 0);
+			ex_res_flag : out STD_LOGIC_VECTOR(2 downto 0)	
 		);
 	end component;
 	
@@ -207,6 +210,15 @@ architecture Behavioral of cpu is
 		);
 	end component;
 	
+	component alu_res_mux
+		port(
+			alu_res_i : in STD_LOGIC_VECTOR(15 downto 0);
+			alu_flag_i : in STD_LOGIC_VECTOR(3 downto 0);
+			res_flag_i : in STD_LOGIC_VECTOR(2 downto 0);
+			ex_res_o : out STD_LOGIC_VECTOR(15 downto 0)
+			);
+	end component;
+
 	component ex_mem
 		port(
 			rst : in STD_LOGIC;
@@ -304,7 +316,8 @@ architecture Behavioral of cpu is
 	signal a_src_o : STD_LOGIC_VECTOR(1 downto 0);
 	signal b_src_o : STD_LOGIC_VECTOR(1 downto 0);
 	signal extend_o : STD_LOGIC_VECTOR(3 downto 0);
-	
+	signal res_flag_o : STD_LOGIC_VECTOR(2 downto 0);
+
 	-- registers
 	signal r1_data : STD_LOGIC_VECTOR(15 downto 0);
 	signal r2_data : STD_LOGIC_VECTOR(15 downto 0);
@@ -325,6 +338,7 @@ architecture Behavioral of cpu is
 	signal ex_alu_op : STD_LOGIC_VECTOR(3 downto 0);
 	signal ex_reg_dst : STD_LOGIC_VECTOR(3 downto 0);
 	signal ex_reg_write : STD_LOGIC;
+	signal ex_res_flag : STD_LOGIC_VECTOR(2 downto 0);
 
 	--forward_mux
 	signal mux_a : STD_LOGIC_VECTOR(15 downto 0);
@@ -333,6 +347,10 @@ architecture Behavioral of cpu is
 	--alu
 	signal result_o : STD_LOGIC_VECTOR(15 downto 0); 
 	signal flag_o : STD_LOGIC_VECTOR(3 downto 0);
+
+	--alu_res_mux
+	signal ex_res_o : STD_LOGIC_VECTOR(15 downto 0);
+
 	--ex/mem
 	signal mem_mem_to_reg : STD_LOGIC; --直接写入寄存器(0)/读取RAM(1)
 	signal mem_reg_write : STD_LOGIC; --是否写入寄存器
@@ -417,6 +435,7 @@ begin
 		extend_o => extend_o,
 		a_src_o => a_src_o,
 		b_src_o => b_src_o,
+		res_flag_o => res_flag_o,
 		reg1_addr_o => reg1_addr_o,
 		reg2_addr_o => reg2_addr_o
 		);
@@ -452,6 +471,7 @@ begin
 		id_reg_write => reg_write_o,
 		id_reg_dst => reg_dst_o,
 		id_alu_op => alu_op_o,
+		id_res_flag => res_flag_o,
 		ex_rx => ex_rx,
 		ex_ry => ex_ry,
 		ex_rx_addr => ex_rx_addr,
@@ -459,7 +479,8 @@ begin
 		ex_mem_to_reg => ex_mem_to_reg,
 		ex_reg_write => ex_reg_write,
 		ex_reg_dst => ex_reg_dst,
-		ex_alu_op => ex_alu_op
+		ex_alu_op => ex_alu_op,
+		ex_res_flag => ex_res_flag
 		);
 
 	u_forward_mux_a : forward_mux
@@ -488,6 +509,14 @@ begin
 		flag_o => flag_o
 		);
 
+	u_alu_res_mux : alu_res_mux
+	port map(
+		alu_res_i => result_o,
+		alu_flag_i => flag_o,
+		res_flag_i => ex_res_flag,
+		ex_res_o => ex_res_o 
+		);
+
 	u_ex_mem : ex_mem
 	port map(
 		rst => rst,
@@ -495,7 +524,7 @@ begin
 		ex_mem_to_reg => ex_mem_to_reg,
 		ex_reg_write => ex_reg_write,
 		ex_reg_dst => ex_reg_dst,
-		ex_result => result_o,
+		ex_result => ex_res_o,
 		mem_mem_to_reg => mem_mem_to_reg,
 		mem_reg_write => mem_reg_write,
 		mem_reg_dst => mem_reg_dst,
