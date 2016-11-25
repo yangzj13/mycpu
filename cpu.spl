@@ -1,0 +1,15 @@
+[Inputs]
+rst
+clk
+=ram1_data[15:0]=
+=ram2_data[15:0]=
+[Outputs]
+ram1_en
+ram1_we
+ram1_oe
+ram2_en
+ram2_we
+ram2_oe
+=ram1_addr[15:0]=
+=ram2_addr[15:0]=
+[BiDir]

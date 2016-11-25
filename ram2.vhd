@@ -49,12 +49,30 @@ begin
 		elsif ((ram2_oe = '0') and (ram2_we = '1')) then
 			case ram2_addr is
 				when x"0000" =>
-					ram2_data <= "0100100100001000"; --ADDIU R1 8
+					--ram2_data <= "0100000000100110"; --ADDIU3 r0 r1 00110
+					--ram2_data <= "0100100100001000"; --ADDIU R1 8
 					--ram2_data <= "1110100101001101"; --OR R1 R2
 				when x"0001" =>
-					ram2_data <= "1110101100101101"; --OR R3 R1
+					ram2_data <= "0110100100011111"; 	--LI r1 00011111
+					--ram2_data <= "0110001100000001"; 		--ADDSP imm1
+					--ram2_data <= "1110101100101101"; --OR R3 R1
 				when x"0002" =>
-					ram2_data <= "1110000101101001"; --ADDU R1 R3 R2
+					ram2_data <= "0110101000000011"; 	--LI r2 00000011
+					--ram2_data <= "1110000101101001"; --ADDU R1 R3 R2
+				when x"0003" =>
+					ram2_data <= "0110100000010101"; 	--LI r0 00010101
+					--ram2_data <= "1110100101001010"; --CMP r1 r2
+				when x"0004" =>
+					ram2_data <= "0110010000000000"; --MTSP r0
+				when x"0005" =>
+					--ram2_data <= "0110010000000000"; --MTSP r0
+					ram2_data <= "1111001000000001"; --MTIH r2
+				when x"0006" =>
+					ram2_data <= "1111001100000000"; --MFIH r3
+					--ram2_data <= "1110100001000000"; --MFPC r0
+					--ram2_data <= "0110010000000000"; --MTSP r0
+				when x"0007" =>
+					
 				when others =>
 					ram2_data <= x"0000";
 			end case;

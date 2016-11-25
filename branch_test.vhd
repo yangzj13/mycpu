@@ -38,7 +38,14 @@ entity branch_test is
 		reg_data_i : in STD_LOGIC_VECTOR(15 downto 0);
 		imm_i : in STD_LOGIC_VECTOR(15 downto 0);
 		pc_mux_sel_o : out STD_LOGIC;
-		pc_branch_o : out STD_LOGIC_VECTOR(15 downto 0)
+		pc_branch_o : out STD_LOGIC_VECTOR(15 downto 0);
+
+		forward_sel : in STD_LOGIC;
+		forward_data : in STD_LOGIC_VECTOR(15 downto 0);
+		forward_addr : out STD_LOGIC_VECTOR(3 downto 0);
+		
+		ex_reg_dst : in STD_LOGIC_VECTOR(3 downto 0);
+		stall_req_branch : out STD_LOGIC
 	);
 end branch_test;
 

@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    13:46:08 11/24/2016 
+-- Create Date:    15:51:29 11/24/2016 
 -- Design Name: 
--- Module Name:    pc_mux - Behavioral 
+-- Module Name:    lw_stall_detect - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -19,8 +19,6 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -31,29 +29,29 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity pc_mux is
-	port(
-		pc_mux_sel_i : in STD_LOGIC;
-		pc_i : in STD_LOGIC_VECTOR(15 downto 0);
-		pc_branch_i : in STD_LOGIC_VECTOR(15 downto 0);
-		pc_mux_o : in STD_LOGIC_VECTOR(15 downto 0)
-		);
-end pc_mux;
+entity lw_stall_detect is
+    Port ( reg_1 : in  STD_LOGIC_VECTOR (3 downto 0);
+           reg_2 : in  STD_LOGIC_VECTOR (3 downto 0);
+           reg_w : in  STD_LOGIC_VECTOR (3 downto 0);
+           mem_read : in  STD_LOGIC;
+           stall_req_lw : out  STD_LOGIC);
+end lw_stall_detect;
 
-architecture Behavioral of pc_mux is
+architecture Behavioral of lw_stall_detect is
 
 begin
 
-process(pc_mux_sel_i, pc_branch_i, pc_i)
+process(reg_1, reg_2, reg_w, mem_read)
 begin
-	case pc_mux_sel_i is
-		when '0' =>
-			pc_mux_o <= pc_i + 1;
-		when '1' =>
-			pc_mux_o <= pc_branch_i + 1;
-		when others =>
-			pc_mux_o <= pc_i + 1;
-	end case;
+	if (mem_read = '1') and (reg_w /= "0000") then
+		if (reg_1 = reg_w) or (reg_2 = reg_w) then
+			stall_req_lw <= '1';
+		else 
+			stall_req_lw <= '0';
+		end if;
+	else 
+		stall_req_lw <= '0';
+	end if;
 end process;
 
 end Behavioral;

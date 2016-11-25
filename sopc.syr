@@ -3,14 +3,14 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 --> Parameter TMPDIR set to xst/projnav.tmp
 
 
-Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.44 secs
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.55 secs
  
 --> Parameter xsthdpdir set to xst
 
 
-Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.44 secs
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.55 secs
  
 --> Reading design: sopc.prj
 
@@ -115,8 +115,7 @@ Architecture behavioral of Entity if_id is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/registers.vhd" in Library work.
 Architecture behavioral of Entity registers is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/controller.vhd" in Library work.
-Entity <controller> compiled.
-Entity <controller> (Architecture <behavioral>) compiled.
+Architecture behavioral of Entity controller is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/extend.vhd" in Library work.
 Architecture behavioral of Entity extend is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/src_mux.vhd" in Library work.
@@ -193,6 +192,9 @@ Analyzing Entity <sopc> in library <work> (Architecture <behavioral>).
 Entity <sopc> analyzed. Unit <sopc> generated.
 
 Analyzing Entity <cpu> in library <work> (Architecture <behavioral>).
+WARNING:Xst:752 - "C:/Users/Bob/Documents/xilinx/cpu208/cpu.vhd" line 571: Unconnected input port 'branch_reg' of component 'forwarding_unit' is tied to default value.
+WARNING:Xst:753 - "C:/Users/Bob/Documents/xilinx/cpu208/cpu.vhd" line 571: Unconnected output port 'branch_data' of component 'forwarding_unit'.
+WARNING:Xst:753 - "C:/Users/Bob/Documents/xilinx/cpu208/cpu.vhd" line 571: Unconnected output port 'branch_sel' of component 'forwarding_unit'.
 Entity <cpu> analyzed. Unit <cpu> generated.
 
 Analyzing Entity <pc_reg> in library <work> (Architecture <behavioral>).
@@ -459,11 +461,12 @@ Unit <mem_wb> synthesized.
 
 Synthesizing Unit <forwarding_unit>.
     Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/forwarding_unit.vhd".
-    Found 4-bit comparator equal for signal <data_A$cmp_eq0000> created at line 60.
-    Found 4-bit comparator equal for signal <select_data_A$cmp_eq0000> created at line 59.
-    Found 4-bit comparator equal for signal <select_data_A$cmp_eq0001> created at line 59.
+    Found 4-bit comparator equal for signal <select_data_A$cmp_eq0000> created at line 64.
+    Found 4-bit comparator equal for signal <select_data_A$cmp_eq0001> created at line 64.
+    Found 4-bit comparator equal for signal <select_data_B$cmp_eq0000> created at line 85.
+    Found 4-bit comparator equal for signal <select_data_B$cmp_eq0001> created at line 85.
     Summary:
-	inferred   3 Comparator(s).
+	inferred   4 Comparator(s).
 Unit <forwarding_unit> synthesized.
 
 
@@ -501,8 +504,8 @@ Macro Statistics
  16-bit latch                                          : 1
  2-bit latch                                           : 2
  4-bit latch                                           : 2
-# Comparators                                          : 5
- 4-bit comparator equal                                : 5
+# Comparators                                          : 6
+ 4-bit comparator equal                                : 6
 # Multiplexers                                         : 2
  16-bit 4-to-1 multiplexer                             : 2
 # Logic shifters                                       : 4
@@ -541,8 +544,8 @@ Macro Statistics
  16-bit latch                                          : 1
  2-bit latch                                           : 2
  4-bit latch                                           : 2
-# Comparators                                          : 5
- 4-bit comparator equal                                : 5
+# Comparators                                          : 6
+ 4-bit comparator equal                                : 6
 # Multiplexers                                         : 2
  16-bit 4-to-1 multiplexer                             : 2
 # Logic shifters                                       : 4
@@ -559,10 +562,10 @@ Macro Statistics
 =========================================================================
 *                         Low Level Synthesis                           *
 =========================================================================
-INFO:Xst:2261 - The FF/Latch <9> in Unit <LPM_LATCH_1> is equivalent to the following FF/Latch, which will be removed : <2> 
-INFO:Xst:2261 - The FF/Latch <12> in Unit <LPM_LATCH_1> is equivalent to the following 4 FFs/Latches, which will be removed : <10> <7> <4> <1> 
-WARNING:Xst:1710 - FF/Latch <12> (without init value) has a constant value of 0 in block <LPM_LATCH_1>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <a_src_o_1> (without init value) has a constant value of 0 in block <controller>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <ram2_data_5> (without init value) has a constant value of 0 in block <ram2>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ram2_data_6> (without init value) has a constant value of 0 in block <ram2>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ram2_data_7> (without init value) has a constant value of 0 in block <ram2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:2170 - Unit alu : the following signal(s) form a combinatorial loop: result_o_shift0006<15>.
 
 Optimizing unit <sopc> ...
@@ -586,16 +589,22 @@ Optimizing unit <mem_wb> ...
 Optimizing unit <forwarding_unit> ...
 
 Optimizing unit <ram2> ...
-INFO:Xst:2261 - The FF/Latch <ram2_data_3> in Unit <ram2> is equivalent to the following 2 FFs/Latches, which will be removed : <ram2_data_8> <ram2_data_14> 
-INFO:Xst:2261 - The FF/Latch <ram2_data_0> in Unit <ram2> is equivalent to the following 3 FFs/Latches, which will be removed : <ram2_data_5> <ram2_data_13> <ram2_data_15> 
 
 Optimizing unit <controller> ...
 
 Optimizing unit <cpu> ...
+WARNING:Xst:2677 - Node <u2/ram2_data_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u2/ram2_data_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u2/ram2_data_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u2/ram2_data_12> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u2/ram2_data_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u2/ram2_data_10> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u2/ram2_data_9> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u2/ram2_data_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u2/ram2_data_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u2/ram2_data_4> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u2/ram2_data_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u2/ram2_data_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u2/ram2_data_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u2/ram2_data_0> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/reg_dst_3> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/reg_dst_2> of sequential type is unconnected in block <sopc>.
@@ -1066,14 +1075,14 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 
 
-Total REAL time to Xst completion: 13.00 secs
-Total CPU time to Xst completion: 13.42 secs
+Total REAL time to Xst completion: 15.00 secs
+Total CPU time to Xst completion: 14.83 secs
  
 --> 
 
-Total memory usage is 326916 kilobytes
+Total memory usage is 326936 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :  433 (   0 filtered)
-Number of infos    :   18 (   0 filtered)
+Number of warnings :  446 (   0 filtered)
+Number of infos    :   14 (   0 filtered)
 

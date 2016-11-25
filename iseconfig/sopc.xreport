@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2016-11-22T23:08:47</DateModified>
+  <DateModified>2016-11-24T13:30:24</DateModified>
   <ModuleName>sopc</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
   <SavedFilePath>C:/Users/Bob/Documents/xilinx/cpu208/iseconfig/sopc.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>C:/Users/Bob/Documents/xilinx/cpu208</ImplementationReportsDirectory>
+  <ImplementationReportsDirectory>C:/Users/Bob/Documents/xilinx/cpu208\</ImplementationReportsDirectory>
   <DateInitialized>2016-11-22T23:08:47</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

@@ -225,7 +225,7 @@ begin
 						extend_o <= "0000";
 						a_src_o <= "00";
 						b_src_o <= "10";
-						alu_op <= "0001";
+						alu_op <= "0000";
 					--ERROR
 					when others =>
 				end case;
@@ -237,7 +237,7 @@ begin
 				reg_dst(2 downto 0) <= inst_i(10 downto 8);
 				reg1_addr_o <= "0000";
 				reg2_addr_o <= "0000";
-				extend_o <= "0001";
+				extend_o <= "1000";
 				a_src_o <= "00";
 				b_src_o <= "11";
 				alu_op <= "0000";
@@ -311,21 +311,8 @@ begin
 				reg_dst <= "0001";
 				alu_op <= "0001";
 				a_src_o <= "00";
-				b_src_o <= "11";
+				b_src_o <= "00";
 				res_flag_o <= res_eq;
-			--MOVE
-			when "01111" =>
-				mem_to_reg <= '0';
-				reg_write <= '1';
-				reg1_addr_o(3) <= '1';
-				reg1_addr_o(2 downto 0) <= inst_i(7 downto 5);
-				reg2_addr_o <= "0000";
-				extend_o <= "0000";
-				reg_dst(3) <= '1';
-				reg_dst(2 downto 0) <= inst_i(10 downto 8);
-				alu_op <= "0000";
-				a_src_o <= "00";
-				b_src_o <= "10";				
 			--when "" =>
 			--when "" =>
 			--when "" =>
