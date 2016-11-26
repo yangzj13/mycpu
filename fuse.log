@@ -22,6 +22,7 @@ Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/branch_test.vhd" into li
 Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/alu_res_mux.vhd" into library work
 Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/alu.vhd" into library work
 Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/ram2.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/ram1.vhd" into library work
 Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/cpu.vhd" into library work
 Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/sopc.vhd" into library work
 Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/test_sopc.vhd" into library work
@@ -51,11 +52,12 @@ Compiling architecture behavioral of entity stall_controller [stall_controller_d
 Compiling architecture behavioral of entity pc_mux [pc_mux_default]
 Compiling architecture behavioral of entity cpu [cpu_default]
 Compiling architecture behavioral of entity ram2 [ram2_default]
+Compiling architecture behavioral of entity ram1 [ram1_default]
 Compiling architecture behavioral of entity sopc [sopc_default]
 Compiling architecture behavior of entity test_sopc
 Time Resolution for simulation is 1ps.
-Waiting for 16 sub-compilation(s) to finish...
-Compiled 47 VHDL Units
+Waiting for 14 sub-compilation(s) to finish...
+Compiled 49 VHDL Units
 Built simulation executable C:/Users/Bob/Documents/xilinx/cpu208/test_sopc_isim_beh.exe
-Fuse Memory Usage: 34956 KB
-Fuse CPU Usage: 1015 ms
+Fuse Memory Usage: 35944 KB
+Fuse CPU Usage: 953 ms

@@ -3,14 +3,14 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 --> Parameter TMPDIR set to xst/projnav.tmp
 
 
-Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.14 secs
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.26 secs
  
 --> Parameter xsthdpdir set to xst
 
 
-Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.15 secs
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.27 secs
  
 --> Reading design: sopc.prj
 
@@ -129,23 +129,24 @@ Architecture behavioral of Entity alu_res_mux is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/ex_mem.vhd" in Library work.
 Architecture behavioral of Entity ex_mem is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/data_mem.vhd" in Library work.
-Architecture behavioral of Entity data_mem is up to date.
+Entity <data_mem> compiled.
+Entity <data_mem> (Architecture <behavioral>) compiled.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/mem_wb.vhd" in Library work.
 Architecture behavioral of Entity mem_wb is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/forwarding_unit.vhd" in Library work.
 Architecture behavioral of Entity forwarding_unit is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/branch_test.vhd" in Library work.
-Entity <branch_test> compiled.
-Entity <branch_test> (Architecture <behavioral>) compiled.
+Architecture behavioral of Entity branch_test is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/stall_controller.vhd" in Library work.
 Architecture behavioral of Entity stall_controller is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/pc_mux.vhd" in Library work.
 Architecture behavioral of Entity pc_mux is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/cpu.vhd" in Library work.
-Entity <cpu> compiled.
-Entity <cpu> (Architecture <behavioral>) compiled.
+Architecture behavioral of Entity cpu is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/ram2.vhd" in Library work.
 Architecture behavioral of Entity ram2 is up to date.
+Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/ram1.vhd" in Library work.
+Architecture behavioral of Entity ram1 is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/sopc.vhd" in Library work.
 Architecture behavioral of Entity sopc is up to date.
 
@@ -157,6 +158,8 @@ Analyzing hierarchy for entity <sopc> in library <work> (architecture <behaviora
 Analyzing hierarchy for entity <cpu> in library <work> (architecture <behavioral>).
 
 Analyzing hierarchy for entity <ram2> in library <work> (architecture <behavioral>).
+
+Analyzing hierarchy for entity <ram1> in library <work> (architecture <behavioral>).
 
 Analyzing hierarchy for entity <pc_reg> in library <work> (architecture <behavioral>).
 
@@ -208,17 +211,17 @@ Analyzing Entity <pc_reg> in library <work> (Architecture <behavioral>).
 Entity <pc_reg> analyzed. Unit <pc_reg> generated.
 
 Analyzing Entity <inst_mem> in library <work> (Architecture <behavioral>).
-WARNING:Xst:819 - "C:/Users/Bob/Documents/xilinx/cpu208/inst_mem.vhd" line 51: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
-   <inst_addr_i>, <inst_i>
 Entity <inst_mem> analyzed. Unit <inst_mem> generated.
 
 Analyzing Entity <if_id> in library <work> (Architecture <behavioral>).
 Entity <if_id> analyzed. Unit <if_id> generated.
 
 Analyzing Entity <registers> in library <work> (Architecture <behavioral>).
-WARNING:Xst:819 - "C:/Users/Bob/Documents/xilinx/cpu208/registers.vhd" line 86: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+WARNING:Xst:819 - "C:/Users/Bob/Documents/xilinx/cpu208/registers.vhd" line 88: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
    <WbReg>, <WbData>, <r0>, <r1>, <r2>, <r3>, <r4>, <r5>, <r6>, <r7>, <T>, <IH>, <RA>, <SP>
-WARNING:Xst:819 - "C:/Users/Bob/Documents/xilinx/cpu208/registers.vhd" line 111: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+WARNING:Xst:819 - "C:/Users/Bob/Documents/xilinx/cpu208/registers.vhd" line 113: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+   <WbReg>, <WbData>, <r0>, <r1>, <r2>, <r3>, <r4>, <r5>, <r6>, <r7>, <T>, <IH>, <RA>, <SP>
+WARNING:Xst:819 - "C:/Users/Bob/Documents/xilinx/cpu208/registers.vhd" line 138: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
    <WbReg>, <WbData>, <r0>, <r1>, <r2>, <r3>, <r4>, <r5>, <r6>, <r7>, <T>, <IH>, <RA>, <SP>
 Entity <registers> analyzed. Unit <registers> generated.
 
@@ -252,6 +255,7 @@ Analyzing Entity <ex_mem> in library <work> (Architecture <behavioral>).
 Entity <ex_mem> analyzed. Unit <ex_mem> generated.
 
 Analyzing Entity <data_mem> in library <work> (Architecture <behavioral>).
+INFO:Xst:2679 - Register <ram1_en> in unit <data_mem> has a constant value of 0 during circuit operation. The register is replaced by logic.
 Entity <data_mem> analyzed. Unit <data_mem> generated.
 
 Analyzing Entity <mem_wb> in library <work> (Architecture <behavioral>).
@@ -261,8 +265,6 @@ Analyzing Entity <forwarding_unit> in library <work> (Architecture <behavioral>)
 Entity <forwarding_unit> analyzed. Unit <forwarding_unit> generated.
 
 Analyzing Entity <branch_test> in library <work> (Architecture <behavioral>).
-WARNING:Xst:819 - "C:/Users/Bob/Documents/xilinx/cpu208/branch_test.vhd" line 63: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
-   <ex_reg_dst>, <reg_addr_i>
 Entity <branch_test> analyzed. Unit <branch_test> generated.
 
 Analyzing Entity <stall_controller> in library <work> (Architecture <behavioral>).
@@ -275,6 +277,11 @@ Entity <pc_mux> analyzed. Unit <pc_mux> generated.
 Analyzing Entity <ram2> in library <work> (Architecture <behavioral>).
 Entity <ram2> analyzed. Unit <ram2> generated.
 
+Analyzing Entity <ram1> in library <work> (Architecture <behavioral>).
+WARNING:Xst:819 - "C:/Users/Bob/Documents/xilinx/cpu208/ram1.vhd" line 60: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+   <ram1_data_0>, <ram1_data_1>, <ram1_data_2>, <ram1_data_3>, <ram1_data_4>, <ram1_data_5>, <ram1_data_6>, <ram1_data_7>, <ram1_data_8>, <ram1_data_9>, <ram1_data_10>
+Entity <ram1> analyzed. Unit <ram1> generated.
+
 
 =========================================================================
 *                           HDL Synthesis                               *
@@ -285,7 +292,29 @@ Performing bidirectional port resolution...
 Synthesizing Unit <ram2>.
     Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/ram2.vhd".
 WARNING:Xst:737 - Found 16-bit latch for signal <ram2_data>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Found 16x16-bit ROM for signal <ram2_data$mux0003>.
+    Summary:
+	inferred   1 ROM(s).
 Unit <ram2> synthesized.
+
+
+Synthesizing Unit <ram1>.
+    Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/ram1.vhd".
+WARNING:Xst:737 - Found 16-bit latch for signal <ram1_data_r>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Found 16-bit register for signal <ram1_data_0>.
+    Found 16-bit register for signal <ram1_data_1>.
+    Found 16-bit register for signal <ram1_data_10>.
+    Found 16-bit register for signal <ram1_data_2>.
+    Found 16-bit register for signal <ram1_data_3>.
+    Found 16-bit register for signal <ram1_data_4>.
+    Found 16-bit register for signal <ram1_data_5>.
+    Found 16-bit register for signal <ram1_data_6>.
+    Found 16-bit register for signal <ram1_data_7>.
+    Found 16-bit register for signal <ram1_data_8>.
+    Found 16-bit register for signal <ram1_data_9>.
+    Summary:
+	inferred 176 D-type flip-flop(s).
+Unit <ram1> synthesized.
 
 
 Synthesizing Unit <pc_reg>.
@@ -323,20 +352,26 @@ Synthesizing Unit <registers>.
     Found 16-bit register for signal <r6>.
     Found 16-bit register for signal <r7>.
     Found 16-bit register for signal <RA>.
-    Found 4-bit comparator equal for signal <readData1$cmp_eq0000> created at line 89.
-    Found 4-bit comparator equal for signal <readData2$cmp_eq0000> created at line 114.
+    Found 4-bit comparator equal for signal <readData1$cmp_eq0000> created at line 91.
+    Found 4-bit comparator equal for signal <readData2$cmp_eq0000> created at line 116.
     Found 16-bit register for signal <SP>.
+    Found 4-bit comparator equal for signal <sw_reg_data$cmp_eq0000> created at line 141.
     Found 16-bit register for signal <T>.
     Summary:
 	inferred 192 D-type flip-flop(s).
-	inferred   2 Comparator(s).
+	inferred   3 Comparator(s).
 Unit <registers> synthesized.
 
 
 Synthesizing Unit <controller>.
     Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/controller.vhd".
 WARNING:Xst:647 - Input <pc_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Register <sw_reg_addr<3>> equivalent to <mem_write> has been removed
+WARNING:Xst:737 - Found 1-bit latch for signal <sw_reg_addr_0>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 3-bit latch for signal <branch_ctr_o>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <sw_reg_addr_1>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <mem_write>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <sw_reg_addr_2>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <reg1_addr_o_0>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <reg1_addr_o_1>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <reg1_addr_o_2>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
@@ -345,6 +380,7 @@ WARNING:Xst:737 - Found 1-bit latch for signal <reg2_addr_o_0>. Latches may be g
 WARNING:Xst:737 - Found 1-bit latch for signal <reg2_addr_o_1>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <reg2_addr_o_2>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <reg2_addr_o_3>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <mem_read>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <reg_write>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 INFO:Xst:2371 - HDL ADVISOR - Logic functions respectively driving the data and gate enable inputs of this latch share common terms. This situation will potentially lead to setup/hold violations and, as a result, to simulation problems. This situation may come from an incomplete case statement (all selector values are not covered). You should carefully review if it was in your intentions to describe such a latch.
 WARNING:Xst:737 - Found 2-bit latch for signal <b_src_o>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
@@ -387,13 +423,16 @@ Synthesizing Unit <id_ex>.
     Found 4-bit register for signal <ex_reg_dst>.
     Found 16-bit register for signal <ex_rx>.
     Found 16-bit register for signal <ex_ry>.
+    Found 1-bit register for signal <ex_mem_write>.
     Found 1-bit register for signal <ex_reg_write>.
+    Found 1-bit register for signal <ex_mem_read>.
     Found 4-bit register for signal <ex_alu_op>.
     Found 4-bit register for signal <ex_rx_addr>.
     Found 1-bit register for signal <ex_mem_to_reg>.
+    Found 4-bit register for signal <ex_sw_reg_addr>.
     Found 3-bit register for signal <ex_res_flag>.
     Summary:
-	inferred  53 D-type flip-flop(s).
+	inferred  59 D-type flip-flop(s).
 Unit <id_ex> synthesized.
 
 
@@ -434,27 +473,25 @@ Unit <alu_res_mux> synthesized.
 
 Synthesizing Unit <ex_mem>.
     Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/ex_mem.vhd".
+    Found 1-bit register for signal <mem_mem_read>.
+    Found 4-bit register for signal <mem_sw_reg_addr>.
+    Found 1-bit register for signal <mem_mem_write>.
     Found 1-bit register for signal <mem_mem_to_reg>.
     Found 1-bit register for signal <mem_reg_write>.
     Found 4-bit register for signal <mem_reg_dst>.
     Found 16-bit register for signal <mem_result>.
     Summary:
-	inferred  22 D-type flip-flop(s).
+	inferred  28 D-type flip-flop(s).
 Unit <ex_mem> synthesized.
 
 
 Synthesizing Unit <data_mem>.
     Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/data_mem.vhd".
-WARNING:Xst:1305 - Output <ram1_we> is never assigned. Tied to value 0.
-WARNING:Xst:647 - Input <addr_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:647 - Input <ram1_data> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:1305 - Output <ram1_addr> is never assigned. Tied to value 0000000000000000.
-WARNING:Xst:1305 - Output <ram1_en> is never assigned. Tied to value 0.
-WARNING:Xst:1305 - Output <ram1_oe> is never assigned. Tied to value 0.
 WARNING:Xst:647 - Input <mem_to_reg> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 16-bit register for signal <data_o>.
-    Summary:
-	inferred  16 D-type flip-flop(s).
+WARNING:Xst:737 - Found 16-bit latch for signal <data_o>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 16-bit latch for signal <ram1_data_out>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 16-bit latch for signal <ram1_addr>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 1-bit latch for signal <ram1_oe>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 Unit <data_mem> synthesized.
 
 
@@ -483,12 +520,14 @@ Unit <forwarding_unit> synthesized.
 
 Synthesizing Unit <branch_test>.
     Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/branch_test.vhd".
-WARNING:Xst:646 - Signal <reg_data> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
-    Found 16-bit adder for signal <pc_branch_o$share0000> created at line 72.
-    Found 4-bit comparator equal for signal <stall_req_branch$cmp_eq0000> created at line 66.
+WARNING:Xst:647 - Input <reg_addr_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <forward_data> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ex_reg_dst> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:1305 - Output <forward_addr> is never assigned. Tied to value 0000.
+WARNING:Xst:647 - Input <forward_sel> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 16-bit adder for signal <pc_branch_o$share0000> created at line 63.
     Summary:
 	inferred   1 Adder/Subtractor(s).
-	inferred   1 Comparator(s).
 Unit <branch_test> synthesized.
 
 
@@ -513,19 +552,11 @@ Unit <pc_mux> synthesized.
 
 Synthesizing Unit <cpu>.
     Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/cpu.vhd".
-WARNING:Xst:653 - Signal <stall_req_if> is used but never assigned. This sourceless signal will be automatically connected to value 0.
-WARNING:Xst:653 - Signal <mem_mem_read> is used but never assigned. This sourceless signal will be automatically connected to value 0.
-WARNING:Xst:653 - Signal <ex_mem_read> is used but never assigned. This sourceless signal will be automatically connected to value 0.
 Unit <cpu> synthesized.
 
 
 Synthesizing Unit <sopc>.
     Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/sopc.vhd".
-WARNING:Xst:646 - Signal <ram1_we> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
-WARNING:Xst:646 - Signal <ram1_oe> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
-WARNING:Xst:646 - Signal <ram1_en> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
-WARNING:Xst:653 - Signal <ram1_data> is used but never assigned. This sourceless signal will be automatically connected to value 0000000000000000.
-WARNING:Xst:646 - Signal <ram1_addr> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
 Unit <sopc> synthesized.
 
 INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
@@ -534,19 +565,21 @@ INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmet
 HDL Synthesis Report
 
 Macro Statistics
+# ROMs                                                 : 1
+ 16x16-bit ROM                                         : 1
 # Adders/Subtractors                                   : 6
  16-bit adder                                          : 3
  16-bit subtractor                                     : 1
  17-bit adder                                          : 1
  17-bit subtractor                                     : 1
-# Registers                                            : 32
- 1-bit register                                        : 5
- 16-bit register                                       : 20
+# Registers                                            : 48
+ 1-bit register                                        : 9
+ 16-bit register                                       : 30
  3-bit register                                        : 1
- 4-bit register                                        : 6
-# Latches                                              : 23
- 1-bit latch                                           : 17
- 16-bit latch                                          : 1
+ 4-bit register                                        : 8
+# Latches                                              : 33
+ 1-bit latch                                           : 23
+ 16-bit latch                                          : 5
  2-bit latch                                           : 2
  3-bit latch                                           : 1
  4-bit latch                                           : 2
@@ -573,21 +606,25 @@ WARNING:Xst:1290 - Hierarchical block <u1> is unconnected in block <sopc>.
    It will be removed from the design.
 WARNING:Xst:1290 - Hierarchical block <u2> is unconnected in block <sopc>.
    It will be removed from the design.
+WARNING:Xst:1290 - Hierarchical block <Inst_ram1> is unconnected in block <sopc>.
+   It will be removed from the design.
 
 =========================================================================
 Advanced HDL Synthesis Report
 
 Macro Statistics
+# ROMs                                                 : 1
+ 16x16-bit ROM                                         : 1
 # Adders/Subtractors                                   : 6
  16-bit adder                                          : 3
  16-bit subtractor                                     : 1
  17-bit adder                                          : 1
  17-bit subtractor                                     : 1
-# Registers                                            : 352
- Flip-Flops                                            : 352
-# Latches                                              : 23
- 1-bit latch                                           : 17
- 16-bit latch                                          : 1
+# Registers                                            : 524
+ Flip-Flops                                            : 524
+# Latches                                              : 33
+ 1-bit latch                                           : 23
+ 16-bit latch                                          : 5
  2-bit latch                                           : 2
  3-bit latch                                           : 1
  4-bit latch                                           : 2
@@ -609,9 +646,6 @@ Macro Statistics
 =========================================================================
 *                         Low Level Synthesis                           *
 =========================================================================
-WARNING:Xst:1710 - FF/Latch <ram2_data_5> (without init value) has a constant value of 0 in block <ram2>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ram2_data_6> (without init value) has a constant value of 0 in block <ram2>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ram2_data_7> (without init value) has a constant value of 0 in block <ram2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:2170 - Unit alu : the following signal(s) form a combinatorial loop: result_o_shift0006<15>.
 
 Optimizing unit <sopc> ...
@@ -628,8 +662,6 @@ Optimizing unit <alu> ...
 
 Optimizing unit <ex_mem> ...
 
-Optimizing unit <data_mem> ...
-
 Optimizing unit <mem_wb> ...
 
 Optimizing unit <forwarding_unit> ...
@@ -640,7 +672,11 @@ Optimizing unit <pc_mux> ...
 
 Optimizing unit <ram2> ...
 
+Optimizing unit <ram1> ...
+
 Optimizing unit <controller> ...
+
+Optimizing unit <data_mem> ...
 
 Optimizing unit <cpu> ...
 WARNING:Xst:2677 - Node <u2/ram2_data_15> of sequential type is unconnected in block <sopc>.
@@ -651,16 +687,261 @@ WARNING:Xst:2677 - Node <u2/ram2_data_11> of sequential type is unconnected in b
 WARNING:Xst:2677 - Node <u2/ram2_data_10> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u2/ram2_data_9> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u2/ram2_data_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u2/ram2_data_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u2/ram2_data_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u2/ram2_data_5> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u2/ram2_data_4> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u2/ram2_data_3> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u2/ram2_data_2> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u2/ram2_data_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u2/ram2_data_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_r_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_r_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_r_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_r_12> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_r_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_r_10> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_r_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_r_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_r_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_r_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_r_5> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_r_4> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_r_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_r_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_r_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_r_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_8_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_8_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_8_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_8_12> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_8_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_8_10> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_8_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_8_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_8_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_8_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_8_5> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_8_4> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_8_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_8_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_8_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_8_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_7_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_7_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_7_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_7_12> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_7_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_7_10> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_7_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_7_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_7_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_7_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_7_5> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_7_4> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_7_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_7_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_7_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_7_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_9_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_9_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_9_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_9_12> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_9_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_9_10> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_9_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_9_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_9_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_9_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_9_5> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_9_4> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_9_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_9_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_9_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_9_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_5_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_5_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_5_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_5_12> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_5_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_5_10> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_5_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_5_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_5_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_5_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_5_5> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_5_4> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_5_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_5_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_5_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_5_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_4_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_4_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_4_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_4_12> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_4_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_4_10> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_4_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_4_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_4_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_4_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_4_5> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_4_4> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_4_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_4_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_4_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_4_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_6_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_6_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_6_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_6_12> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_6_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_6_10> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_6_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_6_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_6_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_6_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_6_5> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_6_4> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_6_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_6_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_6_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_6_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_2_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_2_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_2_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_2_12> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_2_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_2_10> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_2_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_2_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_2_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_2_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_2_5> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_2_4> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_2_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_2_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_2_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_2_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_1_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_1_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_1_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_1_12> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_1_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_1_10> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_1_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_1_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_1_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_1_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_1_5> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_1_4> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_1_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_1_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_1_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_1_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_3_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_3_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_3_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_3_12> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_3_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_3_10> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_3_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_3_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_3_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_3_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_3_5> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_3_4> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_3_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_3_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_3_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_3_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_10_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_10_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_10_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_10_12> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_10_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_10_10> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_10_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_10_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_10_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_10_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_10_5> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_10_4> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_10_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_10_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_10_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_10_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_0_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_0_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_0_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_0_12> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_0_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_0_10> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_0_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_0_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_0_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_0_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_0_5> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_0_4> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_0_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_0_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_0_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <Inst_ram1/ram1_data_0_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_oe> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_addr_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_addr_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_addr_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_addr_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_addr_4> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_addr_5> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_addr_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_addr_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_addr_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_addr_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_addr_10> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_addr_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_addr_12> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_addr_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_addr_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_addr_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_data_out_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_data_out_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_data_out_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_data_out_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_data_out_4> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_data_out_5> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_data_out_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_data_out_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_data_out_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_data_out_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_data_out_10> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_data_out_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_data_out_12> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_data_out_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_data_out_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/ram1_data_out_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_4> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_5> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_10> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_12> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_15> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/reg_dst_3> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/reg_dst_2> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/reg_dst_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/reg_dst_0> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/reg_write> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_controller/mem_read> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/reg2_addr_o_3> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/reg2_addr_o_2> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/reg2_addr_o_1> of sequential type is unconnected in block <sopc>.
@@ -669,6 +950,10 @@ WARNING:Xst:2677 - Node <u1/u_controller/reg1_addr_o_3> of sequential type is un
 WARNING:Xst:2677 - Node <u1/u_controller/reg1_addr_o_2> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/reg1_addr_o_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/reg1_addr_o_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_controller/sw_reg_addr_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_controller/mem_write> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_controller/sw_reg_addr_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_controller/sw_reg_addr_0> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/alu_op_0> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/alu_op_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/alu_op_2> of sequential type is unconnected in block <sopc>.
@@ -705,22 +990,6 @@ WARNING:Xst:2677 - Node <u1/u_mem_wb/wb_reg_dst_0> of sequential type is unconne
 WARNING:Xst:2677 - Node <u1/u_mem_wb/wb_reg_dst_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_mem_wb/wb_reg_dst_2> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_mem_wb/wb_reg_dst_3> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_0> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_1> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_2> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_3> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_4> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_5> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_6> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_7> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_8> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_9> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_10> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_11> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_12> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_13> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_14> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_data_mem/data_o_15> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_result_0> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_result_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_result_2> of sequential type is unconnected in block <sopc>.
@@ -737,10 +1006,16 @@ WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_result_12> of sequential type is unconn
 WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_result_13> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_result_14> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_result_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_mem_read> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_mem_write> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_reg_dst_0> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_reg_dst_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_reg_dst_2> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_reg_dst_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_sw_reg_addr_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_sw_reg_addr_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_sw_reg_addr_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_sw_reg_addr_3> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_reg_write> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_ex_mem/mem_mem_to_reg> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_alu/Z> of sequential type is unconnected in block <sopc>.
@@ -758,7 +1033,13 @@ WARNING:Xst:2677 - Node <u1/u_id_ex/ex_alu_op_0> of sequential type is unconnect
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_alu_op_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_alu_op_2> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_alu_op_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_sw_reg_addr_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_sw_reg_addr_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_sw_reg_addr_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_sw_reg_addr_3> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_mem_to_reg> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_mem_write> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_reg_write> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_rx_0> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_rx_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_rx_2> of sequential type is unconnected in block <sopc>.
@@ -791,7 +1072,7 @@ WARNING:Xst:2677 - Node <u1/u_id_ex/ex_ry_12> of sequential type is unconnected 
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_ry_13> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_ry_14> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_ry_15> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_id_ex/ex_reg_write> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_id_ex/ex_mem_read> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_ry_addr_0> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_ry_addr_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_id_ex/ex_ry_addr_2> of sequential type is unconnected in block <sopc>.
@@ -864,22 +1145,6 @@ WARNING:Xst:2677 - Node <u1/u_registers/r3_12> of sequential type is unconnected
 WARNING:Xst:2677 - Node <u1/u_registers/r3_13> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_registers/r3_14> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_registers/r3_15> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_registers/r6_0> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_registers/r6_1> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_registers/r6_2> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_registers/r6_3> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_registers/r6_4> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_registers/r6_5> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_registers/r6_6> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_registers/r6_7> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_registers/r6_8> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_registers/r6_9> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_registers/r6_10> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_registers/r6_11> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_registers/r6_12> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_registers/r6_13> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_registers/r6_14> of sequential type is unconnected in block <sopc>.
-WARNING:Xst:2677 - Node <u1/u_registers/r6_15> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_registers/r4_0> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_registers/r4_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_registers/r4_2> of sequential type is unconnected in block <sopc>.
@@ -912,6 +1177,22 @@ WARNING:Xst:2677 - Node <u1/u_registers/r5_12> of sequential type is unconnected
 WARNING:Xst:2677 - Node <u1/u_registers/r5_13> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_registers/r5_14> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_registers/r5_15> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_registers/r6_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_registers/r6_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_registers/r6_2> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_registers/r6_3> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_registers/r6_4> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_registers/r6_5> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_registers/r6_6> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_registers/r6_7> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_registers/r6_8> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_registers/r6_9> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_registers/r6_10> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_registers/r6_11> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_registers/r6_12> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_registers/r6_13> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_registers/r6_14> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_registers/r6_15> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_registers/r7_0> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_registers/r7_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_registers/r7_2> of sequential type is unconnected in block <sopc>.
@@ -1129,14 +1410,14 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 
 
-Total REAL time to Xst completion: 13.00 secs
-Total CPU time to Xst completion: 12.65 secs
+Total REAL time to Xst completion: 15.00 secs
+Total CPU time to Xst completion: 15.02 secs
  
 --> 
 
-Total memory usage is 326944 kilobytes
+Total memory usage is 344192 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :  452 (   0 filtered)
-Number of infos    :   16 (   0 filtered)
+Number of warnings :  695 (   0 filtered)
+Number of infos    :   17 (   0 filtered)
 

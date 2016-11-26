@@ -1,0 +1,1 @@
+vhdtdtfi -prj cpu208 -o C:/Users/Bob/Documents/xilinx/cpu208/data_mem.vhi -module data_mem -template C:/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work data_mem.vhd 

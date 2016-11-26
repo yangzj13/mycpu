@@ -36,16 +36,22 @@ entity data_mem is
 
 		mem_to_reg : in STD_LOGIC;
 		
+		mem_read : in STD_LOGIC;
+		mem_write : in STD_LOGIC;
+
 		addr_i : in STD_LOGIC_VECTOR(15 downto 0);
 		data_i : in STD_LOGIC_VECTOR(15 downto 0);
 		data_o : out STD_LOGIC_VECTOR(15 downto 0);
 		
+		--sw_reg_addr : out STD_LOGIC_VECTOR(3 downto 0);
+		sw_reg_data : in STD_LOGIC_VECTOR(15 downto 0);
+
 		ram1_en : out STD_LOGIC;
 		ram1_we : out STD_LOGIC;
 		ram1_oe : out STD_LOGIC;
 		ram1_addr : out STD_LOGIC_VECTOR(15 downto 0);
-		ram1_data : in STD_LOGIC_VECTOR(15 downto 0)
-
+		ram1_data_in : in STD_LOGIC_VECTOR(15 downto 0);
+		ram1_data_out : out STD_LOGIC_VECTOR(15 downto 0)
 		--ram1_data : inout STD_LOGIC_VECTOR(15 downto 0)
 
 		--ram2_en : out STD_LOGIC;
@@ -57,14 +63,33 @@ entity data_mem is
 end data_mem;
 
 architecture Behavioral of data_mem is
-	
+		
 begin
-	process(rst, clk)
+	ram1_we <= not mem_write or not clk; 
+	process(clk, rst, mem_read, mem_write, data_i, addr_i, sw_reg_data, ram1_data_in)
 	begin
+		--if (rst = '0') then
+		--	data_o <= x"0000";
+		--elsif (falling_edge(clk)) then
+		--	data_o <= data_i;
+		--end if;
 		if (rst = '0') then
 			data_o <= x"0000";
-		elsif (falling_edge(clk)) then
-			data_o <= data_i;
+		else
+			if (mem_read = '1') then
+				ram1_en <= '0';
+				ram1_oe <= '0';
+				data_o <= ram1_data_in;
+				ram1_addr <= addr_i;
+			elsif (mem_write = '1') then
+				ram1_en <= '0';
+				ram1_oe <= '1';
+				ram1_addr <= addr_i;
+				ram1_data_out <= sw_reg_data;
+			else
+				ram1_en <= '1';
+				data_o <= data_i;
+			end if;
 		end if;
 	end process;
 

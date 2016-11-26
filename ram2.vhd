@@ -49,30 +49,31 @@ begin
 		elsif ((ram2_oe = '0') and (ram2_we = '1')) then
 			case ram2_addr is
 				when x"0000" =>
-					--ram2_data <= "0100000000100110"; --ADDIU3 r0 r1 00110
-					--ram2_data <= "0100100100001000"; --ADDIU R1 8
-					--ram2_data <= "1110100101001101"; --OR R1 R2
+					ram2_data <= "0110100100000001"; 	--LI r1 1
 				when x"0001" =>
-					ram2_data <= "0110100100011111"; 	--LI r1 00011111
-					--ram2_data <= "0110001100000001"; 		--ADDSP imm1
-					--ram2_data <= "1110101100101101"; --OR R3 R1
+					ram2_data <= "0110101000000001"; 	--LI r2 1
 				when x"0002" =>
-					ram2_data <= "0110101000000011"; 	--LI r2 00000011
-					--ram2_data <= "1110000101101001"; --ADDU R1 R3 R2
+					ram2_data <= "0110101110000000"; 	--LI r3 80
 				when x"0003" =>
-					ram2_data <= "0110100000010101"; 	--LI r0 00010101
-					--ram2_data <= "1110100101001010"; --CMP r1 r2
+					ram2_data <= "0011001101100000"; 	--SLL R3 R3 0
 				when x"0004" =>
-					ram2_data <= "0110010000000000"; --MTSP r0
+					ram2_data <= "0110110000001001"; 	--LI r4 9
 				when x"0005" =>
-					--ram2_data <= "0110010000000000"; --MTSP r0
-					ram2_data <= "1111001000000001"; --MTIH r2
+					ram2_data <= "1101101100100000"; 	--SW R3 R1 0
 				when x"0006" =>
-					ram2_data <= "1111001100000000"; --MFIH r3
-					--ram2_data <= "1110100001000000"; --MFPC r0
-					--ram2_data <= "0110010000000000"; --MTSP r0
+					ram2_data <= "1101101101000001"; 	--SW R3 R2 1
 				when x"0007" =>
-					
+					ram2_data <= "1110000101000101"; --ADDU R1 R2 R1
+				when x"0008" =>
+					ram2_data <= "1110000101001001"; --ADDU R1 R2 R2
+				when x"0009" =>
+					ram2_data <= "0100101100000010"; --ADDIU R3 2
+				when x"000A" =>
+					ram2_data <= "0100110011111111"; --ADDIU R4 FF
+				when x"000B" =>
+					ram2_data <= "0010110011111001"; --BNEZ R4 F9
+				when x"000C" =>
+					ram2_data <= "0110100000010111"; 	--LI r0 00010111
 				when others =>
 					ram2_data <= x"0000";
 			end case;

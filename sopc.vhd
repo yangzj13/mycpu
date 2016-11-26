@@ -48,7 +48,8 @@ port(
 	ram1_we : out STD_LOGIC;
 	ram1_oe : out STD_LOGIC;
 	ram1_addr : out STD_LOGIC_VECTOR(15 downto 0);
-	ram1_data : in STD_LOGIC_VECTOR(15 downto 0);
+	ram1_data_r : in STD_LOGIC_VECTOR(15 downto 0);
+	ram1_data_w : out STD_LOGIC_VECTOR(15 downto 0);
 	-- ram1_data : inout STD_LOGIC_VECTOR(15 downto 0)
 	
 	-- ram2
@@ -71,6 +72,17 @@ port(
 );
 end component;
 
+COMPONENT ram1
+PORT(
+	ram1_en : IN std_logic;
+	ram1_we : IN std_logic;
+	ram1_oe : IN std_logic;
+	ram1_addr : IN std_logic_vector(15 downto 0);
+	ram1_data_w : IN std_logic_vector(15 downto 0);          
+	ram1_data_r : OUT std_logic_vector(15 downto 0)
+	);
+END COMPONENT;
+
 signal ram2_en :  STD_LOGIC;
 signal ram2_we :  STD_LOGIC;
 signal ram2_oe :  STD_LOGIC;
@@ -80,8 +92,8 @@ signal ram1_en :  STD_LOGIC;
 signal ram1_we :  STD_LOGIC;
 signal ram1_oe :  STD_LOGIC;
 signal ram1_addr : STD_LOGIC_VECTOR(15 downto 0);
-signal ram1_data : STD_LOGIC_VECTOR(15 downto 0);
-
+signal ram1_data_r : STD_LOGIC_VECTOR(15 downto 0);
+signal ram1_data_w : STD_LOGIC_VECTOR(15 downto 0);
 begin
 
 u1 : cpu
@@ -96,7 +108,8 @@ port map(
 	ram1_oe => ram1_oe,
 	ram1_we => ram1_we,
 	ram1_en => ram1_en,
-	ram1_data => ram1_data,
+	ram1_data_r => ram1_data_r,
+	ram1_data_w => ram1_data_w,
 	ram1_addr => ram1_addr
 );
 
@@ -109,5 +122,15 @@ port map(
 	ram2_data => ram2_data,
 	ram2_addr => ram2_addr
 );
+
+Inst_ram1: ram1 PORT MAP(
+	ram1_en => ram1_en,
+	ram1_we => ram1_we,
+	ram1_oe => ram1_oe,
+	ram1_addr => ram1_addr,
+	ram1_data_r => ram1_data_r,
+	ram1_data_w => ram1_data_w
+);
+
 end Behavioral;
 

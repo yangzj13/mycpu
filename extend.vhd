@@ -83,6 +83,8 @@ begin
 			when others =>
 				imm_o <= x"0000";
 		end case;
+	elsif (extend_i(2 downto 0) = "111") then
+		imm_o <= x"0008";	
 	else
 		imm_o <= x"0000";
 	end if;

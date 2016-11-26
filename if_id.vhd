@@ -37,7 +37,9 @@ entity if_id is
 		if_pc : in STD_LOGIC_VECTOR(15 downto 0);
 		if_inst : in STD_LOGIC_VECTOR(15 downto 0);
 		id_pc : out STD_LOGIC_VECTOR(15 downto 0);
-		id_inst : out STD_LOGIC_VECTOR(15 downto 0)
+		id_inst : out STD_LOGIC_VECTOR(15 downto 0);
+		
+		clear_next_inst : in STD_LOGIC
 	);
 end if_id;
 
@@ -52,6 +54,10 @@ begin
 			if (stall = '0') then
 				id_pc <= if_pc;
 				id_inst <= if_inst;
+			end if;
+			if (clear_next_inst = '1') then
+				id_pc <= if_pc;
+				id_inst <= x"0000";
 			end if;
 		end if;
 	end process;

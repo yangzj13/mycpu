@@ -1,0 +1,1 @@
+vhdtdtfi -prj cpu208 -o C:/Users/Bob/Documents/xilinx/cpu208/ram1.vhi -module ram1 -template C:/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work ram1.vhd 

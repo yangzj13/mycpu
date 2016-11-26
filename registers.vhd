@@ -56,13 +56,15 @@ entity registers is
 			  
 			  readAddr1 : in std_logic_vector(3 downto 0);
 			  readAddr2 : in std_logic_vector(3 downto 0);
+			  sw_reg_addr : in STD_LOGIC_VECTOR(3 downto 0);
 			  
 			  WbReg : in std_logic_vector(3 downto 0);
 			  WbData : in std_logic_vector(15 downto 0);
 			  WriteBack : in std_logic;
 			  
 			  readData1 : out std_logic_vector(15 downto 0);
-			  readData2 : out std_logic_vector(15 downto 0));
+			  readData2 : out std_logic_vector(15 downto 0);
+			  sw_reg_data : out STD_LOGIC_VECTOR(15 downto 0));
 end registers;
 
 architecture Behavioral of registers is
@@ -83,7 +85,7 @@ architecture Behavioral of registers is
 begin
 	
 	--读取寄存器1的值
-	process(WriteBack, readAddr1)
+	process(WriteBack, readAddr1, WbData)
 	begin
 		--如果读寄存器时，同时也正在进行写操作，那将写进来的值直接传给readData1
 		if(WriteBack = '1' and (readAddr1 = WbReg)) then
@@ -108,7 +110,7 @@ begin
 	end process;
 	
 	--读取寄存器2的值
-	process(WriteBack, readAddr2)
+	process(WriteBack, readAddr2, WbData)
 	begin
 	--如果读寄存器时，这个地址同时也正在进行写操作，那将写进来的值直接传给readData2
 		if(WriteBack = '1' and (readAddr2 = WbReg)) then
@@ -131,6 +133,32 @@ begin
 			end case;
 		end if;
 	end process;
+
+	--读取寄存器sw_reg的值
+	process(WriteBack, sw_reg_addr, WbData)
+	begin
+	--如果读寄存器时，这个地址同时也正在进行写操作，那将写进来的值直接传给readData2
+		if(WriteBack = '1' and (sw_reg_addr = WbReg)) then
+			sw_reg_data <= WbData;
+		else
+			case sw_reg_addr is 
+				when "1000" => sw_reg_data <= r0;
+				when "1001" => sw_reg_data <= r1;
+				when "1010" => sw_reg_data <= r2;
+				when "1011" => sw_reg_data <= r3;
+				when "1100" => sw_reg_data <= r4;
+				when "1101" => sw_reg_data <= r5;
+				when "1110" => sw_reg_data <= r6;
+				when "1111" => sw_reg_data <= r7;
+				when "0001" => sw_reg_data <= T;
+				when "0010" => sw_reg_data <= IH;
+				when "0011" => sw_reg_data <= RA;
+				when "0100" => sw_reg_data <= SP;
+				when others => sw_reg_data <= (others => '0');
+			end case;
+		end if;
+	end process;
+
 	
 	--将数据写入寄存器
 	process(clk, rst)
@@ -150,7 +178,7 @@ begin
 			RA <= (others => '0');
 			SP <= (others => '0');
 			--clk触发并且写使能为1时，将数据写入目标寄存器
-		elsif (clk'event and clk = '0' and WriteBack = '1') then	
+		elsif (clk'event and clk = '1' and WriteBack = '1') then	
 			case WbReg is 
 				when "1000" => r0 <= WbData;
 				when "1001" => r1 <= WbData;

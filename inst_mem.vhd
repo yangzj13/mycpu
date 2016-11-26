@@ -48,7 +48,7 @@ architecture Behavioral of inst_mem is
 
 begin
 
-	process(rst ,clk)
+	process(rst ,inst_i, inst_addr_i)
 	begin
 		if (rst = '0') then
 			ram2_en <= '1';

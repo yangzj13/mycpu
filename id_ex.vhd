@@ -44,6 +44,9 @@ entity id_ex is
 		id_reg_dst : in STD_LOGIC_VECTOR(3 downto 0); -- Ŀ?ļĴ?????????չΪ4λ??
 		id_alu_op : in STD_LOGIC_VECTOR(3 downto 0);
 		id_res_flag : in STD_LOGIC_VECTOR(2 downto 0);
+		id_sw_reg_addr : in STD_LOGIC_VECTOR(3 downto 0);
+		id_mem_read :in STD_LOGIC;
+		id_mem_write :in STD_LOGIC;
 		-- EX
 		ex_rx : out STD_LOGIC_VECTOR(15 downto 0);
 		ex_ry : out STD_LOGIC_VECTOR(15 downto 0);
@@ -53,7 +56,10 @@ entity id_ex is
 		ex_reg_write : out STD_LOGIC; --??????Ĵ??
 		ex_reg_dst : out STD_LOGIC_VECTOR(3 downto 0); -- Ŀ?ļĴ?????????չΪ4λ??
 		ex_alu_op : out STD_LOGIC_VECTOR(3 downto 0);
-		ex_res_flag : out STD_LOGIC_VECTOR(2 downto 0)
+		ex_res_flag : out STD_LOGIC_VECTOR(2 downto 0);
+		ex_sw_reg_addr : out STD_LOGIC_VECTOR(3 downto 0);
+		ex_mem_read : out STD_LOGIC;
+		ex_mem_write : out STD_LOGIC
 	);
 end id_ex;
 
@@ -71,6 +77,9 @@ begin
 			ex_rx_addr <= "0000";
 			ex_ry_addr <= "0000";
 			ex_res_flag <= "000";
+			ex_sw_reg_addr <= "0000";
+			ex_mem_read <= '0';
+			ex_mem_write <= '0';
 		elsif clk'event and clk = '1' then --ʱ????
 			if (stall = '0') then
 				ex_rx <= id_rx;
@@ -82,6 +91,9 @@ begin
 				ex_reg_dst <= id_reg_dst;
 				ex_alu_op <= id_alu_op;
 				ex_res_flag <= id_res_flag;
+				ex_sw_reg_addr <= id_sw_reg_addr;
+				ex_mem_read <= id_mem_read;
+				ex_mem_write <= id_mem_write;
 			elsif stall = '1' then
 				ex_rx <= x"0000";
 				ex_ry <= x"0000";
@@ -92,6 +104,9 @@ begin
 				ex_rx_addr <= "0000";
 				ex_ry_addr <= "0000";
 				ex_res_flag <= "000";
+				ex_sw_reg_addr <= "0000";
+				ex_mem_read <= '0';
+				ex_mem_write <= '0';
 			end if; 
 		end if;
 	end process;

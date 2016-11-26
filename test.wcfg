@@ -12,7 +12,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="20" />
+   <WVObjectSize size="43" />
    <wvobject fp_name="/test_sopc/clk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -25,25 +25,57 @@
       <obj_property name="ElementShortName">clk_period</obj_property>
       <obj_property name="ObjectShortName">clk_period</obj_property>
    </wvobject>
-   <wvobject fp_name="/test_sopc/uut/u1/u_registers/r1" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r1[15:0]</obj_property>
-      <obj_property name="ObjectShortName">r1[15:0]</obj_property>
-   </wvobject>
    <wvobject fp_name="/test_sopc/uut/u1/u_pc_reg/pc_o" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">pc_o[15:0]</obj_property>
       <obj_property name="ObjectShortName">pc_o[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/test_sopc/uut/u1/u_inst_mem/inst_o" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">inst_o[15:0]</obj_property>
-      <obj_property name="ObjectShortName">inst_o[15:0]</obj_property>
+   <wvobject fp_name="/test_sopc/uut/u1/u_registers/r0" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r0[15:0]</obj_property>
+      <obj_property name="ObjectShortName">r0[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/test_sopc/uut/u1/u_registers/writeback" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">writeback</obj_property>
-      <obj_property name="ObjectShortName">writeback</obj_property>
+   <wvobject fp_name="/test_sopc/uut/u1/u_registers/r1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r1[15:0]</obj_property>
+      <obj_property name="ObjectShortName">r1[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/test_sopc/uut/u1/u_registers/wbdata" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">wbdata[15:0]</obj_property>
-      <obj_property name="ObjectShortName">wbdata[15:0]</obj_property>
+   <wvobject fp_name="/test_sopc/uut/u1/u_registers/r2" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r2[15:0]</obj_property>
+      <obj_property name="ObjectShortName">r2[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_registers/r3" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r3[15:0]</obj_property>
+      <obj_property name="ObjectShortName">r3[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_registers/r4" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r4[15:0]</obj_property>
+      <obj_property name="ObjectShortName">r4[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_registers/r5" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r5[15:0]</obj_property>
+      <obj_property name="ObjectShortName">r5[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_registers/r6" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r6[15:0]</obj_property>
+      <obj_property name="ObjectShortName">r6[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_registers/r7" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r7[15:0]</obj_property>
+      <obj_property name="ObjectShortName">r7[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_registers/t" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">t[15:0]</obj_property>
+      <obj_property name="ObjectShortName">t[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_registers/ih" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ih[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ih[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_registers/ra" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ra[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ra[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_registers/sp" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sp[15:0]</obj_property>
+      <obj_property name="ObjectShortName">sp[15:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/test_sopc/uut/u1/u_alu/rx_i" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">rx_i[15:0]</obj_property>
@@ -53,44 +85,104 @@
       <obj_property name="ElementShortName">ry_i[15:0]</obj_property>
       <obj_property name="ObjectShortName">ry_i[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/test_sopc/uut/u1/u_forward_mux_b/origin_data_in" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">origin_data_in[15:0]</obj_property>
-      <obj_property name="ObjectShortName">origin_data_in[15:0]</obj_property>
+   <wvobject fp_name="/test_sopc/uut/u1/u_alu/result_o" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">result_o[15:0]</obj_property>
+      <obj_property name="ObjectShortName">result_o[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/test_sopc/uut/u1/u_forward_mux_b/forward_data_in" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">forward_data_in[15:0]</obj_property>
-      <obj_property name="ObjectShortName">forward_data_in[15:0]</obj_property>
+   <wvobject fp_name="/test_sopc/uut/u1/u_extend/extend_i" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">extend_i[3:0]</obj_property>
+      <obj_property name="ObjectShortName">extend_i[3:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/test_sopc/uut/u1/u_forward_mux_b/select_forward_data" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">select_forward_data</obj_property>
-      <obj_property name="ObjectShortName">select_forward_data</obj_property>
+   <wvobject fp_name="/test_sopc/uut/u1/u_extend/imm_o" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">imm_o[15:0]</obj_property>
+      <obj_property name="ObjectShortName">imm_o[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/test_sopc/uut/u1/u_forward_mux_b/data_out" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">data_out[15:0]</obj_property>
-      <obj_property name="ObjectShortName">data_out[15:0]</obj_property>
+   <wvobject fp_name="/test_sopc/uut/Inst_ram1/ram1_data_0" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ram1_data_0[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram1_data_0[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/test_sopc/uut/u1/u_registers/r3" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r3[15:0]</obj_property>
-      <obj_property name="ObjectShortName">r3[15:0]</obj_property>
+   <wvobject fp_name="/test_sopc/uut/Inst_ram1/ram1_data_1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ram1_data_1[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram1_data_1[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/test_sopc/uut/u1/u_forwarding_unit/mem_reg" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">mem_reg[3:0]</obj_property>
-      <obj_property name="ObjectShortName">mem_reg[3:0]</obj_property>
+   <wvobject fp_name="/test_sopc/uut/Inst_ram1/ram1_data_2" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ram1_data_2[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram1_data_2[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/test_sopc/uut/u1/u_forwarding_unit/mem_data" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">mem_data[15:0]</obj_property>
-      <obj_property name="ObjectShortName">mem_data[15:0]</obj_property>
+   <wvobject fp_name="/test_sopc/uut/Inst_ram1/ram1_data_3" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ram1_data_3[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram1_data_3[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/test_sopc/uut/u1/u_forwarding_unit/ry_cur" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">ry_cur[3:0]</obj_property>
-      <obj_property name="ObjectShortName">ry_cur[3:0]</obj_property>
+   <wvobject fp_name="/test_sopc/uut/Inst_ram1/ram1_data_4" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ram1_data_4[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram1_data_4[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/test_sopc/uut/u1/u_forwarding_unit/wb_data" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">wb_data[15:0]</obj_property>
-      <obj_property name="ObjectShortName">wb_data[15:0]</obj_property>
+   <wvobject fp_name="/test_sopc/uut/Inst_ram1/ram1_data_5" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ram1_data_5[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram1_data_5[15:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/test_sopc/uut/u1/u_registers/r2" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">r2[15:0]</obj_property>
-      <obj_property name="ObjectShortName">r2[15:0]</obj_property>
+   <wvobject fp_name="/test_sopc/uut/Inst_ram1/ram1_data_6" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ram1_data_6[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram1_data_6[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/Inst_ram1/ram1_data_7" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ram1_data_7[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram1_data_7[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/Inst_ram1/ram1_data_8" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ram1_data_8[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram1_data_8[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/Inst_ram1/ram1_data_9" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ram1_data_9[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram1_data_9[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/Inst_ram1/ram1_data_10" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ram1_data_10[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram1_data_10[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_data_mem/ram1_en" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ram1_en</obj_property>
+      <obj_property name="ObjectShortName">ram1_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_data_mem/ram1_we" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ram1_we</obj_property>
+      <obj_property name="ObjectShortName">ram1_we</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_data_mem/ram1_oe" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ram1_oe</obj_property>
+      <obj_property name="ObjectShortName">ram1_oe</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_data_mem/ram1_addr" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ram1_addr[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram1_addr[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_data_mem/ram1_data_in" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ram1_data_in[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram1_data_in[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_data_mem/ram1_data_out" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">ram1_data_out[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ram1_data_out[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_registers/writeback" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">writeback</obj_property>
+      <obj_property name="ObjectShortName">writeback</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_registers/readaddr1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">readaddr1[3:0]</obj_property>
+      <obj_property name="ObjectShortName">readaddr1[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_registers/wbreg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">wbreg[3:0]</obj_property>
+      <obj_property name="ObjectShortName">wbreg[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_registers/readdata1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">readdata1[15:0]</obj_property>
+      <obj_property name="ObjectShortName">readdata1[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_registers/wbdata" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">wbdata[15:0]</obj_property>
+      <obj_property name="ObjectShortName">wbdata[15:0]</obj_property>
    </wvobject>
 </wave_config>

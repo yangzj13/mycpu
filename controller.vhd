@@ -51,7 +51,10 @@ entity controller is
 			--Add   To change T reg
 			res_flag_o : out STD_LOGIC_VECTOR(2 downto 0);
 			-- For B and J instructions
-			branch_ctr_o : out STD_LOGIC_VECTOR(2 downto 0)
+			branch_ctr_o : out STD_LOGIC_VECTOR(2 downto 0);
+			sw_reg_addr : out STD_LOGIC_VECTOR(3 downto 0);
+			mem_read : out STD_LOGIC;
+			mem_write : out STD_LOGIC
 		);
 end controller;
 
@@ -81,6 +84,9 @@ begin
 	else
 		res_flag_o <= res_alu;  --¨ª¦Ì¨¤¨¢¡ê????¨¨??¨¨?????0
 		branch_ctr_o <= no_branch_ctr;
+		sw_reg_addr <= "0000";
+		mem_read <= '0';
+		mem_write <= '0';
 		case inst_i(15 downto 11) is
 			-- AND/OR/CMP/JR/MFPC/SLLV/SLTU
 			when "11101" =>
@@ -378,10 +384,75 @@ begin
 				b_src_o <= "10";
 				alu_op <= "0000";
 				branch_ctr_o <= "100";			
-			--when "" =>
-			--when "" =>
-			--when "" =>
-			--when "" =>
+			-- MOVE
+			when "01111" =>
+				mem_to_reg <= '0';
+				reg_write <= '1';
+				reg_dst(3) <= '1';
+				reg_dst(2 downto 0) <= inst_i(10 downto 8);
+				reg1_addr_o(3) <= '1';
+				reg1_addr_o(2 downto 0) <= inst_i(7 downto 5);
+				reg2_addr_o <= "0000";
+				extend_o <= "0000";
+				a_src_o <= "00";
+				b_src_o <= "10";
+				alu_op <= "0000";
+			-- LW
+			when "10011" =>
+				mem_to_reg <= '0';
+				reg_write <= '1';
+				reg_dst(3) <= '1';
+				reg_dst(2 downto 0) <= inst_i(7 downto 5);
+				reg1_addr_o(3) <= '1';
+				reg1_addr_o(2 downto 0) <= inst_i(10 downto 8);
+				reg2_addr_o <= "0000";
+				extend_o <= "1011";
+				a_src_o <= "00";
+				b_src_o <= "11";
+				alu_op <= "0000";
+				mem_read <= '1';
+			-- LW_SP
+			when "10010" =>
+				mem_to_reg <= '0';
+				reg_write <= '1';
+				reg_dst(3) <= '1';
+				reg_dst(2 downto 0) <= inst_i(10 downto 8);
+				reg1_addr_o <= "0100";
+				reg2_addr_o <= "0000";
+				extend_o <= "1001";
+				a_src_o <= "00";
+				b_src_o <= "11";
+				alu_op <= "0000";
+				mem_read <= '1';
+			-- SW
+			when "11011" =>
+				mem_to_reg <= '0';
+				reg_write <= '0';
+				reg_dst <= "0000";
+				reg1_addr_o(3) <= '1';
+				reg1_addr_o(2 downto 0) <= inst_i(10 downto 8);
+				reg2_addr_o <= "0000";
+				extend_o <= "1011";
+				a_src_o <= "00";
+				b_src_o <= "11";
+				alu_op <= "0000";
+				mem_write <= '1';
+				sw_reg_addr(3) <= '1';
+				sw_reg_addr(2 downto 0) <= inst_i(7 downto 5);
+			-- SW_SP
+			when "11010" =>
+				mem_to_reg <= '0';
+				reg_write <= '0';
+				reg_dst <= "0000";
+				reg1_addr_o <= "0100";
+				reg2_addr_o <= "0000";
+				extend_o <= "1001";
+				a_src_o <= "00";
+				b_src_o <= "11";
+				alu_op <= "0000";
+				mem_write <= '1';
+				sw_reg_addr(3) <= '1';
+				sw_reg_addr(2 downto 0) <= inst_i(10 downto 8);
 			when others =>
 				mem_to_reg <= '0';
 				reg_write <= '0';

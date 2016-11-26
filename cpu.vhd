@@ -39,7 +39,8 @@ entity cpu is
 		ram1_we : out STD_LOGIC;
 		ram1_oe : out STD_LOGIC;
 		ram1_addr : out STD_LOGIC_VECTOR(15 downto 0);
-		ram1_data : in STD_LOGIC_VECTOR(15 downto 0);
+		ram1_data_r : in STD_LOGIC_VECTOR(15 downto 0);
+		ram1_data_w : out STD_LOGIC_VECTOR(15 downto 0);
 		-- ram1_data : inout STD_LOGIC_VECTOR(15 downto 0);
 		
 		-- ram2
@@ -98,7 +99,8 @@ architecture Behavioral of cpu is
 			if_pc : in STD_LOGIC_VECTOR(15 downto 0);
 			if_inst : in STD_LOGIC_VECTOR(15 downto 0);
 			id_pc : out STD_LOGIC_VECTOR(15 downto 0);
-			id_inst : out STD_LOGIC_VECTOR(15 downto 0)
+			id_inst : out STD_LOGIC_VECTOR(15 downto 0);
+			clear_next_inst : in STD_LOGIC
 		);
 	end component;
 
@@ -112,8 +114,11 @@ architecture Behavioral of cpu is
 			-- 读寄存器
 			readAddr1 : in std_logic_vector(3 downto 0);
 			readAddr2 : in std_logic_vector(3 downto 0);
+			sw_reg_addr : in STD_LOGIC_VECTOR(3 DOWNTO 0);
 			readData1 : out std_logic_vector(15 downto 0);
 			readData2 : out std_logic_vector(15 downto 0);
+			sw_reg_data : OUT std_logic_vector(15 downto 0);
+			
 			-- 写寄存器	  
 			WbReg : in std_logic_vector(3 downto 0);
 			WbData : in std_logic_vector(15 downto 0);
@@ -139,8 +144,10 @@ architecture Behavioral of cpu is
 			a_src_o : out STD_LOGIC_VECTOR(1 downto 0);
 			b_src_o : out STD_LOGIC_VECTOR(1 downto 0);
 			res_flag_o : out STD_LOGIC_VECTOR(2 downto 0);
-			branch_ctr_o : out STD_LOGIC_VECTOR(2 downto 0)
-
+			branch_ctr_o : out STD_LOGIC_VECTOR(2 downto 0);
+			mem_read : out STD_LOGIC;
+			mem_write : out STD_LOGIC;
+			sw_reg_addr : out STD_LOGIC_VECTOR(3 downto 0)
 			-- TODO: other controll signals
 		);
 	end component;
@@ -182,6 +189,10 @@ architecture Behavioral of cpu is
 			id_reg_dst : in STD_LOGIC_VECTOR(3 downto 0); -- 目的寄存器地址（扩展为4位）
 			id_alu_op : in STD_LOGIC_VECTOR(3 downto 0);
 			id_res_flag : in STD_LOGIC_VECTOR(2 downto 0);
+			id_sw_reg_addr : in STD_LOGIC_VECTOR(3 downto 0);
+			id_mem_read :in STD_LOGIC;
+			id_mem_write :in STD_LOGIC;
+
 			-- EX
 			ex_rx : out STD_LOGIC_VECTOR(15 downto 0);
 			ex_ry : out STD_LOGIC_VECTOR(15 downto 0);
@@ -191,7 +202,11 @@ architecture Behavioral of cpu is
 			ex_reg_write : out STD_LOGIC; --是否写入寄存器
 			ex_reg_dst : out STD_LOGIC_VECTOR(3 downto 0); -- 目的寄存器地址（扩展为4位）
 			ex_alu_op : out STD_LOGIC_VECTOR(3 downto 0);
-			ex_res_flag : out STD_LOGIC_VECTOR(2 downto 0)	
+			ex_res_flag : out STD_LOGIC_VECTOR(2 downto 0);
+			ex_sw_reg_addr : out STD_LOGIC_VECTOR(3 downto 0);
+			ex_mem_read : out STD_LOGIC;
+			ex_mem_write : out STD_LOGIC
+
 		);
 	end component;
 	
@@ -233,42 +248,39 @@ architecture Behavioral of cpu is
 			ex_reg_write : in STD_LOGIC; --是否写入寄存器
 			ex_reg_dst : in STD_LOGIC_VECTOR(3 downto 0); -- 目的寄存器地址（扩展为4位）
 			ex_result : in STD_LOGIC_VECTOR(15 downto 0);
+			ex_sw_reg_addr : in STD_LOGIC_VECTOR(3 downto 0);
+			ex_mem_read : in STD_LOGIC;
+			ex_mem_write : in STD_LOGIC;
 			-- MEM
 			mem_mem_to_reg : out STD_LOGIC; --直接写入寄存器(0)/读取RAM(1)
 			mem_reg_write : out STD_LOGIC; --是否写入寄存器
 			mem_reg_dst : out STD_LOGIC_VECTOR(3 downto 0); -- 目的寄存器地址（扩展为4位）
-			mem_result : out STD_LOGIC_VECTOR(15 downto 0)
+			mem_result : out STD_LOGIC_VECTOR(15 downto 0);
+			mem_sw_reg_addr : out STD_LOGIC_VECTOR(3 downto 0);
+			mem_mem_read : out STD_LOGIC;
+			mem_mem_write : out STD_LOGIC
 		);
 	end component;
 	
-	component data_mem
-		port(
-		
-			rst : in STD_LOGIC;
-			clk : in STD_LOGIC;
-
-			mem_to_reg : in STD_LOGIC;
-			
-			addr_i : in STD_LOGIC_VECTOR(15 downto 0);
-			data_i : in STD_LOGIC_VECTOR(15 downto 0);
-			data_o : out STD_LOGIC_VECTOR(15 downto 0);
-			
-			ram1_en : out STD_LOGIC;
-			ram1_we : out STD_LOGIC;
-			ram1_oe : out STD_LOGIC;
-			ram1_addr : out STD_LOGIC_VECTOR(15 downto 0);
-			ram1_data : in STD_LOGIC_VECTOR(15 downto 0)
-
-			-- ram1_data : inout STD_LOGIC_VECTOR(15 downto 0);
-
-			--ram2_en : out STD_LOGIC;
-			--ram2_we : out STD_LOGIC;
-			--ram2_oe : out STD_LOGIC;
-			--ram2_addr : out STD_LOGIC_VECTOR(15 downto 0);
-			--ram2_data : in STD_LOGIC_VECTOR(15 downto 0)
-			-- ram2_data : inout STD_LOGIC_VECTOR(15 downto 0)
+	COMPONENT data_mem
+	PORT(
+		rst : IN std_logic;
+		clk : IN std_logic;
+		mem_to_reg : IN std_logic;
+		mem_read : IN std_logic;
+		mem_write : IN std_logic;
+		addr_i : IN std_logic_vector(15 downto 0);
+		data_i : IN std_logic_vector(15 downto 0);
+		sw_reg_data : IN std_logic_vector(15 downto 0);
+		ram1_data_in : IN std_logic_vector(15 downto 0);          
+		data_o : OUT std_logic_vector(15 downto 0);
+		ram1_en : OUT std_logic;
+		ram1_we : OUT std_logic;
+		ram1_oe : OUT std_logic;
+		ram1_addr : OUT std_logic_vector(15 downto 0);
+		ram1_data_out : OUT std_logic_vector(15 downto 0)
 		);
-	end component;
+	END COMPONENT;
 	
 	component mem_wb
 		port(
@@ -320,7 +332,8 @@ architecture Behavioral of cpu is
 		pc_mux_sel_o : OUT std_logic;
 		pc_branch_o : OUT std_logic_vector(15 downto 0);
 		forward_addr : OUT std_logic_vector(3 downto 0);
-		stall_req_branch : OUT std_logic
+		stall_req_branch : OUT std_logic;
+		clear_next_inst : out STD_LOGIC
 		);
 	END COMPONENT;
 
@@ -371,10 +384,14 @@ architecture Behavioral of cpu is
 	signal extend_o : STD_LOGIC_VECTOR(3 downto 0);
 	signal res_flag_o : STD_LOGIC_VECTOR(2 downto 0);
 	signal branch_ctr_o : STD_LOGIC_VECTOR(2 downto 0);
-	
+	signal sw_reg_addr_o : STD_LOGIC_VECTOR(3 downto 0);
+	signal mem_read_o : STD_LOGIC;
+	signal mem_write_o : STD_LOGIC;
+
 	-- registers
 	signal r1_data : STD_LOGIC_VECTOR(15 downto 0);
 	signal r2_data : STD_LOGIC_VECTOR(15 downto 0);
+	signal mem_sw_reg_data : STD_LOGIC_VECTOR(15 downto 0);
 
 	-- extend
 	signal imm_o : STD_LOGIC_VECTOR(15 downto 0);
@@ -393,8 +410,10 @@ architecture Behavioral of cpu is
 	signal ex_reg_dst : STD_LOGIC_VECTOR(3 downto 0);
 	signal ex_reg_write : STD_LOGIC;
 	signal ex_res_flag : STD_LOGIC_VECTOR(2 downto 0);
+	signal ex_sw_reg_addr : STD_LOGIC_VECTOR(3 downto 0);
 	signal ex_mem_read : STD_LOGIC;
-	
+	signal ex_mem_write : STD_LOGIC;
+
 	--forward_mux
 	signal mux_a : STD_LOGIC_VECTOR(15 downto 0);
 	signal mux_b : STD_LOGIC_VECTOR(15 downto 0);
@@ -412,7 +431,9 @@ architecture Behavioral of cpu is
 	signal mem_reg_dst : STD_LOGIC_VECTOR(3 downto 0); -- 目的寄存器地址（扩展为4位）
 	signal mem_result : STD_LOGIC_VECTOR(15 downto 0);
 	signal mem_mem_read : STD_LOGIC;
-	
+	signal mem_mem_write : STD_LOGIC;
+	signal mem_sw_reg_addr : STD_LOGIC_VECTOR(3 downto 0);
+
 	--data memory controller
 	signal data_o : STD_LOGIC_VECTOR(15 downto 0);
 	
@@ -434,6 +455,7 @@ architecture Behavioral of cpu is
 	signal pc_branch_o : STD_LOGIC_VECTOR(15 downto 0);
 	signal forward_addr : STD_LOGIC_VECTOR(3 downto 0);
 	signal stall_req_branch : STD_LOGIC;
+	signal clear_inst_in_if_id : STD_LOGIC;
 
 	--stall_controller
 	signal stall : STD_LOGIC;
@@ -476,7 +498,8 @@ begin
 		if_pc => pc_out,
 		if_inst => inst_out,
 		id_pc => id_pc,
-		id_inst => id_inst
+		id_inst => id_inst,
+		clear_next_inst => clear_inst_in_if_id
 		);
 
 	u_registers : registers
@@ -485,8 +508,10 @@ begin
 		clk => clk,
 		readAddr1 => reg1_addr_o,
 		readAddr2 => reg2_addr_o,
+		sw_reg_addr => mem_sw_reg_addr,
 		readData1 => r1_data,
 		readData2 => r2_data,
+		sw_reg_data => mem_sw_reg_data,
 		WriteBack => wb_reg_write,
 		WbData => wb_wdata,
 		WbReg => wb_reg_dst
@@ -507,7 +532,10 @@ begin
 		res_flag_o => res_flag_o,
 		reg1_addr_o => reg1_addr_o,
 		reg2_addr_o => reg2_addr_o,
-		branch_ctr_o => branch_ctr_o
+		branch_ctr_o => branch_ctr_o,
+		sw_reg_addr => sw_reg_addr_o,
+		mem_read => mem_read_o,
+		mem_write => mem_write_o
 		);
 
 	u_extend : extend
@@ -543,6 +571,9 @@ begin
 		id_reg_dst => reg_dst_o,
 		id_alu_op => alu_op_o,
 		id_res_flag => res_flag_o,
+		id_mem_read => mem_read_o,
+		id_mem_write => mem_write_o,
+		id_sw_reg_addr => sw_reg_addr_o,
 		ex_rx => ex_rx,
 		ex_ry => ex_ry,
 		ex_rx_addr => ex_rx_addr,
@@ -551,7 +582,10 @@ begin
 		ex_reg_write => ex_reg_write,
 		ex_reg_dst => ex_reg_dst,
 		ex_alu_op => ex_alu_op,
-		ex_res_flag => ex_res_flag
+		ex_res_flag => ex_res_flag,
+		ex_mem_read => ex_mem_read,
+		ex_mem_write => ex_mem_write,
+		ex_sw_reg_addr => ex_sw_reg_addr
 		);
 
 	u_forward_mux_a : forward_mux
@@ -596,10 +630,16 @@ begin
 		ex_reg_write => ex_reg_write,
 		ex_reg_dst => ex_reg_dst,
 		ex_result => ex_res_o,
+		ex_sw_reg_addr => ex_sw_reg_addr,
+		ex_mem_read => ex_mem_read,
+		ex_mem_write => ex_mem_write,
 		mem_mem_to_reg => mem_mem_to_reg,
 		mem_reg_write => mem_reg_write,
 		mem_reg_dst => mem_reg_dst,
-		mem_result => mem_result
+		mem_result => mem_result,
+		mem_mem_read => mem_mem_read,
+		mem_mem_write => mem_mem_write,
+		mem_sw_reg_addr => mem_sw_reg_addr
 		);
 
 	u_data_mem : data_mem
@@ -608,7 +648,10 @@ begin
 		clk => clk,
 
 		mem_to_reg => mem_mem_to_reg,
-			
+		mem_read => mem_mem_read,
+		mem_write => mem_mem_write,
+		sw_reg_data => mem_sw_reg_data,
+
 		addr_i => mem_result,
 		data_i => mem_result,
 		data_o => data_o,
@@ -617,8 +660,8 @@ begin
 		ram1_we => ram1_we,
 		ram1_oe => ram1_oe,
 		ram1_addr => ram1_addr,
-		ram1_data => ram1_data
-
+		ram1_data_in => ram1_data_r,
+		ram1_data_out => ram1_data_w
 		--ram2_en => ram2_en,
 		--ram2_we => ram2_we,
 		--ram2_oe => ram2_oe,
@@ -669,7 +712,8 @@ begin
 		forward_data => branch_data,
 		forward_addr => forward_addr,
 		ex_reg_dst => ex_reg_dst,
-		stall_req_branch => stall_req_branch 
+		stall_req_branch => stall_req_branch,
+		clear_next_inst => clear_inst_in_if_id
 	);	
 
 	Inst_stall_controller: stall_controller PORT MAP(
