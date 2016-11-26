@@ -49,7 +49,9 @@ entity controller is
 			-- TODO: other controll signals
 			
 			--Add   To change T reg
-			res_flag_o : out STD_LOGIC_VECTOR(2 downto 0)
+			res_flag_o : out STD_LOGIC_VECTOR(2 downto 0);
+			-- For B and J instructions
+			branch_ctr_o : out STD_LOGIC_VECTOR(2 downto 0)
 		);
 end controller;
 
@@ -58,6 +60,10 @@ architecture Behavioral of controller is
 constant res_alu : std_logic_vector := "000";
 constant res_eq : std_logic_vector := "101";  
 constant res_sl : std_logic_vector := "110";  
+
+constant no_branch_ctr : std_logic_vector := "000";
+
+constant reg_T : std_logic_vector := "0001";
 
 begin
 	
@@ -74,6 +80,7 @@ begin
 		res_flag_o <= res_alu;
 	else
 		res_flag_o <= res_alu;  --¨ª¦Ì¨¤¨¢¡ê????¨¨??¨¨?????0
+		branch_ctr_o <= no_branch_ctr;
 		case inst_i(15 downto 11) is
 			-- AND/OR/CMP/JR/MFPC/SLLV/SLTU
 			when "11101" =>
@@ -126,6 +133,17 @@ begin
 						case inst_i(7 downto 5) is
 							--JR
 							when "000" =>
+								mem_to_reg <= '0';
+								reg_write <= '0';
+								reg_dst <= "0000";
+								reg1_addr_o(3) <= '1';
+								reg1_addr_o(2 downto 0) <= inst_i(10 downto 8);
+								reg2_addr_o <= "0000";
+								extend_o <= "0000";
+								a_src_o <= "00";
+								b_src_o <= "00";
+								alu_op <= "0000";
+								branch_ctr_o <= "111";
 							--MFPC
 							when "010" =>
 								mem_to_reg <= '0';
@@ -213,7 +231,16 @@ begin
 						alu_op <= "0000";
 					--BTEQZ
 					when "000" =>
-						
+						mem_to_reg <= '0';
+						reg_write <= '0';
+						reg_dst <= "0000";
+						reg1_addr_o <= reg_T;
+						reg2_addr_o <= "0000";
+						extend_o <= "1001";
+						a_src_o <= "10";
+						b_src_o <= "10";
+						alu_op <= "0000";
+						branch_ctr_o <= "101";
 					--MTSP
 					when "100" =>
 						mem_to_reg <= '0';
@@ -313,9 +340,44 @@ begin
 				a_src_o <= "00";
 				b_src_o <= "00";
 				res_flag_o <= res_eq;
-			--when "" =>
-			--when "" =>
-			--when "" =>
+			-- B
+			when "00010" =>
+				mem_to_reg <= '0';
+				reg_write <= '0';
+				reg_dst <= "0000";
+				reg1_addr_o <= "0000";
+				reg2_addr_o <= "0000";
+				extend_o <= "1101";
+				a_src_o <= "10";
+				b_src_o <= "10";
+				alu_op <= "0000";
+				branch_ctr_o <= "001";
+			-- BEQZ
+			when "00100" =>
+				mem_to_reg <= '0';
+				reg_write <= '0';
+				reg_dst <= "0000";
+				reg1_addr_o(3) <= '1';
+				reg1_addr_o(2 downto 0) <= inst_i(10 downto 8);
+				reg2_addr_o <= "0000";
+				extend_o <= "1001";
+				a_src_o <= "10";
+				b_src_o <= "10";
+				alu_op <= "0000";
+				branch_ctr_o <= "010";
+			-- BNEQZ
+			when "00101" =>
+				mem_to_reg <= '0';
+				reg_write <= '0';
+				reg_dst <= "0000";
+				reg1_addr_o(3) <= '1';
+				reg1_addr_o(2 downto 0) <= inst_i(10 downto 8);
+				reg2_addr_o <= "0000";
+				extend_o <= "1001";
+				a_src_o <= "10";
+				b_src_o <= "10";
+				alu_op <= "0000";
+				branch_ctr_o <= "100";			
 			--when "" =>
 			--when "" =>
 			--when "" =>
@@ -324,6 +386,9 @@ begin
 				mem_to_reg <= '0';
 				reg_write <= '0';
 				reg_dst <= "0000";
+				extend_o <= "0000";
+				a_src_o <= "10";
+				b_src_o <= "10";
 				alu_op <= "0000";
 		end case;
 	end if;

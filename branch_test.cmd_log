@@ -1,0 +1,1 @@
+vhdtdtfi -prj cpu208 -o C:/Users/Bob/Documents/xilinx/cpu208/branch_test.vhi -module branch_test -template C:/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work branch_test.vhd 

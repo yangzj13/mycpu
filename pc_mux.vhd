@@ -36,7 +36,7 @@ entity pc_mux is
 		pc_mux_sel_i : in STD_LOGIC;
 		pc_i : in STD_LOGIC_VECTOR(15 downto 0);
 		pc_branch_i : in STD_LOGIC_VECTOR(15 downto 0);
-		pc_mux_o : in STD_LOGIC_VECTOR(15 downto 0)
+		pc_mux_o : out STD_LOGIC_VECTOR(15 downto 0)
 		);
 end pc_mux;
 

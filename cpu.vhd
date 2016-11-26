@@ -59,18 +59,19 @@ architecture Behavioral of cpu is
 		port(
 			rst : in STD_LOGIC;
 			clk : in STD_LOGIC;
+			stall : in STD_LOGIC;
 			pc_i : in STD_LOGIC_VECTOR(15 downto 0);
 			pc_o : out STD_LOGIC_VECTOR(15 downto 0)
 		);
 	end component;
 
 	--PC加1
-	component pc_adder
-		port(
-			pc_i : in STD_LOGIC_VECTOR(15 downto 0);
-			pc_o : out STD_LOGIC_VECTOR(15 downto 0)
-		);
-	end component;
+	--component pc_adder
+	--	port(
+	--		pc_i : in STD_LOGIC_VECTOR(15 downto 0);
+	--		pc_o : out STD_LOGIC_VECTOR(15 downto 0)
+	--	);
+	--end component;
 
 	--指令MEM控制器
 	component inst_mem
@@ -93,6 +94,7 @@ architecture Behavioral of cpu is
 		port(
 			rst : in STD_LOGIC;
 			clk : in STD_LOGIC;
+			stall : in STD_LOGIC;
 			if_pc : in STD_LOGIC_VECTOR(15 downto 0);
 			if_inst : in STD_LOGIC_VECTOR(15 downto 0);
 			id_pc : out STD_LOGIC_VECTOR(15 downto 0);
@@ -136,7 +138,9 @@ architecture Behavioral of cpu is
 			extend_o : out STD_LOGIC_VECTOR(3 downto 0);
 			a_src_o : out STD_LOGIC_VECTOR(1 downto 0);
 			b_src_o : out STD_LOGIC_VECTOR(1 downto 0);
-			res_flag_o : out STD_LOGIC_VECTOR(2 downto 0)
+			res_flag_o : out STD_LOGIC_VECTOR(2 downto 0);
+			branch_ctr_o : out STD_LOGIC_VECTOR(2 downto 0)
+
 			-- TODO: other controll signals
 		);
 	end component;
@@ -167,6 +171,7 @@ architecture Behavioral of cpu is
 		port(
 			rst : in STD_LOGIC;
 			clk : in STD_LOGIC;
+			stall : in STD_LOGIC;
 			-- ID
 			id_rx : in STD_LOGIC_VECTOR(15 downto 0);
 			id_ry : in STD_LOGIC_VECTOR(15 downto 0);
@@ -294,15 +299,63 @@ architecture Behavioral of cpu is
 			data_A : out  STD_LOGIC_VECTOR (15 downto 0);
            	data_B : out  STD_LOGIC_VECTOR (15 downto 0);
            	select_data_A : out  STD_LOGIC;
-           	select_data_B : out  STD_LOGIC);
+           	select_data_B : out  STD_LOGIC;
+
+           	branch_reg : in STD_LOGIC_VECTOR(3 downto 0);
+           	branch_data : out STD_LOGIC_VECTOR(15 downto 0);
+           	branch_sel : out STD_LOGIC
+           	);
 	end component;
+
+	COMPONENT branch_test
+	PORT(
+		branch_ctr_i : IN std_logic_vector(2 downto 0);
+		pc_i : IN std_logic_vector(15 downto 0);
+		reg_data_i : IN std_logic_vector(15 downto 0);
+		reg_addr_i : in STD_LOGIC_VECTOR(3 downto 0);
+		imm_i : IN std_logic_vector(15 downto 0);
+		forward_sel : IN std_logic;
+		forward_data : IN std_logic_vector(15 downto 0);
+		ex_reg_dst : IN std_logic_vector(3 downto 0);          
+		pc_mux_sel_o : OUT std_logic;
+		pc_branch_o : OUT std_logic_vector(15 downto 0);
+		forward_addr : OUT std_logic_vector(3 downto 0);
+		stall_req_branch : OUT std_logic
+		);
+	END COMPONENT;
+
+	COMPONENT pc_mux
+	PORT(
+		pc_mux_sel_i : IN std_logic;
+		pc_i : IN std_logic_vector(15 downto 0);
+		pc_branch_i : IN std_logic_vector(15 downto 0);          
+		pc_mux_o : OUT std_logic_vector(15 downto 0)
+		);
+	END COMPONENT;
+
+	COMPONENT stall_controller
+	PORT(
+		stall_req_branch : IN std_logic;
+		stall_req_if : IN std_logic;
+		id_reg1_addr : IN std_logic_vector(3 downto 0);
+		id_reg2_addr : IN std_logic_vector(3 downto 0);
+		ex_reg_dst : IN std_logic_vector(3 downto 0);
+		ex_mem_read : IN std_logic;
+		mem_reg_dst : IN std_logic_vector(3 downto 0);
+		mem_mem_read : IN std_logic;          
+		stall : OUT std_logic
+		);
+	END COMPONENT;
 
 	-- pc_reg
 	signal pc_out : STD_LOGIC_VECTOR(15 downto 0);
-	-- pc_adder
-	signal pc_plus_1 : STD_LOGIC_VECTOR(15 downto 0);
+	-- pc_mux
+	signal pc_mux_o : STD_LOGIC_VECTOR(15 downto 0);
 	-- inst_mem
 	signal inst_out : STD_LOGIC_VECTOR(15 downto 0);
+
+	signal stall_req_if : STD_LOGIC;
+
 	-- if/id
 	signal id_pc : STD_LOGIC_VECTOR(15 downto 0);
 	signal id_inst : STD_LOGIC_VECTOR(15 downto 0);
@@ -317,7 +370,8 @@ architecture Behavioral of cpu is
 	signal b_src_o : STD_LOGIC_VECTOR(1 downto 0);
 	signal extend_o : STD_LOGIC_VECTOR(3 downto 0);
 	signal res_flag_o : STD_LOGIC_VECTOR(2 downto 0);
-
+	signal branch_ctr_o : STD_LOGIC_VECTOR(2 downto 0);
+	
 	-- registers
 	signal r1_data : STD_LOGIC_VECTOR(15 downto 0);
 	signal r2_data : STD_LOGIC_VECTOR(15 downto 0);
@@ -339,7 +393,8 @@ architecture Behavioral of cpu is
 	signal ex_reg_dst : STD_LOGIC_VECTOR(3 downto 0);
 	signal ex_reg_write : STD_LOGIC;
 	signal ex_res_flag : STD_LOGIC_VECTOR(2 downto 0);
-
+	signal ex_mem_read : STD_LOGIC;
+	
 	--forward_mux
 	signal mux_a : STD_LOGIC_VECTOR(15 downto 0);
 	signal mux_b : STD_LOGIC_VECTOR(15 downto 0);
@@ -356,7 +411,8 @@ architecture Behavioral of cpu is
 	signal mem_reg_write : STD_LOGIC; --是否写入寄存器
 	signal mem_reg_dst : STD_LOGIC_VECTOR(3 downto 0); -- 目的寄存器地址（扩展为4位）
 	signal mem_result : STD_LOGIC_VECTOR(15 downto 0);
-
+	signal mem_mem_read : STD_LOGIC;
+	
 	--data memory controller
 	signal data_o : STD_LOGIC_VECTOR(15 downto 0);
 	
@@ -370,22 +426,34 @@ architecture Behavioral of cpu is
 	signal forward_data_b : STD_LOGIC_VECTOR(15 downto 0);
 	signal forward_sel_a : STD_LOGIC;
 	signal forward_sel_b : STD_LOGIC;
-	
+	signal branch_data : STD_LOGIC_VECTOR(15 downto 0);
+	signal branch_sel : STD_LOGIC;
+
+	--branch_test
+	signal pc_mux_sel_o : STD_LOGIC;
+	signal pc_branch_o : STD_LOGIC_VECTOR(15 downto 0);
+	signal forward_addr : STD_LOGIC_VECTOR(3 downto 0);
+	signal stall_req_branch : STD_LOGIC;
+
+	--stall_controller
+	signal stall : STD_LOGIC;
+
 begin
 	
 	u_pc_reg : pc_reg
 	port map(	
 		rst => rst,
 		clk => clk,
-		pc_i => pc_plus_1,
+		pc_i => pc_mux_o,
+		stall => stall,
 		pc_o => pc_out
 	);
 
-	u_pc_adder : pc_adder
-	port map(
-		pc_i => pc_out,
-		pc_o => pc_plus_1
-	);
+	--u_pc_adder : pc_adder
+	--port map(
+	--	pc_i => pc_out,
+	--	pc_o => pc_plus_1
+	--);
 
 	u_inst_mem : inst_mem
 	port map(
@@ -404,6 +472,7 @@ begin
 	port map(
 		rst => rst,
 		clk => clk,
+		stall => stall, 
 		if_pc => pc_out,
 		if_inst => inst_out,
 		id_pc => id_pc,
@@ -437,7 +506,8 @@ begin
 		b_src_o => b_src_o,
 		res_flag_o => res_flag_o,
 		reg1_addr_o => reg1_addr_o,
-		reg2_addr_o => reg2_addr_o
+		reg2_addr_o => reg2_addr_o,
+		branch_ctr_o => branch_ctr_o
 		);
 
 	u_extend : extend
@@ -463,6 +533,7 @@ begin
 	port map(
 		rst => rst,
 		clk => clk,
+		stall => stall,
 		id_rx => a_o,
 		id_ry => b_o,
 		id_rx_addr => reg1_addr_o,
@@ -580,7 +651,47 @@ begin
 		data_A => forward_data_a,
 		data_B => forward_data_b,
 		select_data_A => forward_sel_a,
-		select_data_B => forward_sel_b
+		select_data_B => forward_sel_b,
+		branch_reg => forward_addr,
+		branch_sel => branch_sel,
+		branch_data => branch_data
 		);
+
+	Inst_branch_test: branch_test PORT MAP(
+		branch_ctr_i => branch_ctr_o,
+		pc_i => id_pc,
+		reg_data_i => r1_data,
+		reg_addr_i => reg1_addr_o,
+		imm_i => imm_o,
+		pc_mux_sel_o => pc_mux_sel_o,
+		pc_branch_o => pc_branch_o,
+		forward_sel => branch_sel,
+		forward_data => branch_data,
+		forward_addr => forward_addr,
+		ex_reg_dst => ex_reg_dst,
+		stall_req_branch => stall_req_branch 
+	);	
+
+	Inst_stall_controller: stall_controller PORT MAP(
+		stall_req_branch => stall_req_branch,
+		stall_req_if => stall_req_if,
+		id_reg1_addr => reg1_addr_o,
+		id_reg2_addr => reg2_addr_o,
+		ex_reg_dst => ex_reg_dst,
+		ex_mem_read => ex_mem_read,
+		mem_reg_dst => mem_reg_dst,
+		mem_mem_read => mem_mem_read,
+		stall => stall
+	);
+
+	Inst_pc_mux: pc_mux PORT MAP(
+		pc_mux_sel_i => pc_mux_sel_o,
+		pc_i => pc_out,
+		pc_branch_i => pc_branch_o,
+		pc_mux_o => pc_mux_o
+	);
+	
+	stall_req_if <= '0';
+	
 end Behavioral;
 

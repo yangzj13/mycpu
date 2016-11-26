@@ -35,6 +35,7 @@ entity branch_test is
 	port(
 		branch_ctr_i : in STD_LOGIC_VECTOR(2 downto 0);
 		pc_i : in STD_LOGIC_VECTOR(15 downto 0);
+		reg_addr_i : in STD_LOGIC_VECTOR(3 downto 0);
 		reg_data_i : in STD_LOGIC_VECTOR(15 downto 0);
 		imm_i : in STD_LOGIC_VECTOR(15 downto 0);
 		pc_mux_sel_o : out STD_LOGIC;
@@ -50,11 +51,24 @@ entity branch_test is
 end branch_test;
 
 architecture Behavioral of branch_test is
-
+signal reg_data : STD_LOGIC_VECTOR(15 downto 0);
 begin
+	
+	with forward_sel select
+		reg_data <= reg_data_i when '0',
+					forward_data when '1',
+					reg_data_i when others;
+	forward_addr <= reg_addr_i;
 
 process(branch_ctr_i, pc_i, reg_data_i, imm_i)
 begin
+
+	if (ex_reg_dst /= "0000" and ex_reg_dst = reg_addr_i) then
+		stall_req_branch <= '1';
+	else 
+		stall_req_branch <= '0';
+	end if;
+
 	case branch_ctr_i is
 		--not branch or jump
 		when "000" =>

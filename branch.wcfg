@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="C:/Users/Bob/Documents/xilinx/cpu208/test_sopc_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="std_logic_1164" />
+            <top_module name="std_logic_arith" />
+            <top_module name="std_logic_unsigned" />
+            <top_module name="test_sopc" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="9" />
+   <wvobject fp_name="/test_sopc/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/rst" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/clk_period" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">clk_period</obj_property>
+      <obj_property name="ObjectShortName">clk_period</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_registers/r1" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">r1[15:0]</obj_property>
+      <obj_property name="ObjectShortName">r1[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_pc_reg/pc_o" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">pc_o[15:0]</obj_property>
+      <obj_property name="ObjectShortName">pc_o[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_if_id/id_pc" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">id_pc[15:0]</obj_property>
+      <obj_property name="ObjectShortName">id_pc[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_if_id/id_inst" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">id_inst[15:0]</obj_property>
+      <obj_property name="ObjectShortName">id_inst[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/u_pc_reg/pc_i" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">pc_i[15:0]</obj_property>
+      <obj_property name="ObjectShortName">pc_i[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/test_sopc/uut/u1/Inst_pc_mux/pc_mux_o" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">pc_mux_o[15:0]</obj_property>
+      <obj_property name="ObjectShortName">pc_mux_o[15:0]</obj_property>
+   </wvobject>
+</wave_config>

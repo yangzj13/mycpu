@@ -33,6 +33,7 @@ entity pc_reg is
     Port ( 
 		rst : in  STD_LOGIC;
 		clk : in  STD_LOGIC;
+		stall : in STD_LOGIC;
 		pc_i : in STD_LOGIC_VECTOR(15 downto 0);
 		pc_o : out STD_LOGIC_VECTOR(15 downto 0)
 		);
@@ -47,7 +48,9 @@ begin
 		if (rst = '0') then  --复位，pc从0开始
 			pc_o <= x"0000";  --x代表十六进制
 		elsif (rising_edge(clk)) then 
-			pc_o <= pc_i;
+			if (stall = '0') then
+				pc_o <= pc_i;
+			end if;
 		end if;
 	end process;
 	

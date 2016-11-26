@@ -33,6 +33,7 @@ entity if_id is
 	port(
 		rst : in STD_LOGIC;
 		clk : in STD_LOGIC;
+		stall : in STD_LOGIC;
 		if_pc : in STD_LOGIC_VECTOR(15 downto 0);
 		if_inst : in STD_LOGIC_VECTOR(15 downto 0);
 		id_pc : out STD_LOGIC_VECTOR(15 downto 0);
@@ -48,8 +49,10 @@ begin
 			id_pc <= x"0000";
 			id_inst <= x"0000";
 		elsif clk'event and clk = '1' then
-			id_pc <= if_pc;
-			id_inst <= if_inst;
+			if (stall = '0') then
+				id_pc <= if_pc;
+				id_inst <= if_inst;
+			end if;
 		end if;
 	end process;
 end Behavioral;

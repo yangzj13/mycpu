@@ -33,6 +33,7 @@ entity id_ex is
 	port(
 		rst : in STD_LOGIC;
 		clk : in STD_LOGIC;
+		stall : in STD_LOGIC;
 		-- ID
 		id_rx : in STD_LOGIC_VECTOR(15 downto 0);
 		id_ry : in STD_LOGIC_VECTOR(15 downto 0);
@@ -71,15 +72,27 @@ begin
 			ex_ry_addr <= "0000";
 			ex_res_flag <= "000";
 		elsif clk'event and clk = '1' then --ʱ????
-			ex_rx <= id_rx;
-			ex_ry <= id_ry;
-			ex_rx_addr <= id_rx_addr;
-			ex_ry_addr <= id_ry_addr;
-			ex_mem_to_reg <= id_mem_to_reg;
-			ex_reg_write <= id_reg_write;
-			ex_reg_dst <= id_reg_dst;
-			ex_alu_op <= id_alu_op;
-			ex_res_flag <= id_res_flag;
+			if (stall = '0') then
+				ex_rx <= id_rx;
+				ex_ry <= id_ry;
+				ex_rx_addr <= id_rx_addr;
+				ex_ry_addr <= id_ry_addr;
+				ex_mem_to_reg <= id_mem_to_reg;
+				ex_reg_write <= id_reg_write;
+				ex_reg_dst <= id_reg_dst;
+				ex_alu_op <= id_alu_op;
+				ex_res_flag <= id_res_flag;
+			elsif stall = '1' then
+				ex_rx <= x"0000";
+				ex_ry <= x"0000";
+				ex_mem_to_reg <= '0';
+				ex_reg_write <= '0';
+				ex_reg_dst <= "0000";
+				ex_alu_op <= "0000";
+				ex_rx_addr <= "0000";
+				ex_ry_addr <= "0000";
+				ex_res_flag <= "000";
+			end if; 
 		end if;
 	end process;
 

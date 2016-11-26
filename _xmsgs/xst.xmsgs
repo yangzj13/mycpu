@@ -5,15 +5,6 @@
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
 <messages>
-<msg type="warning" file="Xst" num="752" delta="old" >&quot;<arg fmt="%s" index="1">C:/Users/Bob/Documents/xilinx/cpu208/cpu.vhd</arg>&quot; line <arg fmt="%d" index="2">571</arg>: Unconnected input port &apos;<arg fmt="%s" index="3">branch_reg</arg>&apos; of component &apos;<arg fmt="%s" index="4">forwarding_unit</arg>&apos; is tied to default value.
-</msg>
-
-<msg type="warning" file="Xst" num="753" delta="old" >&quot;<arg fmt="%s" index="1">C:/Users/Bob/Documents/xilinx/cpu208/cpu.vhd</arg>&quot; line <arg fmt="%d" index="2">571</arg>: Unconnected output port &apos;<arg fmt="%s" index="3">branch_data</arg>&apos; of component &apos;<arg fmt="%s" index="4">forwarding_unit</arg>&apos;.
-</msg>
-
-<msg type="warning" file="Xst" num="753" delta="old" >&quot;<arg fmt="%s" index="1">C:/Users/Bob/Documents/xilinx/cpu208/cpu.vhd</arg>&quot; line <arg fmt="%d" index="2">571</arg>: Unconnected output port &apos;<arg fmt="%s" index="3">branch_sel</arg>&apos; of component &apos;<arg fmt="%s" index="4">forwarding_unit</arg>&apos;.
-</msg>
-
 <msg type="warning" file="Xst" num="819" delta="old" >&quot;<arg fmt="%s" index="1">C:/Users/Bob/Documents/xilinx/cpu208/inst_mem.vhd</arg>&quot; line <arg fmt="%d" index="2">51</arg>: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
 <arg fmt="%s" index="3">&lt;inst_addr_i&gt;, &lt;inst_i&gt;</arg>
 </msg>
@@ -41,6 +32,13 @@
 <msg type="info" file="Xst" num="1561" delta="old" >&quot;<arg fmt="%s" index="1">C:/Users/Bob/Documents/xilinx/cpu208/src_mux.vhd</arg>&quot; line <arg fmt="%d" index="2">72</arg>: Mux is complete : default of case is discarded
 </msg>
 
+<msg type="warning" file="Xst" num="819" delta="new" >&quot;<arg fmt="%s" index="1">C:/Users/Bob/Documents/xilinx/cpu208/branch_test.vhd</arg>&quot; line <arg fmt="%d" index="2">63</arg>: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+<arg fmt="%s" index="3">&lt;ex_reg_dst&gt;, &lt;reg_addr_i&gt;</arg>
+</msg>
+
+<msg type="info" file="Xst" num="1561" delta="old" >&quot;<arg fmt="%s" index="1">C:/Users/Bob/Documents/xilinx/cpu208/pc_mux.vhd</arg>&quot; line <arg fmt="%d" index="2">53</arg>: Mux is complete : default of case is discarded
+</msg>
+
 <msg type="warning" file="Xst" num="737" delta="old" >Found <arg fmt="%d" index="1">16</arg>-bit latch for signal &lt;<arg fmt="%s" index="2">ram2_data</arg>&gt;. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 </msg>
 
@@ -48,6 +46,9 @@
 </msg>
 
 <msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">pc_i</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+</msg>
+
+<msg type="warning" file="Xst" num="737" delta="old" >Found <arg fmt="%d" index="1">3</arg>-bit latch for signal &lt;<arg fmt="%s" index="2">branch_ctr_o</arg>&gt;. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 </msg>
 
 <msg type="warning" file="Xst" num="737" delta="old" >Found <arg fmt="%d" index="1">1</arg>-bit latch for signal &lt;<arg fmt="%s" index="2">reg1_addr_o_0</arg>&gt;. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
@@ -173,6 +174,18 @@
 <msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">mem_to_reg</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 </msg>
 
+<msg type="warning" file="Xst" num="646" delta="new" >Signal &lt;<arg fmt="%s" index="1">reg_data</arg>&gt; is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="old" >Signal &lt;<arg fmt="%s" index="1">stall_req_if</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">0</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="old" >Signal &lt;<arg fmt="%s" index="1">mem_mem_read</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">0</arg>.
+</msg>
+
+<msg type="warning" file="Xst" num="653" delta="old" >Signal &lt;<arg fmt="%s" index="1">ex_mem_read</arg>&gt; is used but never assigned. This sourceless signal will be automatically connected to value <arg fmt="%s" index="2">0</arg>.
+</msg>
+
 <msg type="warning" file="Xst" num="646" delta="old" >Signal &lt;<arg fmt="%s" index="1">ram1_we</arg>&gt; is assigned but never used. This unconnected signal will be trimmed during the optimization process.
 </msg>
 
@@ -188,15 +201,15 @@
 <msg type="warning" file="Xst" num="646" delta="old" >Signal &lt;<arg fmt="%s" index="1">ram1_addr</arg>&gt; is assigned but never used. This unconnected signal will be trimmed during the optimization process.
 </msg>
 
+<msg type="info" file="Xst" num="1767" delta="old" >HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+</msg>
+
 <msg type="warning" file="Xst" num="1290" delta="old" >Hierarchical block &lt;<arg fmt="%s" index="1">u1</arg>&gt; is unconnected in block &lt;<arg fmt="%s" index="2">sopc</arg>&gt;.
 It will be removed from the design.
 </msg>
 
 <msg type="warning" file="Xst" num="1290" delta="old" >Hierarchical block &lt;<arg fmt="%s" index="1">u2</arg>&gt; is unconnected in block &lt;<arg fmt="%s" index="2">sopc</arg>&gt;.
 It will be removed from the design.
-</msg>
-
-<msg type="warning" file="Xst" num="1710" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">a_src_o_1</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">controller</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
 </msg>
 
 <msg type="warning" file="Xst" num="1710" delta="old" >FF/Latch &lt;<arg fmt="%s" index="1">ram2_data_5</arg>&gt; (without init value) has a constant value of <arg fmt="%d" index="2">0</arg> in block &lt;<arg fmt="%s" index="3">ram2</arg>&gt;. This FF/Latch will be trimmed during the optimization process.
@@ -315,10 +328,22 @@ It will be removed from the design.
 <msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">u1/u_controller/a_src_o_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">sopc</arg>&gt;.
 </msg>
 
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">u1/u_controller/a_src_o_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">sopc</arg>&gt;.
+</msg>
+
 <msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">u1/u_controller/b_src_o_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">sopc</arg>&gt;.
 </msg>
 
 <msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">u1/u_controller/b_src_o_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">sopc</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">u1/u_controller/branch_ctr_o_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">sopc</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">u1/u_controller/branch_ctr_o_1</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">sopc</arg>&gt;.
+</msg>
+
+<msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">u1/u_controller/branch_ctr_o_2</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">sopc</arg>&gt;.
 </msg>
 
 <msg type="warning" file="Xst" num="2677" delta="old" >Node &lt;<arg fmt="%s" index="1">u1/u_mem_wb/wb_wdata_0</arg>&gt; of sequential type is unconnected in block &lt;<arg fmt="%s" index="2">sopc</arg>&gt;.

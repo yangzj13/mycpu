@@ -3,14 +3,14 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 --> Parameter TMPDIR set to xst/projnav.tmp
 
 
-Total REAL time to Xst completion: 1.00 secs
-Total CPU time to Xst completion: 0.55 secs
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.14 secs
  
 --> Parameter xsthdpdir set to xst
 
 
-Total REAL time to Xst completion: 1.00 secs
-Total CPU time to Xst completion: 0.55 secs
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.15 secs
  
 --> Reading design: sopc.prj
 
@@ -106,8 +106,6 @@ Slice Utilization Ratio Delta      : 5
 =========================================================================
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/pc_reg.vhd" in Library work.
 Architecture behavioral of Entity pc_reg is up to date.
-Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/pc_adder.vhd" in Library work.
-Architecture behavioral of Entity pc_adder is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/inst_mem.vhd" in Library work.
 Architecture behavioral of Entity inst_mem is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/if_id.vhd" in Library work.
@@ -136,8 +134,16 @@ Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/mem_wb.vhd" in Library
 Architecture behavioral of Entity mem_wb is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/forwarding_unit.vhd" in Library work.
 Architecture behavioral of Entity forwarding_unit is up to date.
+Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/branch_test.vhd" in Library work.
+Entity <branch_test> compiled.
+Entity <branch_test> (Architecture <behavioral>) compiled.
+Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/stall_controller.vhd" in Library work.
+Architecture behavioral of Entity stall_controller is up to date.
+Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/pc_mux.vhd" in Library work.
+Architecture behavioral of Entity pc_mux is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/cpu.vhd" in Library work.
-Architecture behavioral of Entity cpu is up to date.
+Entity <cpu> compiled.
+Entity <cpu> (Architecture <behavioral>) compiled.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/ram2.vhd" in Library work.
 Architecture behavioral of Entity ram2 is up to date.
 Compiling vhdl file "C:/Users/Bob/Documents/xilinx/cpu208/sopc.vhd" in Library work.
@@ -153,8 +159,6 @@ Analyzing hierarchy for entity <cpu> in library <work> (architecture <behavioral
 Analyzing hierarchy for entity <ram2> in library <work> (architecture <behavioral>).
 
 Analyzing hierarchy for entity <pc_reg> in library <work> (architecture <behavioral>).
-
-Analyzing hierarchy for entity <pc_adder> in library <work> (architecture <behavioral>).
 
 Analyzing hierarchy for entity <inst_mem> in library <work> (architecture <behavioral>).
 
@@ -184,6 +188,12 @@ Analyzing hierarchy for entity <mem_wb> in library <work> (architecture <behavio
 
 Analyzing hierarchy for entity <forwarding_unit> in library <work> (architecture <behavioral>).
 
+Analyzing hierarchy for entity <branch_test> in library <work> (architecture <behavioral>).
+
+Analyzing hierarchy for entity <stall_controller> in library <work> (architecture <behavioral>).
+
+Analyzing hierarchy for entity <pc_mux> in library <work> (architecture <behavioral>).
+
 
 =========================================================================
 *                            HDL Analysis                               *
@@ -192,16 +202,10 @@ Analyzing Entity <sopc> in library <work> (Architecture <behavioral>).
 Entity <sopc> analyzed. Unit <sopc> generated.
 
 Analyzing Entity <cpu> in library <work> (Architecture <behavioral>).
-WARNING:Xst:752 - "C:/Users/Bob/Documents/xilinx/cpu208/cpu.vhd" line 571: Unconnected input port 'branch_reg' of component 'forwarding_unit' is tied to default value.
-WARNING:Xst:753 - "C:/Users/Bob/Documents/xilinx/cpu208/cpu.vhd" line 571: Unconnected output port 'branch_data' of component 'forwarding_unit'.
-WARNING:Xst:753 - "C:/Users/Bob/Documents/xilinx/cpu208/cpu.vhd" line 571: Unconnected output port 'branch_sel' of component 'forwarding_unit'.
 Entity <cpu> analyzed. Unit <cpu> generated.
 
 Analyzing Entity <pc_reg> in library <work> (Architecture <behavioral>).
 Entity <pc_reg> analyzed. Unit <pc_reg> generated.
-
-Analyzing Entity <pc_adder> in library <work> (Architecture <behavioral>).
-Entity <pc_adder> analyzed. Unit <pc_adder> generated.
 
 Analyzing Entity <inst_mem> in library <work> (Architecture <behavioral>).
 WARNING:Xst:819 - "C:/Users/Bob/Documents/xilinx/cpu208/inst_mem.vhd" line 51: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
@@ -256,6 +260,18 @@ Entity <mem_wb> analyzed. Unit <mem_wb> generated.
 Analyzing Entity <forwarding_unit> in library <work> (Architecture <behavioral>).
 Entity <forwarding_unit> analyzed. Unit <forwarding_unit> generated.
 
+Analyzing Entity <branch_test> in library <work> (Architecture <behavioral>).
+WARNING:Xst:819 - "C:/Users/Bob/Documents/xilinx/cpu208/branch_test.vhd" line 63: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+   <ex_reg_dst>, <reg_addr_i>
+Entity <branch_test> analyzed. Unit <branch_test> generated.
+
+Analyzing Entity <stall_controller> in library <work> (Architecture <behavioral>).
+Entity <stall_controller> analyzed. Unit <stall_controller> generated.
+
+Analyzing Entity <pc_mux> in library <work> (Architecture <behavioral>).
+INFO:Xst:1561 - "C:/Users/Bob/Documents/xilinx/cpu208/pc_mux.vhd" line 53: Mux is complete : default of case is discarded
+Entity <pc_mux> analyzed. Unit <pc_mux> generated.
+
 Analyzing Entity <ram2> in library <work> (Architecture <behavioral>).
 Entity <ram2> analyzed. Unit <ram2> generated.
 
@@ -278,14 +294,6 @@ Synthesizing Unit <pc_reg>.
     Summary:
 	inferred  16 D-type flip-flop(s).
 Unit <pc_reg> synthesized.
-
-
-Synthesizing Unit <pc_adder>.
-    Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/pc_adder.vhd".
-    Found 16-bit adder for signal <pc_o>.
-    Summary:
-	inferred   1 Adder/Subtractor(s).
-Unit <pc_adder> synthesized.
 
 
 Synthesizing Unit <inst_mem>.
@@ -328,6 +336,7 @@ Unit <registers> synthesized.
 Synthesizing Unit <controller>.
     Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/controller.vhd".
 WARNING:Xst:647 - Input <pc_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:737 - Found 3-bit latch for signal <branch_ctr_o>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <reg1_addr_o_0>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <reg1_addr_o_1>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 WARNING:Xst:737 - Found 1-bit latch for signal <reg1_addr_o_2>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
@@ -461,17 +470,52 @@ Unit <mem_wb> synthesized.
 
 Synthesizing Unit <forwarding_unit>.
     Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/forwarding_unit.vhd".
+    Found 4-bit comparator equal for signal <branch_data$cmp_eq0000> created at line 106.
+    Found 4-bit comparator equal for signal <branch_data$cmp_eq0001> created at line 106.
     Found 4-bit comparator equal for signal <select_data_A$cmp_eq0000> created at line 64.
     Found 4-bit comparator equal for signal <select_data_A$cmp_eq0001> created at line 64.
     Found 4-bit comparator equal for signal <select_data_B$cmp_eq0000> created at line 85.
     Found 4-bit comparator equal for signal <select_data_B$cmp_eq0001> created at line 85.
     Summary:
-	inferred   4 Comparator(s).
+	inferred   6 Comparator(s).
 Unit <forwarding_unit> synthesized.
+
+
+Synthesizing Unit <branch_test>.
+    Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/branch_test.vhd".
+WARNING:Xst:646 - Signal <reg_data> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found 16-bit adder for signal <pc_branch_o$share0000> created at line 72.
+    Found 4-bit comparator equal for signal <stall_req_branch$cmp_eq0000> created at line 66.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred   1 Comparator(s).
+Unit <branch_test> synthesized.
+
+
+Synthesizing Unit <stall_controller>.
+    Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/stall_controller.vhd".
+    Found 4-bit comparator equal for signal <ex_stall$cmp_eq0000> created at line 56.
+    Found 4-bit comparator equal for signal <ex_stall$cmp_eq0001> created at line 56.
+    Found 4-bit comparator equal for signal <mem_stall$cmp_eq0000> created at line 65.
+    Found 4-bit comparator equal for signal <mem_stall$cmp_eq0001> created at line 65.
+    Summary:
+	inferred   4 Comparator(s).
+Unit <stall_controller> synthesized.
+
+
+Synthesizing Unit <pc_mux>.
+    Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/pc_mux.vhd".
+    Found 16-bit adder for signal <pc_mux_o>.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+Unit <pc_mux> synthesized.
 
 
 Synthesizing Unit <cpu>.
     Related source file is "C:/Users/Bob/Documents/xilinx/cpu208/cpu.vhd".
+WARNING:Xst:653 - Signal <stall_req_if> is used but never assigned. This sourceless signal will be automatically connected to value 0.
+WARNING:Xst:653 - Signal <mem_mem_read> is used but never assigned. This sourceless signal will be automatically connected to value 0.
+WARNING:Xst:653 - Signal <ex_mem_read> is used but never assigned. This sourceless signal will be automatically connected to value 0.
 Unit <cpu> synthesized.
 
 
@@ -484,13 +528,14 @@ WARNING:Xst:653 - Signal <ram1_data> is used but never assigned. This sourceless
 WARNING:Xst:646 - Signal <ram1_addr> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
 Unit <sopc> synthesized.
 
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
 
 =========================================================================
 HDL Synthesis Report
 
 Macro Statistics
-# Adders/Subtractors                                   : 5
- 16-bit adder                                          : 2
+# Adders/Subtractors                                   : 6
+ 16-bit adder                                          : 3
  16-bit subtractor                                     : 1
  17-bit adder                                          : 1
  17-bit subtractor                                     : 1
@@ -499,13 +544,14 @@ Macro Statistics
  16-bit register                                       : 20
  3-bit register                                        : 1
  4-bit register                                        : 6
-# Latches                                              : 22
+# Latches                                              : 23
  1-bit latch                                           : 17
  16-bit latch                                          : 1
  2-bit latch                                           : 2
+ 3-bit latch                                           : 1
  4-bit latch                                           : 2
-# Comparators                                          : 6
- 4-bit comparator equal                                : 6
+# Comparators                                          : 13
+ 4-bit comparator equal                                : 13
 # Multiplexers                                         : 2
  16-bit 4-to-1 multiplexer                             : 2
 # Logic shifters                                       : 4
@@ -532,20 +578,21 @@ WARNING:Xst:1290 - Hierarchical block <u2> is unconnected in block <sopc>.
 Advanced HDL Synthesis Report
 
 Macro Statistics
-# Adders/Subtractors                                   : 5
- 16-bit adder                                          : 2
+# Adders/Subtractors                                   : 6
+ 16-bit adder                                          : 3
  16-bit subtractor                                     : 1
  17-bit adder                                          : 1
  17-bit subtractor                                     : 1
 # Registers                                            : 352
  Flip-Flops                                            : 352
-# Latches                                              : 22
+# Latches                                              : 23
  1-bit latch                                           : 17
  16-bit latch                                          : 1
  2-bit latch                                           : 2
+ 3-bit latch                                           : 1
  4-bit latch                                           : 2
-# Comparators                                          : 6
- 4-bit comparator equal                                : 6
+# Comparators                                          : 13
+ 4-bit comparator equal                                : 13
 # Multiplexers                                         : 2
  16-bit 4-to-1 multiplexer                             : 2
 # Logic shifters                                       : 4
@@ -562,7 +609,6 @@ Macro Statistics
 =========================================================================
 *                         Low Level Synthesis                           *
 =========================================================================
-WARNING:Xst:1710 - FF/Latch <a_src_o_1> (without init value) has a constant value of 0 in block <controller>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1710 - FF/Latch <ram2_data_5> (without init value) has a constant value of 0 in block <ram2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ram2_data_6> (without init value) has a constant value of 0 in block <ram2>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <ram2_data_7> (without init value) has a constant value of 0 in block <ram2>. This FF/Latch will be trimmed during the optimization process.
@@ -587,6 +633,10 @@ Optimizing unit <data_mem> ...
 Optimizing unit <mem_wb> ...
 
 Optimizing unit <forwarding_unit> ...
+
+Optimizing unit <branch_test> ...
+
+Optimizing unit <pc_mux> ...
 
 Optimizing unit <ram2> ...
 
@@ -628,8 +678,12 @@ WARNING:Xst:2677 - Node <u1/u_controller/extend_o_1> of sequential type is uncon
 WARNING:Xst:2677 - Node <u1/u_controller/extend_o_2> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/extend_o_3> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/a_src_o_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_controller/a_src_o_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/b_src_o_0> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_controller/b_src_o_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_controller/branch_ctr_o_0> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_controller/branch_ctr_o_1> of sequential type is unconnected in block <sopc>.
+WARNING:Xst:2677 - Node <u1/u_controller/branch_ctr_o_2> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_mem_wb/wb_wdata_0> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_mem_wb/wb_wdata_1> of sequential type is unconnected in block <sopc>.
 WARNING:Xst:2677 - Node <u1/u_mem_wb/wb_wdata_2> of sequential type is unconnected in block <sopc>.
@@ -1075,14 +1129,14 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 
 
-Total REAL time to Xst completion: 15.00 secs
-Total CPU time to Xst completion: 14.83 secs
+Total REAL time to Xst completion: 13.00 secs
+Total CPU time to Xst completion: 12.65 secs
  
 --> 
 
-Total memory usage is 326936 kilobytes
+Total memory usage is 326944 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :  446 (   0 filtered)
-Number of infos    :   14 (   0 filtered)
+Number of warnings :  452 (   0 filtered)
+Number of infos    :   16 (   0 filtered)
 
