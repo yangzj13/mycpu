@@ -51,7 +51,8 @@ entity data_mem is
 		ram1_oe : out STD_LOGIC;
 		ram1_addr : out STD_LOGIC_VECTOR(15 downto 0);
 		ram1_data_in : in STD_LOGIC_VECTOR(15 downto 0);
-		ram1_data_out : out STD_LOGIC_VECTOR(15 downto 0)
+		ram1_data_out : out STD_LOGIC_VECTOR(15 downto 0);
+		ram1_hr : out STD_LOGIC
 		--ram1_data : inout STD_LOGIC_VECTOR(15 downto 0)
 
 		--ram2_en : out STD_LOGIC;
@@ -75,16 +76,23 @@ begin
 		--end if;
 		if (rst = '0') then
 			data_o <= x"0000";
+			ram1_en <= '1';
+			ram1_oe <= '1';
+			ram1_data_out <= x"0000";
+			ram1_hr <= '0';
 		else
 			if (mem_read = '1') then
 				ram1_en <= '0';
 				ram1_oe <= '0';
 				data_o <= ram1_data_in;
 				ram1_addr <= addr_i;
+				ram1_data_out <= (others => 'Z');
+				ram1_hr <= '1';
 			elsif (mem_write = '1') then
 				ram1_en <= '0';
 				ram1_oe <= '1';
 				ram1_addr <= addr_i;
+				ram1_hr <= '0';
 				ram1_data_out <= sw_reg_data;
 			else
 				ram1_en <= '1';

@@ -1,0 +1,8 @@
+INTSTYLE=impact
+INFILE=C:\Users\Bob\Documents\xilinx\cpu208\impact.xsl
+OUTFILE=C:\Users\Bob\Documents\xilinx\cpu208\impact.xsl
+FAMILY=Single
+PART=Single
+WORKINGDIR=C:\Users\Bob\Documents\xilinx\cpu208
+LICENSE=iMPACT
+USER_INFO=iMPACT

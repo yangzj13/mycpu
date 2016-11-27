@@ -40,7 +40,9 @@ entity inst_mem is
 	ram2_en : out STD_LOGIC;
 	ram2_we : out STD_LOGIC;
 	ram2_oe : out STD_LOGIC;
-	ram2_addr : out STD_LOGIC_VECTOR(15 downto 0)
+	ram2_addr : out STD_LOGIC_VECTOR(15 downto 0);
+	ram2_data_o : out STD_LOGIC_VECTOR(15 downto 0);
+	ram2_hr : out STD_LOGIC
 );
 end inst_mem;
 
@@ -62,7 +64,8 @@ begin
 			ram2_we <= '1';
 			ram2_oe <= '0';
 			ram2_en <= '0';
-			--inst_i <= "ZZZZZZZZZZZZZZZZ";
+			ram2_data_o <= (others => 'Z');
+			ram2_hr <= '1';
 			inst_o <= inst_i;
 		end if;
 	end process;

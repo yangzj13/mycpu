@@ -1,0 +1,136 @@
+#-----------------------------------------------------------
+# PlanAhead v14.7 (64-bit)
+# Build 321239 by xbuild on Fri Sep 27 19:29:51 MDT 2013
+# Start of session at: Sun Nov 27 04:07:23 2016
+# Process ID: 1252
+# Log file: C:/Users/Bob/Documents/xilinx/cpu208/planAhead_run_1/planAhead.log
+# Journal file: C:/Users/Bob/Documents/xilinx/cpu208/planAhead_run_1/planAhead.jou
+#-----------------------------------------------------------
+INFO: [Common 17-78] Attempting to get a license: PlanAhead
+INFO: [Common 17-290] Got license for PlanAhead
+INFO: [Device 21-36] Loading parts and site information from C:/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/arch.xml
+Parsing RTL primitives file [C:/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+Finished parsing RTL primitives file [C:/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+start_gui
+source C:/Users/Bob/Documents/xilinx/cpu208/pa.fromHdl.tcl
+# create_project -name cpu208 -dir "C:/Users/Bob/Documents/xilinx/cpu208/planAhead_run_1" -part xc3s1200efg320-4
+# set_param project.pinAheadLayout yes
+# set srcset [get_property srcset [current_run -impl]]
+# set_property target_constrs_file "cpu.ucf" [current_fileset -constrset]
+Adding file 'C:/Users/Bob/Documents/xilinx/cpu208/cpu.ucf' to fileset 'constrs_1'
+# set hdlfile [add_files [list {stall_controller.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set hdlfile [add_files [list {src_mux.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set hdlfile [add_files [list {registers.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set hdlfile [add_files [list {pc_reg.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set hdlfile [add_files [list {pc_mux.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set hdlfile [add_files [list {mem_wb.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set hdlfile [add_files [list {inst_mem.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set hdlfile [add_files [list {if_id.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set hdlfile [add_files [list {id_ex.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set hdlfile [add_files [list {forward_mux.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set hdlfile [add_files [list {forwarding_unit.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set hdlfile [add_files [list {ex_mem.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set hdlfile [add_files [list {extend.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set hdlfile [add_files [list {data_mem.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set hdlfile [add_files [list {controller.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set hdlfile [add_files [list {branch_test.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set hdlfile [add_files [list {alu_res_mux.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set hdlfile [add_files [list {alu.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set hdlfile [add_files [list {cpu.vhd}]]
+# set_property file_type VHDL $hdlfile
+# set_property library work $hdlfile
+# set_property top cpu $srcset
+# add_files [list {cpu.ucf}] -fileset [get_property constrset [current_run]]
+# open_rtl_design -part xc3s1200efg320-4
+Using Verific elaboration
+Parsing VHDL file "C:/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/rtl/lib/synplify/synattr.vhd" into library synplify
+Parsing VHDL file "C:/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/rtl/lib/synplify/synattr.vhd" into library synplify
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/stall_controller.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/src_mux.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/registers.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/pc_reg.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/pc_mux.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/mem_wb.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/inst_mem.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/if_id.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/id_ex.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/forward_mux.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/forwarding_unit.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/ex_mem.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/extend.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/data_mem.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/controller.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/branch_test.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/alu_res_mux.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/alu.vhd" into library work
+Parsing VHDL file "C:/Users/Bob/Documents/xilinx/cpu208/cpu.vhd" into library work
+INFO: [Designutils 20-910] Reading macro library C:/Xilinx/14.7/ISE_DS/PlanAhead/data\./parts/xilinx/spartan3e/spartan3e/hd_int_macros.edn
+Parsing EDIF File [C:/Xilinx/14.7/ISE_DS/PlanAhead/data\./parts/xilinx/spartan3e/spartan3e/hd_int_macros.edn]
+Finished Parsing EDIF File [C:/Xilinx/14.7/ISE_DS/PlanAhead/data\./parts/xilinx/spartan3e/spartan3e/hd_int_macros.edn]
+Loading clock regions from C:/Xilinx/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan3e/spartan3e/xc3s1200e/ClockRegion.xml
+Loading clock buffers from C:/Xilinx/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan3e/spartan3e/xc3s1200e/ClockBuffers.xml
+Loading package from C:/Xilinx/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan3e/spartan3e/xc3s1200e/fg320/Package.xml
+Loading io standards from C:/Xilinx/14.7/ISE_DS/PlanAhead/data\./parts/xilinx/spartan3e/IOStandards.xml
+INFO: [Device 21-19] Loading pkg sso from C:/Xilinx/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan3e/spartan3e/xc3s1200e/fg320/SSORules.xml
+Loading list of drcs for the architecture : C:/Xilinx/14.7/ISE_DS/PlanAhead/data\./parts/xilinx/spartan3e/spartan3e/drc.xml
+INFO: [Timing 38-77] Reading timing library C:/Xilinx/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan3e/spartan3e/spartan3e-4.lib.
+INFO: [Timing 38-34] Done reading timing library C:/Xilinx/14.7/ISE_DS/PlanAhead/data\parts/xilinx/spartan3e/spartan3e/spartan3e-4.lib.
+Parsing UCF File [C:/Users/Bob/Documents/xilinx/cpu208/cpu.ucf]
+Finished Parsing UCF File [C:/Users/Bob/Documents/xilinx/cpu208/cpu.ucf]
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Phase 0 | Netlist Checksum: e31cdeb3
+open_rtl_design: Time (s): elapsed = 00:00:11 . Memory (MB): peak = 603.871 ; gain = 131.531
+update_compile_order -fileset sim_1
+set_property package_pin "" [get_ports [list  {ram1_addr[13]}]]
+set_property package_pin "" [get_ports [list  {ram1_addr[15]}]]
+set_property package_pin "" [get_ports [list  {ram1_addr[12]}]]
+set_property package_pin "" [get_ports [list  {ram1_addr[15]}]]
+save_constraints
+exit
+ERROR: [PlanAhead 12-106] *** Exception: ui.h.b: Found deleted key in HTclEventBroker. Verify if the classes listed here call cleanup()
+HTclEvent: SIGNAL_BUS_MODIFY   Classes: ui.views.aR 
+HTclEvent: DEBUG_CORE_CONFIG_CHANGE   Classes: ui.views.aR 
+HTclEvent: DEBUG_PORT_CONFIG_CHANGE   Classes: ui.views.aR 
+HTclEvent: SIGNAL_MODIFY   Classes: ui.views.aR 
+ (See C:/Users/Bob/Documents/xilinx/cpu208\planAhead_pid1252.debug)
+ERROR: [Common 17-39] 'stop_gui' failed due to earlier errors.
+INFO: [Common 17-206] Exiting PlanAhead at Sun Nov 27 04:10:07 2016...
+INFO: [Common 17-83] Releasing license: PlanAhead

@@ -39,17 +39,20 @@ entity cpu is
 		ram1_we : out STD_LOGIC;
 		ram1_oe : out STD_LOGIC;
 		ram1_addr : out STD_LOGIC_VECTOR(15 downto 0);
-		ram1_data_r : in STD_LOGIC_VECTOR(15 downto 0);
-		ram1_data_w : out STD_LOGIC_VECTOR(15 downto 0);
-		-- ram1_data : inout STD_LOGIC_VECTOR(15 downto 0);
+		--ram1_data_r : in STD_LOGIC_VECTOR(15 downto 0);
+		--ram1_data_w : out STD_LOGIC_VECTOR(15 downto 0);
+		ram1_data : inout STD_LOGIC_VECTOR(15 downto 0);
 		
 		-- ram2
 		ram2_en : out STD_LOGIC;
 		ram2_we : out STD_LOGIC;
 		ram2_oe : out STD_LOGIC;
 		ram2_addr : out STD_LOGIC_VECTOR(15 downto 0);
-		ram2_data : in STD_LOGIC_VECTOR(15 downto 0)
-		-- ram2_data : inout STD_LOGIC_VECTOR(15 downto 0)
+		--ram2_data : in STD_LOGIC_VECTOR(15 downto 0)
+		ram2_data : inout STD_LOGIC_VECTOR(15 downto 0);
+		
+		led : out STD_LOGIC_VECTOR(15 downto 0)
+		
 		);
 end cpu;
 
@@ -86,7 +89,9 @@ architecture Behavioral of cpu is
 			ram2_en : out STD_LOGIC;
 			ram2_we : out STD_LOGIC;
 			ram2_oe : out STD_LOGIC;
-			ram2_addr : out STD_LOGIC_VECTOR(15 downto 0)
+			ram2_addr : out STD_LOGIC_VECTOR(15 downto 0);
+			ram2_data_o : out STD_LOGIC_VECTOR(15 downto 0);
+			ram2_hr : out STD_LOGIC
 		);
 	end component;
 	
@@ -278,7 +283,8 @@ architecture Behavioral of cpu is
 		ram1_we : OUT std_logic;
 		ram1_oe : OUT std_logic;
 		ram1_addr : OUT std_logic_vector(15 downto 0);
-		ram1_data_out : OUT std_logic_vector(15 downto 0)
+		ram1_data_out : OUT std_logic_vector(15 downto 0);
+		ram1_hr : out STD_LOGIC
 		);
 	END COMPONENT;
 	
@@ -459,8 +465,18 @@ architecture Behavioral of cpu is
 
 	--stall_controller
 	signal stall : STD_LOGIC;
-
+	
+	signal ram2_data_w : STD_LOGIC_VECTOR(15 downto 0);
+	signal ram1_data_w : STD_LOGIC_VECTOR(15 downto 0);
+	signal ram2_hr : STD_LOGIC;
+	signal ram1_hr : STD_LOGIC;
+	
+	
+	--debug
+	
 begin
+	
+	led <= ram1_data_w;
 	
 	u_pc_reg : pc_reg
 	port map(	
@@ -487,7 +503,9 @@ begin
 		ram2_en => ram2_en,
 		ram2_we => ram2_we,
 		ram2_oe => ram2_oe,
-		ram2_addr => ram2_addr
+		ram2_addr => ram2_addr,
+		ram2_data_o => ram2_data_w,
+		ram2_hr => ram2_hr
 	);
 
 	u_if_id : if_id
@@ -660,8 +678,9 @@ begin
 		ram1_we => ram1_we,
 		ram1_oe => ram1_oe,
 		ram1_addr => ram1_addr,
-		ram1_data_in => ram1_data_r,
-		ram1_data_out => ram1_data_w
+		ram1_data_in => ram1_data,
+		ram1_data_out => ram1_data_w,
+		ram1_hr => ram1_hr
 		--ram2_en => ram2_en,
 		--ram2_we => ram2_we,
 		--ram2_oe => ram2_oe,
@@ -736,6 +755,16 @@ begin
 	);
 	
 	stall_req_if <= '0';
+	
+	with ram2_hr select
+		ram2_data <= (others => 'Z') when '1',
+						ram2_data_w when others;
+	
+	--with ram1_hr select
+	--	ram1_data <= (others => 'Z') when '1',
+	--					ram1_data_w when others;
+	
+	ram1_data <= ram1_data_w;
 	
 end Behavioral;
 
