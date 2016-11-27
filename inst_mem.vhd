@@ -42,31 +42,54 @@ entity inst_mem is
 	ram2_oe : out STD_LOGIC;
 	ram2_addr : out STD_LOGIC_VECTOR(15 downto 0);
 	ram2_data_o : out STD_LOGIC_VECTOR(15 downto 0);
-	ram2_hr : out STD_LOGIC
+	ram2_hr : out STD_LOGIC;
+	mem_read_en : in STD_LOGIC;
+	mem_addr : in STD_LOGIC_VECTOR(15 downto 0);
+	mem_write_en : in STD_LOGIC;
+	mem_write_data : in STD_LOGIC_VECTOR(15 downto 0);
+	stall_req_if : out STD_LOGIC
 );
 end inst_mem;
 
 architecture Behavioral of inst_mem is
 
 begin
-
-	process(rst ,inst_i, inst_addr_i)
+	ram2_we <= not mem_write_en or not clk;
+	process(clk, rst ,inst_i, inst_addr_i, mem_read_en, mem_addr, mem_write_en, mem_write_data)
 	begin
 		if (rst = '0') then
 			ram2_en <= '1';
-			ram2_we <= '1';
 			ram2_oe <= '1';
 			ram2_addr <= x"0000";
 			--inst_i <= x"0000";
 			inst_o <= x"0000";
+			ram2_hr <= '0';
+			ram2_data_o <= (others => '0');
+			stall_req_if <= '0';
 		else
-			ram2_addr <= inst_addr_i;
-			ram2_we <= '1';
-			ram2_oe <= '0';
 			ram2_en <= '0';
-			ram2_data_o <= (others => 'Z');
-			ram2_hr <= '1';
-			inst_o <= inst_i;
+			if (mem_read_en = '1') then
+				stall_req_if <= '1';
+				ram2_oe <= '0';
+				ram2_addr <= mem_addr;
+				ram2_data_o <= (others => 'Z');
+				inst_o <= inst_i;
+				ram2_hr <= '1';
+			elsif (mem_write_en = '1') then
+				stall_req_if <= '1';
+				ram2_oe <= '1';
+				ram2_addr <= mem_addr;
+				ram2_data_o <= mem_write_data;
+				inst_o <= (others => '0');
+				ram2_hr <= '0';
+			else
+				ram2_addr <= inst_addr_i;
+				ram2_oe <= '0';
+				ram2_data_o <= (others => 'Z');
+				ram2_hr <= '1';
+				inst_o <= inst_i;
+				stall_req_if <= '0';
+			end if;
 		end if;
 	end process;
 

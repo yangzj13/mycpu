@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map P.20131013 on Sun Nov 27 05:12:48 2016
+// Written by: Map P.20131013 on Sun Nov 27 17:16:23 2016
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -10,7 +10,9 @@ COMP "ram1_addr<13>" LOCATE = SITE "G16" LEVEL 1;
 COMP "ram1_addr<14>" LOCATE = SITE "H14" LEVEL 1;
 COMP "ram1_addr<15>" LOCATE = SITE "H15" LEVEL 1;
 COMP "clk" LOCATE = SITE "B9" LEVEL 1;
+COMP "rdn" LOCATE = SITE "C14" LEVEL 1;
 COMP "rst" LOCATE = SITE "U10" LEVEL 1;
+COMP "wrn" LOCATE = SITE "U5" LEVEL 1;
 COMP "ram1_data<10>" LOCATE = SITE "L15" LEVEL 1;
 COMP "ram1_data<11>" LOCATE = SITE "L16" LEVEL 1;
 COMP "ram1_data<12>" LOCATE = SITE "L17" LEVEL 1;
@@ -24,11 +26,13 @@ COMP "ram2_addr<13>" LOCATE = SITE "V13" LEVEL 1;
 COMP "ram2_addr<14>" LOCATE = SITE "V12" LEVEL 1;
 COMP "ram2_addr<15>" LOCATE = SITE "V9" LEVEL 1;
 COMP "ram2_data<10>" LOCATE = SITE "P13" LEVEL 1;
+COMP "tbre" LOCATE = SITE "D14" LEVEL 1;
 COMP "ram2_data<11>" LOCATE = SITE "P12" LEVEL 1;
 COMP "ram2_data<12>" LOCATE = SITE "P11" LEVEL 1;
 COMP "ram2_data<13>" LOCATE = SITE "P10" LEVEL 1;
 COMP "ram2_data<14>" LOCATE = SITE "N12" LEVEL 1;
 COMP "ram2_data<15>" LOCATE = SITE "N11" LEVEL 1;
+COMP "tsre" LOCATE = SITE "N9" LEVEL 1;
 COMP "led<10>" LOCATE = SITE "F12" LEVEL 1;
 COMP "led<11>" LOCATE = SITE "A13" LEVEL 1;
 COMP "led<12>" LOCATE = SITE "B13" LEVEL 1;
@@ -41,6 +45,7 @@ COMP "ram1_oe" LOCATE = SITE "M16" LEVEL 1;
 COMP "ram2_oe" LOCATE = SITE "R9" LEVEL 1;
 COMP "ram1_we" LOCATE = SITE "M18" LEVEL 1;
 COMP "ram2_we" LOCATE = SITE "M9" LEVEL 1;
+COMP "data_ready" LOCATE = SITE "A16" LEVEL 1;
 COMP "ram1_addr<0>" LOCATE = SITE "C17" LEVEL 1;
 COMP "ram1_addr<1>" LOCATE = SITE "C18" LEVEL 1;
 COMP "ram1_addr<2>" LOCATE = SITE "D16" LEVEL 1;
