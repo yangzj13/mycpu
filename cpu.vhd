@@ -32,8 +32,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity cpu is
     Port ( 
     	rst : in  STD_LOGIC;
-        clk : in  STD_LOGIC;
-		
+        clk1x : in  STD_LOGIC;
+		  clk11m : in STD_LOGIC;
+		clk50m : in STD_LOGIC;
 		--ram1
 		ram1_en : out STD_LOGIC;
 		ram1_we : out STD_LOGIC;
@@ -58,10 +59,13 @@ entity cpu is
 		rdn : out STD_LOGIC;
 		data_ready : in STD_LOGIC;
 		
-		led : out STD_LOGIC_VECTOR(15 downto 0)
-		
+		led : out STD_LOGIC_VECTOR(15 downto 0);
+		digit1 : out STD_LOGIC_VECTOR(6 downto 0);
+		digit2 : out STD_LOGIC_VECTOR(6 downto 0);
+		KEYSET : in STD_LOGIC_VECTOR(15 DOWNTO 0)
 		);
 end cpu;
+
 
 architecture Behavioral of cpu is
 
@@ -275,7 +279,8 @@ architecture Behavioral of cpu is
 			mem_result : out STD_LOGIC_VECTOR(15 downto 0);
 			mem_sw_reg_addr : out STD_LOGIC_VECTOR(3 downto 0);
 			mem_mem_read : out STD_LOGIC;
-			mem_mem_write : out STD_LOGIC
+			mem_mem_write : out STD_LOGIC;
+			clk_mem : out STD_LOGIC
 		);
 	end component;
 	
@@ -283,6 +288,7 @@ architecture Behavioral of cpu is
 	PORT(
 		rst : IN std_logic;
 		clk : IN std_logic;
+		clk_mem : in STD_LOGIC;
 		mem_to_reg : IN std_logic;
 		mem_read : IN std_logic;
 		mem_write : IN std_logic;
@@ -461,7 +467,8 @@ architecture Behavioral of cpu is
 	signal mem_mem_read : STD_LOGIC;
 	signal mem_mem_write : STD_LOGIC;
 	signal mem_sw_reg_addr : STD_LOGIC_VECTOR(3 downto 0);
-
+	signal clk_mem : STD_LOGIC;
+	
 	--data memory controller
 	signal data_o : STD_LOGIC_VECTOR(15 downto 0);
 	signal mem_read_en : STD_LOGIC;
@@ -499,11 +506,12 @@ architecture Behavioral of cpu is
 	
 	
 	--debug
-	
+	signal clk : STD_LOGIC;
+	signal wrn_o : STD_LOGIC;
+	signal rdn_o : STD_LOGIC;
+	signal clk25m : STD_LOGIC;
 begin
-	
-	led <= ram1_data;
-	
+		
 	u_pc_reg : pc_reg
 	port map(	
 		rst => rst,
@@ -689,14 +697,15 @@ begin
 		mem_result => mem_result,
 		mem_mem_read => mem_mem_read,
 		mem_mem_write => mem_mem_write,
-		mem_sw_reg_addr => mem_sw_reg_addr
+		mem_sw_reg_addr => mem_sw_reg_addr,
+		clk_mem => clk_mem
 		);
 
 	u_data_mem : data_mem
 	port map(
 		rst => rst,
 		clk => clk,
-
+		clk_mem => clk_mem,
 		mem_to_reg => mem_mem_to_reg,
 		mem_read => mem_mem_read,
 		mem_write => mem_mem_write,
@@ -718,8 +727,8 @@ begin
 		mem_write_en => mem_write_en,
 		mem_write_data => mem_write_data,
 		inst_i => inst_out,
-		rdn => rdn,
-		wrn => wrn,
+		rdn => rdn_o,
+		wrn => wrn_o,
 		data_ready => data_ready,
 		tbre => tbre,
 		tsre => tsre
@@ -792,16 +801,187 @@ begin
 		pc_mux_o => pc_mux_o
 	);
 		
+	rdn <= rdn_o;
+	wrn <= wrn_o;
+		
 	with ram2_hr select
 		ram2_data <= (others => 'Z') when '1',
 						ram2_data_w when others;
 	
-	
-	with ram1_hr select
-		ram1_data <= (others => 'Z') when '1',
-						ram1_data_w when others;
+	ram1_data <= ram1_data_w;
 	
 	--ram1_data <= ram1_data_w;
+		
+		process(pc_out)
+		begin
+		case PC_out(7 downto 4) is
+			when "0000" => digit1 <= "0111111";--0
+			when "0001" => digit1 <= "0000110";--1
+			when "0010" => digit1 <= "1011011";--2
+			when "0011" => digit1 <= "1001111";--3
+			when "0100" => digit1 <= "1100110";--4
+			when "0101" => digit1 <= "1101101";--5
+			when "0110" => digit1 <= "1111101";--6
+			when "0111" => digit1 <= "0000111";--7
+			when "1000" => digit1 <= "1111111";--8
+			when "1001" => digit1 <= "1101111";--9
+			when "1010" => digit1 <= "1110111";--A
+			when "1011" => digit1 <= "1111100";--B
+			when "1100" => digit1 <= "0111001";--C
+			when "1101" => digit1 <= "1011110";--D
+			when "1110" => digit1 <= "1111001";--E
+			when "1111" => digit1 <= "1110001";--F
+			when others => digit1 <= "0000000";
+		end case;
+		
+		case pc_out(3 downto 0) is
+			when "0000" => digit2 <= "0111111";--0
+			when "0001" => digit2 <= "0000110";--1
+			when "0010" => digit2 <= "1011011";--2
+			when "0011" => digit2 <= "1001111";--3
+			when "0100" => digit2 <= "1100110";--4
+			when "0101" => digit2 <= "1101101";--5
+			when "0110" => digit2 <= "1111101";--6
+			when "0111" => digit2 <= "0000111";--7
+			when "1000" => digit2 <= "1111111";--8
+			when "1001" => digit2 <= "1101111";--9
+			when "1010" => digit2 <= "1110111";--A
+			when "1011" => digit2 <= "1111100";--B
+			when "1100" => digit2 <= "0111001";--C
+			when "1101" => digit2 <= "1011110";--D
+			when "1110" => digit2 <= "1111001";--E
+			when "1111" => digit2 <= "1110001";--F
+			when others => digit2 <= "0000000";
+		end case;
+	end process;
 	
+	WITH KEYSET(15 DOWNTO 8) SELECT
+		LED <= 	pc_out WHEN X"00",
+	-- pc_mux
+			pc_mux_o WHEN X"01",
+	-- inst_mem
+			inst_out WHEN X"02",
+
+			"000000000000000" & stall_req_if WHEN X"03",
+			
+	-- if/id
+			id_pc WHEN X"04",
+			id_inst WHEN X"05",
+	-- controller
+			--mem_to_reg_o WHEN X"05",
+			"000000000000" & alu_op_o WHEN X"06",
+			X"000" & reg_dst_o WHEN X"07",
+			"000000000000000" & reg_write_o WHEN X"08",
+			X"000" & reg1_addr_o WHEN X"09",
+			X"000" & reg2_addr_o WHEN X"0A",
+			--a_src_o WHEN X"0B",
+			--b_src_o WHEN X"0C",
+			--extend_o WHEN X"0D",
+			--res_flag_o WHEN X"0E",
+			"0000000000000" & branch_ctr_o WHEN X"0B",
+			--sw_reg_addr_oIC_VECTOR(3 downto 0);
+			--mem_read_o : 
+			--mem_write_o :;
+
+	-- registers
+			r1_data WHEN X"0C",
+			r2_data WHEN X"0D",
+			mem_sw_reg_data WHEN X"0E",
+
+	-- extend
+			imm_o WHEN X"0F",
+
+	-- src_mux
+			a_o WHEN X"10",
+			b_o WHEN X"11",
+
+	--id/ex
+			ex_rx WHEN X"12",
+			ex_ry WHEN X"13",
+	--signal ex_rx_addr : STD_LOGIC_VECTOR(3 downto 0);
+	--signal ex_ry_addr : STD_LOGIC_VECTOR(3 downto 0);
+	--signal ex_mem_to_reg : STD_LOGIC;
+	--signal ex_alu_op : STD_LOGIC_VECTOR(3 downto 0);
+	--signal ex_reg_dst : STD_LOGIC_VECTOR(3 downto 0);
+	--signal ex_reg_write : STD_LOGIC;
+	--signal ex_res_flag : STD_LOGIC_VECTOR(2 downto 0);
+	--signal ex_sw_reg_addr : STD_LOGIC_VECTOR(3 downto 0);
+	--signal ex_mem_read : STD_LOGIC;
+	--signal ex_mem_write : STD_LOGIC;
+
+	--forward_mux
+			mux_a when x"14",
+			mux_b when x"15",
+
+	--alu
+			result_o WHEN X"16",
+	--signal flag_o : STD_LOGIC_VECTOR(3 downto 0);
+
+	--alu_res_mux
+			ex_res_o WHEN X"17",
+
+	--ex/mem
+	--signal mem_mem_to_reg : STD_LOGIC; --直接写入寄存器(0)/读取RAM(1)
+	--signal mem_reg_write : STD_LOGIC; --是否写入寄存器
+	--signal mem_reg_dst : STD_LOGIC_VECTOR(3 downto 0); -- 目的寄存器地址（扩展为4位）
+	--signal mem_result : STD_LOGIC_VECTOR(15 downto 0);
+	--signal mem_mem_read : STD_LOGIC;
+	--signal mem_mem_write : STD_LOGIC;
+	--signal mem_sw_reg_addr : STD_LOGIC_VECTOR(3 downto 0);
+
+	--data memory controller
+			data_o WHEN X"18",
+	--signal mem_read_en : STD_LOGIC;
+	--signal mem_addr : STD_LOGIC_VECTOR(15 downto 0);
+	--signal mem_write_en : STD_LOGIC;
+	--signal mem_write_data : STD_LOGIC_VECTOR(15 downto 0);
+	
+	--mem/wb
+			wb_wdata WHEN X"19",
+			--wb_reg_dst : STD_LOGIC_VECTOR(3 downto 0);
+	--signal wb_reg_write : STD_LOGIC; --是否写入寄存器
+	
+	--forwarding_unit
+	--signal forward_data_a : STD_LOGIC_VECTOR(15 downto 0);
+	--signal forward_data_b : STD_LOGIC_VECTOR(15 downto 0);
+	--signal forward_sel_a : STD_LOGIC;
+	--signal forward_sel_b : STD_LOGIC;
+	--signal branch_data : STD_LOGIC_VECTOR(15 downto 0);
+	--signal branch_sel : STD_LOGIC;
+
+	--branch_test
+			"000000000000000" & pc_mux_sel_o WHEN X"20",
+			pc_branch_o WHEN X"21",
+	--signal forward_addr : STD_LOGIC_VECTOR(3 downto 0);
+	--signal stall_req_branch : STD_LOGIC;
+			"000000000000000" & clear_inst_in_if_id WHEN X"22",
+			"00000000000" & tbre & tsre & rdn_o & wrn_o & data_ready when x"23",
+			X"FFFF" WHEN OTHERS;
+
+	--stall_controller
+	--signal stall : STD_LOGIC;
+	
+	--signal ram2_data_w : STD_LOGIC_VECTOR(15 downto 0);
+	--signal ram1_data_w : STD_LOGIC_VECTOR(15 downto 0);
+	--signal ram2_hr : STD_LOGIC;
+	--signal ram1_hr : STD_LOGIC;
+
+	process(rst,clk50m)
+	
+	begin
+		if (rst = '0') then
+			clk25m <= '0';
+		elsif (rising_edge(clk50m)) then
+			clk25m <= not clk25m;
+		end if;
+	end process;
+
+	with keyset(1 downto 0) select
+		clk <= clk50m when "00",
+		clk11m when "01",
+		clk25m when "10",
+		clk1x when others;
+		
+		
 end Behavioral;
 

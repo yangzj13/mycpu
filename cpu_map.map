@@ -9,39 +9,26 @@ Target Device  : xc3s1200e
 Target Package : fg320
 Target Speed   : -4
 Mapper Version : spartan3e -- $Revision: 1.55 $
-Mapped Date    : Sun Nov 27 17:16:20 2016
+Mapped Date    : Wed Nov 30 22:30:41 2016
 
 Mapping design into LUTs...
 Running directed packing...
 Running delay-based LUT packing...
 Running related packing...
 Updating timing models...
-WARNING:PhysDesignRules:372 - Gated clock. Clock net u_data_mem/ram1_hr_not0001
-   is sourced by a combinatorial pin. This is not good design practice. Use the
-   CE pin to control the loading of data into the flip-flop.
-WARNING:PhysDesignRules:372 - Gated clock. Clock net u_data_mem/ram1_en_not0001
-   is sourced by a combinatorial pin. This is not good design practice. Use the
-   CE pin to control the loading of data into the flip-flop.
-WARNING:PhysDesignRules:372 - Gated clock. Clock net u_data_mem/ram1_oe_not0001
-   is sourced by a combinatorial pin. This is not good design practice. Use the
-   CE pin to control the loading of data into the flip-flop.
-WARNING:PhysDesignRules:372 - Gated clock. Clock net
-   u_controller/reg_dst_2_not0001 is sourced by a combinatorial pin. This is not
-   good design practice. Use the CE pin to control the loading of data into the
-   flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net stall_req_branch is sourced
+   by a combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
 WARNING:PhysDesignRules:372 - Gated clock. Clock net
    u_controller/reg_dst_3_not0001 is sourced by a combinatorial pin. This is not
    good design practice. Use the CE pin to control the loading of data into the
    flip-flop.
 WARNING:PhysDesignRules:372 - Gated clock. Clock net
-   u_controller/reg_dst_1_not0001 is sourced by a combinatorial pin. This is not
+   u_controller/reg_dst_2_not0001 is sourced by a combinatorial pin. This is not
    good design practice. Use the CE pin to control the loading of data into the
    flip-flop.
-WARNING:PhysDesignRules:372 - Gated clock. Clock net u_data_mem/data_o_not0001
-   is sourced by a combinatorial pin. This is not good design practice. Use the
-   CE pin to control the loading of data into the flip-flop.
 WARNING:PhysDesignRules:372 - Gated clock. Clock net
-   u_controller/b_src_o_not0001 is sourced by a combinatorial pin. This is not
+   u_controller/reg_dst_1_not0001 is sourced by a combinatorial pin. This is not
    good design practice. Use the CE pin to control the loading of data into the
    flip-flop.
 WARNING:PhysDesignRules:372 - Gated clock. Clock net
@@ -52,46 +39,57 @@ WARNING:PhysDesignRules:372 - Gated clock. Clock net u_controller/alu_op_not0001
    is sourced by a combinatorial pin. This is not good design practice. Use the
    CE pin to control the loading of data into the flip-flop.
 WARNING:PhysDesignRules:372 - Gated clock. Clock net
-   u_data_mem/UartReadyLoad_not0001 is sourced by a combinatorial pin. This is
-   not good design practice. Use the CE pin to control the loading of data into
-   the flip-flop.
+   u_controller/b_src_o_not0001 is sourced by a combinatorial pin. This is not
+   good design practice. Use the CE pin to control the loading of data into the
+   flip-flop.
 WARNING:PhysDesignRules:372 - Gated clock. Clock net
    u_controller/reg_dst_0_not0001 is sourced by a combinatorial pin. This is not
    good design practice. Use the CE pin to control the loading of data into the
    flip-flop.
+WARNING:PhysDesignRules:367 - The signal <KEYSET<2>_IBUF> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal <KEYSET<3>_IBUF> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal <KEYSET<4>_IBUF> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal <KEYSET<5>_IBUF> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal <KEYSET<6>_IBUF> is incomplete. The
+   signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal <KEYSET<7>_IBUF> is incomplete. The
+   signal does not drive any load pins in the design.
 
 Design Summary
 --------------
 
 Design Summary:
 Number of errors:      0
-Number of warnings:   12
+Number of warnings:   14
 Logic Utilization:
-  Total Number Slice Registers:         465 out of  17,344    2%
-    Number used as Flip Flops:          344
-    Number used as Latches:             121
-  Number of 4 input LUTs:             1,606 out of  17,344    9%
+  Total Number Slice Registers:         514 out of  17,344    2%
+    Number used as Flip Flops:          461
+    Number used as Latches:              53
+  Number of 4 input LUTs:             2,055 out of  17,344   11%
 Logic Distribution:
-  Number of occupied Slices:            966 out of   8,672   11%
-    Number of Slices containing only related logic:     966 out of     966 100%
-    Number of Slices containing unrelated logic:          0 out of     966   0%
+  Number of occupied Slices:          1,197 out of   8,672   13%
+    Number of Slices containing only related logic:   1,197 out of   1,197 100%
+    Number of Slices containing unrelated logic:          0 out of   1,197   0%
       *See NOTES below for an explanation of the effects of unrelated logic.
-  Total Number of 4 input LUTs:       1,607 out of  17,344    9%
-    Number used as logic:             1,606
+  Total Number of 4 input LUTs:       2,056 out of  17,344   11%
+    Number used as logic:             2,055
     Number used as a route-thru:          1
 
   The Slice Logic Distribution report is not meaningful if the design is
   over-mapped for a non-slice resource or if Placement fails.
 
-  Number of bonded IOBs:                 93 out of     250   37%
-    IOB Latches:                         33
-  Number of BUFGMUXs:                     4 out of      24   16%
+  Number of bonded IOBs:                125 out of     250   50%
+  Number of BUFGMUXs:                     3 out of      24   12%
 
-Average Fanout of Non-Clock Nets:                3.53
+Average Fanout of Non-Clock Nets:                3.75
 
 Peak Memory Usage:  332 MB
-Total REAL time to MAP completion:  3 secs 
-Total CPU time to MAP completion:   3 secs 
+Total REAL time to MAP completion:  4 secs 
+Total CPU time to MAP completion:   4 secs 
 
 NOTES:
 

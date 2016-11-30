@@ -55,6 +55,7 @@ architecture Behavioral of inst_mem is
 
 begin
 	ram2_we <= not mem_write_en or not clk;
+	--ram2_we <= '1';
 	process(clk, rst ,inst_i, inst_addr_i, mem_read_en, mem_addr, mem_write_en, mem_write_data)
 	begin
 		if (rst = '0') then

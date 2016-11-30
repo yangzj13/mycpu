@@ -55,10 +55,10 @@ begin
 				id_pc <= if_pc;
 				id_inst <= if_inst;
 			elsif (stall = '1') then
-				id_pc <= if_pc;
-				id_inst <= x"0000";
+				--id_pc <= if_pc;
+				--id_inst <= x"0000";
 			end if;
-			if (clear_next_inst = '1') then
+			if (stall = '0' and clear_next_inst = '1') then
 				id_pc <= if_pc;
 				id_inst <= x"0000";
 			end if;

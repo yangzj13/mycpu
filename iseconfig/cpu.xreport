@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2016-11-22T18:57:21</DateModified>
-  <ModuleName>sopc</ModuleName>
+  <DateModified>2016-11-30T15:50:19</DateModified>
+  <ModuleName>cpu</ModuleName>
   <SummaryTimeStamp>2016-11-22T18:16:21</SummaryTimeStamp>
   <SavedFilePath>C:/Users/Bob/Documents/xilinx/cpu208/iseconfig/cpu.xreport</SavedFilePath>
   <ImplementationReportsDirectory>C:/Users/Bob/Documents/xilinx/cpu208\</ImplementationReportsDirectory>

@@ -1,7 +1,7 @@
 Release 14.7 par P.20131013 (nt64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-BOB-YANG-THINKP::  Sun Nov 27 17:16:27 2016
+BOB-YANG-THINKP::  Wed Nov 30 22:53:10 2016
 
 par -w -intstyle ise -ol high -t 1 cpu_map.ncd cpu.ncd cpu.pcf 
 
@@ -24,18 +24,18 @@ Device speed data version:  "PRODUCTION 1.27 2013-10-13".
 
 Design Summary Report:
 
- Number of External IOBs                          93 out of 250    37%
+ Number of External IOBs                         125 out of 250    50%
 
-   Number of External Input IOBs                  5
+   Number of External Input IOBs                 23
 
-      Number of External Input IBUFs              5
-        Number of LOCed External Input IBUFs      5 out of 5     100%
+      Number of External Input IBUFs             23
+        Number of LOCed External Input IBUFs     23 out of 23    100%
 
 
-   Number of External Output IOBs                56
+   Number of External Output IOBs                70
 
-      Number of External Output IOBs             56
-        Number of LOCed External Output IOBs     56 out of 56    100%
+      Number of External Output IOBs             70
+        Number of LOCed External Output IOBs     70 out of 70    100%
 
 
    Number of External Bidir IOBs                 32
@@ -44,8 +44,8 @@ Design Summary Report:
         Number of LOCed External Bidir IOBs      32 out of 32    100%
 
 
-   Number of BUFGMUXs                        4 out of 24     16%
-   Number of Slices                        966 out of 8672   11%
+   Number of BUFGMUXs                        3 out of 24     12%
+   Number of Slices                       1197 out of 8672   13%
       Number of SLICEMs                      0 out of 4336    0%
 
 
@@ -58,46 +58,52 @@ Router effort level (-rl):    High
 Starting initial Timing Analysis.  REAL time: 2 secs 
 Finished initial Timing Analysis.  REAL time: 2 secs 
 
+WARNING:Par:288 - The signal KEYSET<2>_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal KEYSET<3>_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal KEYSET<4>_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal KEYSET<5>_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal KEYSET<6>_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal KEYSET<7>_IBUF has no load.  PAR will not attempt to route this signal.
 
 Starting Placer
 Total REAL time at the beginning of Placer: 2 secs 
 Total CPU  time at the beginning of Placer: 2 secs 
 
 Phase 1.1  Initial Placement Analysis
-Phase 1.1  Initial Placement Analysis (Checksum:6f3f1d2c) REAL time: 2 secs 
+Phase 1.1  Initial Placement Analysis (Checksum:5489f85) REAL time: 2 secs 
 
 Phase 2.7  Design Feasibility Check
-Phase 2.7  Design Feasibility Check (Checksum:6f3f1d2c) REAL time: 2 secs 
+Phase 2.7  Design Feasibility Check (Checksum:5489f85) REAL time: 2 secs 
 
 Phase 3.31  Local Placement Optimization
-Phase 3.31  Local Placement Optimization (Checksum:6f3f1d2c) REAL time: 2 secs 
+Phase 3.31  Local Placement Optimization (Checksum:5489f85) REAL time: 2 secs 
 
 Phase 4.2  Initial Clock and IO Placement
 
-Phase 4.2  Initial Clock and IO Placement (Checksum:cc1dddf7) REAL time: 2 secs 
+Phase 4.2  Initial Clock and IO Placement (Checksum:c66c47a2) REAL time: 3 secs 
 
 Phase 5.30  Global Clock Region Assignment
-Phase 5.30  Global Clock Region Assignment (Checksum:cc1dddf7) REAL time: 2 secs 
+Phase 5.30  Global Clock Region Assignment (Checksum:c66c47a2) REAL time: 3 secs 
 
 Phase 6.36  Local Placement Optimization
-Phase 6.36  Local Placement Optimization (Checksum:cc1dddf7) REAL time: 2 secs 
+Phase 6.36  Local Placement Optimization (Checksum:c66c47a2) REAL time: 3 secs 
 
 Phase 7.8  Global Placement
-..................
-.......
-.................................
-...................
-...........................
-Phase 7.8  Global Placement (Checksum:6b631be9) REAL time: 6 secs 
+........................
+.................
+...............................
+...............................................
+.......................................................
+Phase 7.8  Global Placement (Checksum:70cc0ab6) REAL time: 7 secs 
 
 Phase 8.5  Local Placement Optimization
-Phase 8.5  Local Placement Optimization (Checksum:6b631be9) REAL time: 6 secs 
+Phase 8.5  Local Placement Optimization (Checksum:70cc0ab6) REAL time: 7 secs 
 
 Phase 9.18  Placement Optimization
-Phase 9.18  Placement Optimization (Checksum:e411de17) REAL time: 8 secs 
+Phase 9.18  Placement Optimization (Checksum:a897c18) REAL time: 9 secs 
 
 Phase 10.5  Local Placement Optimization
-Phase 10.5  Local Placement Optimization (Checksum:e411de17) REAL time: 8 secs 
+Phase 10.5  Local Placement Optimization (Checksum:a897c18) REAL time: 9 secs 
 
 Total REAL time to Placer completion: 9 secs 
 Total CPU  time to Placer completion: 9 secs 
@@ -108,38 +114,34 @@ Writing design to file cpu.ncd
 Starting Router
 
 
-Phase  1  : 6950 unrouted;      REAL time: 16 secs 
+Phase  1  : 8956 unrouted;      REAL time: 17 secs 
 
-Phase  2  : 6635 unrouted;      REAL time: 16 secs 
+Phase  2  : 8626 unrouted;      REAL time: 17 secs 
 
-Phase  3  : 1903 unrouted;      REAL time: 17 secs 
+Phase  3  : 2948 unrouted;      REAL time: 18 secs 
 
-Phase  4  : 1996 unrouted; (Par is working to improve performance)     REAL time: 18 secs 
+Phase  4  : 2979 unrouted; (Par is working to improve performance)     REAL time: 19 secs 
 
-Phase  5  : 0 unrouted; (Par is working to improve performance)     REAL time: 19 secs 
+Phase  5  : 0 unrouted; (Par is working to improve performance)     REAL time: 21 secs 
 
 Updating file: cpu.ncd with current fully routed design.
 
-Phase  6  : 0 unrouted; (Par is working to improve performance)     REAL time: 20 secs 
+Phase  6  : 0 unrouted; (Par is working to improve performance)     REAL time: 22 secs 
 
-Phase  7  : 0 unrouted; (Par is working to improve performance)     REAL time: 3 mins 1 secs 
+Phase  7  : 0 unrouted; (Par is working to improve performance)     REAL time: 31 secs 
 
-Phase  8  : 0 unrouted; (Par is working to improve performance)     REAL time: 3 mins 3 secs 
+Phase  8  : 0 unrouted; (Par is working to improve performance)     REAL time: 31 secs 
 
-Phase  9  : 0 unrouted; (Par is working to improve performance)     REAL time: 3 mins 3 secs 
+Phase  9  : 0 unrouted; (Par is working to improve performance)     REAL time: 31 secs 
 
-Phase 10  : 0 unrouted; (Par is working to improve performance)     REAL time: 3 mins 4 secs 
+Phase 10  : 0 unrouted; (Par is working to improve performance)     REAL time: 32 secs 
 
-Phase 11  : 0 unrouted; (Par is working to improve performance)     REAL time: 3 mins 4 secs 
+Phase 11  : 0 unrouted; (Par is working to improve performance)     REAL time: 32 secs 
+WARNING:Route:455 - CLK Net:stall_req_branch may have excessive skew because 
+      10 CLK pins and 2 NON_CLK pins failed to route using a CLK template.
 
-Phase 12  : 0 unrouted; (Par is working to improve performance)     REAL time: 3 mins 4 secs 
-WARNING:Route:455 - CLK Net:u_data_mem/data_o_not0001 may have excessive skew because 
-      5 CLK pins and 0 NON_CLK pins failed to route using a CLK template.
-WARNING:Route:455 - CLK Net:u_data_mem/UartReadyLoad_not0001 may have excessive skew because 
-      2 CLK pins and 0 NON_CLK pins failed to route using a CLK template.
-
-Total REAL time to Router completion: 3 mins 4 secs 
-Total CPU time to Router completion: 3 mins 2 secs 
+Total REAL time to Router completion: 32 secs 
+Total CPU time to Router completion: 32 secs 
 
 Partition Implementation Status
 -------------------------------
@@ -157,52 +159,34 @@ Generating Clock Report
 +---------------------+--------------+------+------+------------+-------------+
 |        Clock Net    |   Resource   |Locked|Fanout|Net Skew(ns)|Max Delay(ns)|
 +---------------------+--------------+------+------+------------+-------------+
-|            clk_IBUF | BUFGMUX_X2Y10| No   |  196 |  0.111     |  0.280      |
+|                 clk | BUFGMUX_X1Y10| No   |  285 |  0.208     |  0.377      |
 +---------------------+--------------+------+------+------------+-------------+
-|            rst_IBUF |  BUFGMUX_X2Y1| No   |   32 |  0.175     |  0.377      |
+|            rst_IBUF |  BUFGMUX_X2Y1| No   |   16 |  0.094     |  0.278      |
 +---------------------+--------------+------+------+------------+-------------+
-|u_data_mem/Mtrien_ra |              |      |      |            |             |
-|m1_data_out<13>_not0 |              |      |      |            |             |
-|                 001 |  BUFGMUX_X1Y0| No   |   26 |  0.107     |  0.373      |
+|         clk50m_IBUF | BUFGMUX_X2Y10| No   |    1 |  0.000     |  0.213      |
 +---------------------+--------------+------+------+------------+-------------+
-|u_data_mem/mem_write |              |      |      |            |             |
-|       _data_not0001 | BUFGMUX_X1Y10| No   |   18 |  0.102     |  0.284      |
-+---------------------+--------------+------+------+------------+-------------+
-|u_data_mem/ram1_hr_n |              |      |      |            |             |
-|              ot0001 |         Local|      |   16 |  0.376     |  2.046      |
-+---------------------+--------------+------+------+------------+-------------+
-|u_data_mem/ram1_oe_n |              |      |      |            |             |
-|              ot0001 |         Local|      |    1 |  0.000     |  1.391      |
+|    stall_req_branch |         Local|      |   19 |  1.104     |  2.606      |
 +---------------------+--------------+------+------+------------+-------------+
 |u_controller/reg_dst |              |      |      |            |             |
-|          _2_not0001 |         Local|      |    1 |  0.000     |  0.284      |
+|          _3_not0001 |         Local|      |    1 |  0.000     |  0.825      |
 +---------------------+--------------+------+------+------------+-------------+
 |u_controller/reg_dst |              |      |      |            |             |
-|          _3_not0001 |         Local|      |    1 |  0.000     |  1.125      |
+|          _2_not0001 |         Local|      |    1 |  0.000     |  0.537      |
 +---------------------+--------------+------+------+------------+-------------+
 |u_controller/reg_dst |              |      |      |            |             |
-|          _1_not0001 |         Local|      |    1 |  0.000     |  1.075      |
-+---------------------+--------------+------+------+------------+-------------+
-|u_data_mem/data_o_no |              |      |      |            |             |
-|               t0001 |         Local|      |   10 |  1.707     |  2.634      |
-+---------------------+--------------+------+------+------------+-------------+
-|u_controller/b_src_o |              |      |      |            |             |
-|            _not0001 |         Local|      |    4 |  0.022     |  1.456      |
+|          _1_not0001 |         Local|      |    1 |  0.000     |  1.126      |
 +---------------------+--------------+------+------+------------+-------------+
 |u_controller/reg_wri |              |      |      |            |             |
-|          te_not0001 |         Local|      |    4 |  0.023     |  1.182      |
+|          te_not0001 |         Local|      |    4 |  0.010     |  1.446      |
 +---------------------+--------------+------+------+------------+-------------+
 |u_controller/alu_op_ |              |      |      |            |             |
-|             not0001 |         Local|      |    4 |  0.014     |  1.866      |
+|             not0001 |         Local|      |    4 |  0.003     |  1.784      |
 +---------------------+--------------+------+------+------------+-------------+
-|u_data_mem/UartReady |              |      |      |            |             |
-|        Load_not0001 |         Local|      |    3 |  1.156     |  2.071      |
+|u_controller/b_src_o |              |      |      |            |             |
+|            _not0001 |         Local|      |    4 |  0.067     |  1.767      |
 +---------------------+--------------+------+------+------------+-------------+
 |u_controller/reg_dst |              |      |      |            |             |
-|          _0_not0001 |         Local|      |    1 |  0.000     |  0.284      |
-+---------------------+--------------+------+------+------------+-------------+
-|u_data_mem/ram1_en_n |              |      |      |            |             |
-|              ot0001 |         Local|      |    1 |  0.000     |  1.065      |
+|          _0_not0001 |         Local|      |    1 |  0.000     |  1.125      |
 +---------------------+--------------+------+------+------------+-------------+
 
 * Net Skew is the difference between the minimum and maximum routing
@@ -222,11 +206,15 @@ Asterisk (*) preceding a constraint indicates it was not met.
   Constraint                                |    Check    | Worst Case |  Best Case | Timing |   Timing   
                                             |             |    Slack   | Achievable | Errors |    Score   
 ----------------------------------------------------------------------------------------------------------
-  Autotimespec constraint for clock net clk | SETUP       |         N/A|    13.962ns|     N/A|           0
-  _IBUF                                     | HOLD        |     0.984ns|            |       0|           0
+  Autotimespec constraint for clock net clk | SETUP       |         N/A|    15.966ns|     N/A|           0
+                                            | HOLD        |     0.973ns|            |       0|           0
 ----------------------------------------------------------------------------------------------------------
   Autotimespec constraint for clock net rst | SETUP       |         N/A|     2.522ns|     N/A|           0
-  _IBUF                                     | HOLD        |     1.467ns|            |       0|           0
+  _IBUF                                     | HOLD        |     1.390ns|            |       0|           0
+----------------------------------------------------------------------------------------------------------
+  Autotimespec constraint for clock net clk | SETUP       |         N/A|     1.474ns|     N/A|           0
+  50m_IBUF                                  | HOLD        |     1.025ns|            |       0|           0
+                                            | MINPERIOD   |         N/A|     1.596ns|     N/A|           0
 ----------------------------------------------------------------------------------------------------------
 
 
@@ -242,16 +230,18 @@ Generating Pad Report.
 
 All signals are completely routed.
 
-Total REAL time to PAR completion: 3 mins 5 secs 
-Total CPU time to PAR completion: 3 mins 3 secs 
+WARNING:Par:283 - There are 6 loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
 
-Peak Memory Usage:  343 MB
+Total REAL time to PAR completion: 33 secs 
+Total CPU time to PAR completion: 33 secs 
+
+Peak Memory Usage:  372 MB
 
 Placement: Completed - No errors found.
 Routing: Completed - No errors found.
 
 Number of error messages: 0
-Number of warning messages: 2
+Number of warning messages: 9
 Number of info messages: 1
 
 Writing design to file cpu.ncd

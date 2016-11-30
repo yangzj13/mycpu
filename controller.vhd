@@ -114,7 +114,7 @@ begin
 					--CMP
 					when "01010" =>
 						reg_dst <= "0001";
-						alu_op <= "0100";
+						alu_op <= "0001";
 						a_src_o <= "00";
 						b_src_o <= "00";
 						res_flag_o <= res_eq;
@@ -461,6 +461,7 @@ begin
 				a_src_o <= "10";
 				b_src_o <= "10";
 				alu_op <= "0000";
+				
 		end case;
 	end if;
 end process;

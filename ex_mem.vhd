@@ -33,6 +33,7 @@ entity ex_mem is
 	port(
 		rst : in STD_LOGIC;
 		clk : in STD_LOGIC;
+		clk_mem : OUT STD_LOGIC;
 		-- EXE
 		ex_mem_to_reg : in STD_LOGIC; --直接写入寄存器(0)/读取RAM(1)
 		ex_reg_write : in STD_LOGIC; --是否写入寄存器
@@ -53,7 +54,9 @@ entity ex_mem is
 end ex_mem;
 
 architecture Behavioral of ex_mem is
+signal clk_mem_tmp : STD_LOGIC;
 begin
+	clk_mem <= clk_mem_tmp;
 	process(clk, rst)
 	begin
 		if rst = '0' then
@@ -64,6 +67,7 @@ begin
 			mem_sw_reg_addr <= "0000";
 			mem_mem_read <= '0';
 			mem_mem_write <= '0';
+			clk_mem_tmp <= '0';
 		elsif clk'event and clk = '1' then --时钟上升沿
 			mem_mem_to_reg <= ex_mem_to_reg;
 			mem_reg_write <= ex_reg_write;
@@ -72,6 +76,7 @@ begin
 			mem_sw_reg_addr <= ex_sw_reg_addr;
 			mem_mem_read <= ex_mem_read;
 			mem_mem_write <= ex_mem_write;
+			clk_mem_tmp <= not clk_mem_tmp;
 		end if;		
 	end process;
 end Behavioral;

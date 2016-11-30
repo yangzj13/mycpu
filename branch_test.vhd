@@ -54,69 +54,82 @@ end branch_test;
 
 architecture Behavioral of branch_test is
 
+signal data : std_logic_vector(15 downto 0);
+
 begin
+
+forward_addr <= reg_addr_i;
+with forward_sel select
+	data <= forward_data when '1',
+			reg_data_i when others;
+
 
 process(branch_ctr_i, pc_i, reg_data_i, imm_i)
 begin
 	clear_next_inst <= '0';
-	stall_req_branch <= '0';
-	case branch_ctr_i is
-		
-		--not branch or jump
-		when "000" =>
-			pc_mux_sel_o <= '0';
-			pc_branch_o <= x"0000";
+	--stall_req_branch <= '0';
+	if (branch_ctr_i /= "000" and ex_reg_dst /= x"00" and ex_reg_dst = reg_addr_i) then
+		stall_req_branch <= '1';
+	else
+		stall_req_branch <= '0';
+		case branch_ctr_i is
 			
-			
-		--B
-		when "001" =>
-			pc_mux_sel_o <= '1';
-			pc_branch_o <= pc_i + imm_i;	
-			clear_next_inst <= '1';
-			
-		--BEQZ
-		when "010" =>
-			if (reg_data_i = x"0000") then
-				pc_mux_sel_o <= '1';
-				pc_branch_o <= pc_i + imm_i;
-				clear_next_inst <= '1';
-			else 
+			--not branch or jump
+			when "000" =>
 				pc_mux_sel_o <= '0';
 				pc_branch_o <= x"0000";
-				clear_next_inst <= '1';
-			end if;
-		--BNEZ
-		when "100" =>
-			if (reg_data_i /= x"0000") then
+				
+				
+			--B
+			when "001" =>
 				pc_mux_sel_o <= '1';
-				pc_branch_o <= pc_i + imm_i;
+				pc_branch_o <= pc_i + imm_i;	
 				clear_next_inst <= '1';
-			else 
+				
+			--BEQZ
+			when "010" =>
+				if (data = x"0000") then
+					pc_mux_sel_o <= '1';
+					pc_branch_o <= pc_i + imm_i;
+					clear_next_inst <= '1';
+				else 
+					pc_mux_sel_o <= '0';
+					pc_branch_o <= x"0000";
+					clear_next_inst <= '0';
+				end if;
+			--BNEZ
+			when "100" =>
+				if (data /= x"0000") then
+					pc_mux_sel_o <= '1';
+					pc_branch_o <= pc_i + imm_i;
+					clear_next_inst <= '1';
+				else 
+					pc_mux_sel_o <= '0';
+					pc_branch_o <= x"0000";
+					clear_next_inst <= '0';
+				end if;
+			--BTEQZ
+			when "101" =>
+				if (data = x"0000") then
+					pc_mux_sel_o <= '1';
+					pc_branch_o <= pc_i + imm_i;
+					clear_next_inst <= '1';
+				else 
+					pc_mux_sel_o <= '0';
+					pc_branch_o <= x"0000";
+					clear_next_inst <= '0';
+				end if;
+			--JR
+			when "111" =>
+				pc_mux_sel_o <= '1';
+				pc_branch_o <= data;
+				clear_next_inst <= '1';
+			when others =>
 				pc_mux_sel_o <= '0';
 				pc_branch_o <= x"0000";
-				clear_next_inst <= '1';
-			end if;
-		--BTEQZ
-		when "101" =>
-			if (reg_data_i = x"0000") then
-				pc_mux_sel_o <= '1';
-				pc_branch_o <= pc_i + imm_i;
-				clear_next_inst <= '1';
-			else 
-				pc_mux_sel_o <= '0';
-				pc_branch_o <= x"0000";
-				clear_next_inst <= '1';
-			end if;
-		--JR
-		when "111" =>
-			pc_mux_sel_o <= '1';
-			pc_branch_o <= reg_data_i;
-			clear_next_inst <= '1';
-		when others =>
-			pc_mux_sel_o <= '0';
-			pc_branch_o <= x"0000";
-			clear_next_inst <= '1';
- 	end case;
+				clear_next_inst <= '0';
+		end case;
+	end if;
 end process;
 
 end Behavioral;
